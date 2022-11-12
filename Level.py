@@ -17,7 +17,7 @@ class Level():
             if tileNum=="1":
                 self.tiles.add(GrassTile(c*64,r*64))
             if tileNum=="p":
-                self.playerGroup.add(Player(c*64,r*64))
+                self.playerGroup.add(Player(c*64,r*64,self.tiles))
             elif tileNum=="n":
                 r+=1
                 c=-1
