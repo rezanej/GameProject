@@ -20,7 +20,7 @@ class Game():
                 if event.type==pygame.QUIT:
                     self.running=False
 
-            self.level.show()
+            self.level.showAUpdate()
             pygame.display.flip()
             self.clock.tick(Fps)
 

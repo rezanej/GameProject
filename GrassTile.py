@@ -5,4 +5,3 @@ class GrassTile(pygame.sprite.Sprite):
         super().__init__()
         self.image=Grassimages[CurrentLevel-1]
         self.rect=self.image.get_rect(topleft=(x,y))
-        print(x,y)

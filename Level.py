@@ -22,12 +22,17 @@ class Level():
                 r+=1
                 c=-1
             c+=1
-    def show(self):
+    def showAUpdate(self):
+
         self.tiles.update()
         self.display.blit(self.backGround,self.backGroundRect)
         self.tiles.draw(self.display)
+        self.playerGroup.update()
         self.playerGroup.draw(self.display)
+
     def initBackGround(self):
+
         self.backGround = BackgroundImages[CurrentLevel]
         self.backGroundRect = self.backGround.get_rect()
+
 

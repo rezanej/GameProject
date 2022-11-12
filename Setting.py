@@ -3,6 +3,7 @@ WindowWidth=64*20 #temporary
 WindowHeight=64*10 #temporary
 Fps=60
 CurrentLevel=0
+PlayerSpeed=3
 BackgroundImages=[]
 Grassimages=[]
 Grassimages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Tiles/2.png"),(64,64)))
