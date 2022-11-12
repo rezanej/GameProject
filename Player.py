@@ -12,16 +12,22 @@ class Player(pygame.sprite.Sprite):
         self.jumpSpeed=PlayerJumpSpeed
         self.speed=PlayerSpeed
         self.gravity=Gravity
+        self.state="idle"
+        self.currentimageNum=0
     def setDirection(self):
 
         keys=pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             self.direction.x=-1
-
+            self.state="run"
         elif keys[pygame.K_RIGHT]:
             self.direction.x=1
+            self.state="run"
+
         else:
             self.direction.x=0
+            self.state="idle"
+
         if keys[pygame.K_SPACE]:
             self.jump()
 
@@ -31,6 +37,8 @@ class Player(pygame.sprite.Sprite):
         self.horizontalCollision()
         self.gravityFun()
         self.verticalCollision()
+        self.checkJump()
+        self.animate()
     def horizontalMovement(self):
         self.rect.x += self.direction.x * self.speed
 
@@ -56,7 +64,34 @@ class Player(pygame.sprite.Sprite):
     def gravityFun(self):
         self.direction.y += self.gravity
         self.rect.centery += self.direction.y
-
+    def checkJump(self):
+        if self.direction.y>0:
+            self.state="jump"
+        elif self.direction.y<0:
+            self.state="idle"
     def verticalMovement(self):
         self.direction.y+=4
         self.rect.y+=self.direction.y
+    def animate(self):
+        if self.state=="idle":
+            self.image=PlayerIdleImages[self.currentimageNum]
+            self.currentimageNum += 1
+            if self.currentimageNum==10:
+                self.currentimageNum=0
+        if self.state=="run":
+            if self.direction.x > 0:
+                self.image=PlayerRunImages[self.currentimageNum]
+            if self.direction.x < 0:
+                self.image=PlayerRunImagesLeft[self.currentimageNum]
+            self.currentimageNum += 1
+            if self.currentimageNum==10:
+                self.currentimageNum=0
+        if self.state=="jump":
+            if self.direction.x>0:
+                self.image=PlayerJumpImages[self.currentimageNum]
+                self.currentimageNum+=1
+            if self.direction.x < 0:
+                self.image=PlayerJumpImagesLeft[self.currentimageNum]
+                self.currentimageNum += 1
+            if self.currentimageNum==10:
+                self.currentimageNum=0
