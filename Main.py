@@ -1,4 +1,6 @@
 import pygame
+
+import Level
 from Setting import *
 
 
@@ -9,7 +11,7 @@ class Game():
         pygame.display.set_caption("Swordman")
         # icon will be added here
         self.clock=pygame.time.Clock()
-
+        self.level=Level.Level(self.display)
         self.running=True
 
     def update(self):
@@ -18,7 +20,7 @@ class Game():
                 if event.type==pygame.QUIT:
                     self.running=False
 
-
+            self.level.show()
             pygame.display.flip()
             self.clock.tick(Fps)
 
