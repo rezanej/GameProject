@@ -49,15 +49,19 @@ PlayerJumpImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/J
 PlayerJumpImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Jump__008.png"),(363/7,439/7)))
 PlayerJumpImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Jump__009.png"),(363/7,439/7)))
 PlayerJumpImagesLeft=[]
+
+TreeImages=[]
+TreeImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Tree_1.png"),(116/2,44/2)))
+TreeImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Tree_2.png"),(282/2,301/2)))
 for images in PlayerJumpImages:
     PlayerJumpImagesLeft.append(pygame.transform.flip(images,True,False))
 for images in PlayerRunImages:
     PlayerRunImagesLeft.append(pygame.transform.flip(images,True,False))
 Level1TileMap="00000000000000000000000000000000000000000000000000n" \
               "00000000000000000000000000000000000000000000000000n" \
-              "00000000p00000000000000000000000000000000000000000n" \
+              "00T00000p0000000000000000000TT00000000000000000000n" \
               "11110000110000011001100000111100000000000000000000n" \
-              "00000000000000000000001000100001000010000000000000n" \
+              "000000t00000000000000010t01000010t0010000000000000n" \
               "00011111110111000000000110000000111000000000000000n" \
               "00000000000000000000000000000000000000000000000000n" \
               "00000000000000000000000000000000000000000000000000n" \
