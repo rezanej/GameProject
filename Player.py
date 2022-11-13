@@ -14,6 +14,7 @@ class Player(pygame.sprite.Sprite):
         self.gravity=Gravity
         self.state="idle"
         self.currentimageNum=0
+        self.left=False
     def setDirection(self):
 
         keys=pygame.key.get_pressed()
@@ -74,23 +75,28 @@ class Player(pygame.sprite.Sprite):
         self.rect.y+=self.direction.y
     def animate(self):
         if self.state=="idle":
-            self.image=PlayerIdleImages[self.currentimageNum]
+            if not self.left:
+                self.image=PlayerIdleImages[self.currentimageNum]
+            elif self.left:
+                self.image = PlayerIdleImagesLeft[self.currentimageNum]
             self.currentimageNum += 1
             if self.currentimageNum==10:
                 self.currentimageNum=0
         if self.state=="run":
             if self.direction.x > 0:
+                self.left=False
                 self.image=PlayerRunImages[self.currentimageNum]
             if self.direction.x < 0:
+                self.left = True
                 self.image=PlayerRunImagesLeft[self.currentimageNum]
             self.currentimageNum += 1
             if self.currentimageNum==10:
                 self.currentimageNum=0
         if self.state=="jump":
-            if self.direction.x>0:
+            if not self.left:
                 self.image=PlayerJumpImages[self.currentimageNum]
                 self.currentimageNum+=1
-            if self.direction.x < 0:
+            else:
                 self.image=PlayerJumpImagesLeft[self.currentimageNum]
                 self.currentimageNum += 1
             if self.currentimageNum==10:

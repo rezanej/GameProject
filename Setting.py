@@ -12,6 +12,7 @@ Grassimages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Tiles/
 BackgroundImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/BG/BG.png"),(64*20,640)))
 PlayerImage=pygame.transform.scale(pygame.image.load("PlayerImages/Idle__000.png"),(232/7,439/7))
 PlayerIdleImages=[]
+PlayerIdleImagesLeft=[]
 PlayerIdleImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Idle__000.png"),(232/7,439/7)))
 PlayerIdleImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Idle__001.png"),(232/7,439/7)))
 PlayerIdleImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Idle__002.png"),(232/7,439/7)))
@@ -22,6 +23,8 @@ PlayerIdleImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/I
 PlayerIdleImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Idle__007.png"),(232/7,439/7)))
 PlayerIdleImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Idle__008.png"),(232/7,439/7)))
 PlayerIdleImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Idle__009.png"),(232/7,439/7)))
+for image in PlayerIdleImages:
+    PlayerIdleImagesLeft.append(pygame.transform.flip(image,True,False))
 PlayerRunImages=[]
 PlayerRunImagesLeft=[]
 PlayerRunImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Run__000.png"),(363/7,439/7)))
