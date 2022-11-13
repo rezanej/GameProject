@@ -23,7 +23,7 @@ class Level():
                 c=-1
             c+=1
     def showAUpdate(self):
-
+        self.scroll()
         self.tiles.update()
         self.display.blit(self.backGround,self.backGroundRect)
         self.tiles.draw(self.display)
@@ -34,5 +34,17 @@ class Level():
 
         self.backGround = BackgroundImages[CurrentLevel]
         self.backGroundRect = self.backGround.get_rect()
+
+    def scroll(self):
+        if self.playerGroup.sprite.rect.x <WindowWidth/4 and self.playerGroup.sprite.direction.x<0:
+            self.playerGroup.sprite.speed=0
+            for tiles in self.tiles:
+                tiles.rect.x+=PlayerSpeed
+        elif self.playerGroup.sprite.rect.x >WindowWidth*(3/4) and self.playerGroup.sprite.direction.x>0:
+            self.playerGroup.sprite.speed = 0
+            for tiles in self.tiles:
+                tiles.rect.x -= PlayerSpeed
+        else:
+            self.playerGroup.sprite.speed=PlayerSpeed
 
 
