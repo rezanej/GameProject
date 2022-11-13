@@ -5,7 +5,6 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         self.image=PlayerImage
         self.rect=self.image.get_rect(topleft=(x,y))
-
         self.direction=pygame.math.Vector2()
         self.tileGroup=tileGroup
         print(self.direction)
@@ -15,6 +14,7 @@ class Player(pygame.sprite.Sprite):
         self.state="idle"
         self.currentimageNum=0
         self.left=False
+        self.onGround=False
     def setDirection(self):
 
         keys=pygame.key.get_pressed()
@@ -29,11 +29,13 @@ class Player(pygame.sprite.Sprite):
             self.direction.x=0
             self.state="idle"
 
-        if keys[pygame.K_SPACE]:
+        if keys[pygame.K_SPACE] and self.onGround:
             self.jump()
+            self.state="jump"
 
     def update(self):
         self.setDirection()
+        self.onGround=False
         self.horizontalMovement()
         self.horizontalCollision()
         self.gravityFun()
@@ -57,9 +59,11 @@ class Player(pygame.sprite.Sprite):
                 if self.direction.y > 0:
                     self.rect.bottom = sprite.rect.top
                     self.direction.y = 0
-                if self.direction.y < 0:
+                    self.onGround=True
+                elif self.direction.y < 0:
                     self.rect.top = sprite.rect.bottom
                     self.direction.y = 0
+
     def jump(self):
         self.direction.y=-self.jumpSpeed
     def gravityFun(self):
@@ -67,9 +71,9 @@ class Player(pygame.sprite.Sprite):
         self.rect.centery += self.direction.y
     def checkJump(self):
         if self.direction.y>0:
+            self.onGround=False
+        if self.direction.y <0:
             self.state="jump"
-        elif self.direction.y<0:
-            self.state="idle"
     def verticalMovement(self):
         self.direction.y+=4
         self.rect.y+=self.direction.y
