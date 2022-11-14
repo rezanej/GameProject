@@ -1,12 +1,14 @@
 import pygame
 from Setting import *
+from Kunai import *
 class Player(pygame.sprite.Sprite):
-    def __init__(self,x,y,tileGroup):
+    def __init__(self,x,y,tileGroup,kunaiGroup):
         super().__init__()
         self.image=PlayerImage
         self.rect=self.image.get_rect(topleft=(x,y))
         self.direction=pygame.math.Vector2()
         self.tileGroup=tileGroup
+        self.kunaiGroup=kunaiGroup
         print(self.direction)
         self.jumpSpeed=PlayerJumpSpeed
         self.speed=PlayerSpeed
@@ -32,7 +34,8 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_SPACE] and self.onGround:
             self.jump()
             self.state="jump"
-
+        if keys[pygame.K_f]:
+            self.kunaiGroup.add(Kunai(self.rect.centerx,self.rect.centery,self))
     def update(self):
         self.setDirection()
         self.onGround=False

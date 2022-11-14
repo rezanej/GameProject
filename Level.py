@@ -1,5 +1,6 @@
 import pygame
 from Setting import *
+from Kunai import *
 from Player import *
 from GrassTile import *
 from Tree import *
@@ -11,6 +12,7 @@ class Level():
         self.subTiles=pygame.sprite.Group()
         self.playerGroup=pygame.sprite.GroupSingle()
         self.TreeGroup=pygame.sprite.Group()
+        self.kunaiGroup=pygame.sprite.Group()
         self.display=display
         self.addTiles()
     def addTiles(self):
@@ -20,7 +22,7 @@ class Level():
             if tileNum=="1":
                 self.tiles.add(GrassTile(c*64,r*64))
             elif tileNum=="p":
-                self.playerGroup.add(Player(c*64,r*64,self.tiles))
+                self.playerGroup.add(Player(c*64,r*64,self.tiles,self.kunaiGroup))
             elif tileNum=="n":
                 r+=1
                 c=-1
@@ -38,8 +40,12 @@ class Level():
         self.tiles.draw(self.display)
         self.TreeGroup.draw(self.display)
         self.subTiles.draw(self.display)
+        self.kunaiGroup.update()
+        self.kunaiGroup.draw(self.display)
+
         self.playerGroup.update()
         self.playerGroup.draw(self.display)
+
 
     def initBackGround(self):
 
