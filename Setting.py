@@ -11,6 +11,9 @@ Grassimages=[]
 Grassimages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Tiles/2.png"),(64,64)))
 BackgroundImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/BG/BG.png"),(64*20,640)))
 PlayerImage=pygame.transform.scale(pygame.image.load("PlayerImages/Idle__000.png"),(232/7,439/7))
+DirtImages=[]
+DirtImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Tiles/5.png"),(64,64)))
+DirtImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Tiles/8.png"),(64,64)))
 PlayerIdleImages=[]
 PlayerIdleImagesLeft=[]
 PlayerIdleImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Idle__000.png"),(232/7,439/7)))
@@ -59,12 +62,12 @@ for images in PlayerRunImages:
     PlayerRunImagesLeft.append(pygame.transform.flip(images,True,False))
 Level1TileMap="00000000000000000000000000000000000000000000000000n" \
               "00000000000000000000000000000000000000000000000000n" \
-              "00T00000p0000000000000000000TT00000000000000000000n" \
-              "11110000110000011001100000111100000000000000000000n" \
-              "000000t00000000000000010t01000010t0010000000000000n" \
+              "00000000000000000000000000000000000000000000000000n" \
+              "00000000000000000000000000000000000000000000000000n" \
+              "00000000000000000000000000000000000000000000000000n" \
+              "00T00000pT000000000000000000TT00000000000000000000n" \
+              "11100000110000011001100000111100000000000000000000n" \
+              "ddd000t00000T00000000010t01000010t0010000000000000n" \
               "00011111110111000000000110000000111000000000000000n" \
-              "00000000000000000000000000000000000000000000000000n" \
-              "00000000000000000000000000000000000000000000000000n" \
-              "00000000000000000000000000000000000000000000000000n" \
-              "00000000000000000000000000000000000000000000000000n"
+              "000ddddddd0ddd000000000000000000000000000000000000n"
 

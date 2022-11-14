@@ -3,10 +3,12 @@ from Setting import *
 from Player import *
 from GrassTile import *
 from Tree import *
+from Tile import *
 class Level():
     def __init__(self,display):
         self.initBackGround()
         self.tiles=pygame.sprite.Group()
+        self.subTiles=pygame.sprite.Group()
         self.playerGroup=pygame.sprite.GroupSingle()
         self.TreeGroup=pygame.sprite.Group()
         self.display=display
@@ -26,6 +28,8 @@ class Level():
                 self.TreeGroup.add(Tree(TreeImages[0],c*64,r*64+64))
             elif tileNum=="T":
                 self.TreeGroup.add(Tree(TreeImages[1],c*64,r*64+64))
+            elif tileNum=="d":
+                self.subTiles.add(Tile(c*64,r*64,DirtImages[0]))
             c+=1
     def showAUpdate(self):
         self.scroll()
@@ -33,6 +37,7 @@ class Level():
         self.display.blit(self.backGround,self.backGroundRect)
         self.tiles.draw(self.display)
         self.TreeGroup.draw(self.display)
+        self.subTiles.draw(self.display)
         self.playerGroup.update()
         self.playerGroup.draw(self.display)
 
@@ -48,11 +53,15 @@ class Level():
                 tiles.rect.x+=PlayerSpeed
             for tiles in self.TreeGroup:
                 tiles.rect.x+=PlayerSpeed
+            for tiles in self.subTiles:
+                tiles.rect.x+=PlayerSpeed
         elif self.playerGroup.sprite.rect.x >WindowWidth*(3/4) and self.playerGroup.sprite.direction.x>0:
             self.playerGroup.sprite.speed = 0
             for tiles in self.tiles:
                 tiles.rect.x -= PlayerSpeed
             for tiles in self.TreeGroup:
+                tiles.rect.x-=PlayerSpeed
+            for tiles in self.subTiles:
                 tiles.rect.x-=PlayerSpeed
         else:
             self.playerGroup.sprite.speed=PlayerSpeed
