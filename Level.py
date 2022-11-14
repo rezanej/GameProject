@@ -31,7 +31,7 @@ class Level():
             elif tileNum=="T":
                 self.TreeGroup.add(Tree(TreeImages[1],c*64,r*64+64))
             elif tileNum=="d":
-                self.subTiles.add(Tile(c*64,r*64,DirtImages[0]))
+                self.tiles.add(Tile(c*64,r*64,DirtImages[0]))
             c+=1
     def showAUpdate(self):
         self.scroll()
@@ -42,7 +42,7 @@ class Level():
         self.subTiles.draw(self.display)
         self.kunaiGroup.update()
         self.kunaiGroup.draw(self.display)
-
+        print(len(self.kunaiGroup.sprites()))
         self.playerGroup.update()
         self.playerGroup.draw(self.display)
 

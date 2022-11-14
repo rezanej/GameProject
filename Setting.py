@@ -7,6 +7,9 @@ PlayerSpeed=8
 PlayerJumpSpeed=35
 Gravity=3
 KunaiSpeed=50
+StartKunai=4
+KunaiLifetime=15
+KunaiTimer=20
 BackgroundImages=[]
 Grassimages=[]
 Grassimages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Tiles/2.png"),(64,64)))
@@ -57,6 +60,7 @@ PlayerJumpImagesLeft=[]
 KunaiImgae=pygame.transform.rotate(pygame.transform.scale(pygame.image.load("PlayerImages/Kunai.png"),(32/4,160/4)),90)
 KunaiImgae=pygame.transform.flip(KunaiImgae,True,False)
 KunaiImgaeLeft=pygame.transform.rotate(pygame.transform.scale(pygame.image.load("PlayerImages/Kunai.png"),(32/4,160/4)),90)
+
 
 TreeImages=[]
 TreeImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Tree_1.png"),(116/2,44/2)))

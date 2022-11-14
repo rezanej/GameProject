@@ -1,6 +1,7 @@
 import pygame
 from Setting import *
 from Kunai import *
+
 class Player(pygame.sprite.Sprite):
     def __init__(self,x,y,tileGroup,kunaiGroup):
         super().__init__()
@@ -9,12 +10,13 @@ class Player(pygame.sprite.Sprite):
         self.direction=pygame.math.Vector2()
         self.tileGroup=tileGroup
         self.kunaiGroup=kunaiGroup
-        print(self.direction)
         self.jumpSpeed=PlayerJumpSpeed
         self.speed=PlayerSpeed
         self.gravity=Gravity
         self.state="idle"
         self.currentimageNum=0
+        self.kunaiNumber=StartKunai
+        self.kunaiTimer=KunaiTimer
         self.left=False
         self.onGround=False
     def setDirection(self):
@@ -34,8 +36,11 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_SPACE] and self.onGround:
             self.jump()
             self.state="jump"
-        if keys[pygame.K_f]:
+        if keys[pygame.K_f] and self.kunaiNumber>0 and self.kunaiTimer==KunaiTimer:
             self.kunaiGroup.add(Kunai(self.rect.centerx,self.rect.centery,self))
+            self.kunaiNumber-=1
+            self.kunaiTimer=0
+
     def update(self):
         self.setDirection()
         self.onGround=False
@@ -45,6 +50,7 @@ class Player(pygame.sprite.Sprite):
         self.verticalCollision()
         self.checkJump()
         self.animate()
+        self.kunaiTiming()
     def horizontalMovement(self):
         self.rect.x += self.direction.x * self.speed
 
@@ -108,3 +114,7 @@ class Player(pygame.sprite.Sprite):
                 self.currentimageNum += 1
             if self.currentimageNum==10:
                 self.currentimageNum=0
+
+    def kunaiTiming(self):
+        if self.kunaiTimer<KunaiTimer:
+            self.kunaiTimer+=1
