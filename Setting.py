@@ -18,6 +18,9 @@ PlayerImage=pygame.transform.scale(pygame.image.load("PlayerImages/Idle__000.png
 DirtImages=[]
 DirtImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Tiles/5.png"),(64,64)))
 DirtImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Tiles/8.png"),(64,64)))
+WaterImages=[]
+WaterImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Tiles/17.png"),(64,64)))
+WaterImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Tiles/18.png"),(64,64)))
 PlayerIdleImages=[]
 PlayerIdleImagesLeft=[]
 PlayerIdleImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Idle__000.png"),(232/7,439/7)))
@@ -108,6 +111,6 @@ Level1TileMap="00000000000000000000000000000000000000000000000000n" \
               "b0T00b00T000000p00000000000TT00000000000000000000n" \
               "11111111110000011001100000111100000000000000000000n" \
               "dddddddd0000T00000000010t01000010t0010000000000000n" \
-              "dddddddd111111000000000110000000111000000000000000n" \
-              "dddddddddddddd000000000000000000000000000000000000n"
+              "dddddddd111111wwwwwwwww11wwwwwww111wwwwwwwwwwwwwwwn" \
+              "ddddddddddddddWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWn"
 

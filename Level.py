@@ -14,6 +14,7 @@ class Level():
         self.TreeGroup=pygame.sprite.Group()
         self.kunaiGroup=pygame.sprite.Group()
         self.borderGroup=pygame.sprite.Group()
+        self.waterGroup=pygame.sprite.Group()
         self.display=display
         self.addTiles()
         self.x=0
@@ -36,6 +37,10 @@ class Level():
                 self.tiles.add(Tile(c*64,r*64,DirtImages[0]))
             elif tileNum=="b":
                 self.borderGroup.add(Tile(c*64,r*64,DirtImages[0]))
+            elif tileNum=="w":
+                self.subTiles.add(Tile(c*64,r*64,WaterImages[0]))
+            elif tileNum=="W":
+                self.subTiles.add(Tile(c*64,r*64,WaterImages[1]))
             c+=1
     def showAUpdate(self):
         self.scroll()
