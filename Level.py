@@ -13,8 +13,10 @@ class Level():
         self.playerGroup=pygame.sprite.GroupSingle()
         self.TreeGroup=pygame.sprite.Group()
         self.kunaiGroup=pygame.sprite.Group()
+        self.borderGroup=pygame.sprite.Group()
         self.display=display
         self.addTiles()
+        self.x=0
     def addTiles(self):
         r,c=0,0
         for tileNum in Level1TileMap:
@@ -22,7 +24,7 @@ class Level():
             if tileNum=="1":
                 self.tiles.add(GrassTile(c*64,r*64))
             elif tileNum=="p":
-                self.playerGroup.add(Player(c*64,r*64,self.tiles,self.kunaiGroup))
+                self.playerGroup.add(Player(c*64,r*64,self.tiles,self.kunaiGroup,self.borderGroup))
             elif tileNum=="n":
                 r+=1
                 c=-1
@@ -32,6 +34,8 @@ class Level():
                 self.TreeGroup.add(Tree(TreeImages[1],c*64,r*64+64))
             elif tileNum=="d":
                 self.tiles.add(Tile(c*64,r*64,DirtImages[0]))
+            elif tileNum=="b":
+                self.borderGroup.add(Tile(c*64,r*64,DirtImages[0]))
             c+=1
     def showAUpdate(self):
         self.scroll()
@@ -53,6 +57,7 @@ class Level():
 
     def scroll(self):
         if self.playerGroup.sprite.rect.x <WindowWidth/4 and self.playerGroup.sprite.direction.x<0:
+            self.x-=1
             self.playerGroup.sprite.speed=0
             for tiles in self.tiles:
                 tiles.rect.x+=PlayerSpeed
@@ -60,13 +65,18 @@ class Level():
                 tiles.rect.x+=PlayerSpeed
             for tiles in self.subTiles:
                 tiles.rect.x+=PlayerSpeed
+            for tiles in self.borderGroup:
+                tiles.rect.x+=PlayerSpeed
         elif self.playerGroup.sprite.rect.x >WindowWidth*(3/4) and self.playerGroup.sprite.direction.x>0:
+            self.x+=1
             self.playerGroup.sprite.speed = 0
             for tiles in self.tiles:
                 tiles.rect.x -= PlayerSpeed
             for tiles in self.TreeGroup:
                 tiles.rect.x-=PlayerSpeed
             for tiles in self.subTiles:
+                tiles.rect.x-=PlayerSpeed
+            for tiles in self.borderGroup:
                 tiles.rect.x-=PlayerSpeed
         else:
             self.playerGroup.sprite.speed=PlayerSpeed

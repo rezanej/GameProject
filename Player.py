@@ -3,13 +3,14 @@ from Setting import *
 from Kunai import *
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self,x,y,tileGroup,kunaiGroup):
+    def __init__(self,x,y,tileGroup,kunaiGroup,bordergroup):
         super().__init__()
         self.image=PlayerImage
         self.rect=self.image.get_rect(topleft=(x,y))
         self.direction=pygame.math.Vector2()
         self.tileGroup=tileGroup
         self.kunaiGroup=kunaiGroup
+        self.borderGroup=bordergroup
         self.jumpSpeed=PlayerJumpSpeed
         self.speed=PlayerSpeed
         self.gravity=Gravity
@@ -21,6 +22,7 @@ class Player(pygame.sprite.Sprite):
         self.left=False
         self.onGround=False
         self.attckOffset=True
+
     def setDirection(self):
         keys=pygame.key.get_pressed()
         if keys[pygame.K_f] and self.kunaiNumber>0 and self.kunaiTimer==KunaiTimer:
@@ -75,9 +77,24 @@ class Player(pygame.sprite.Sprite):
                     self.rect.right=sprite.rect.left
                 if self.direction.x<0:
                     self.rect.left=sprite.rect.right
+        for sprite in self.borderGroup.sprites():
+            if sprite.rect.colliderect(self.rect):
+                if self.direction.x>0:
+                    self.rect.right=sprite.rect.left
+                if self.direction.x<0:
+                    self.rect.left=sprite.rect.right
 
     def verticalCollision(self):
         for sprite in self.tileGroup.sprites():
+            if sprite.rect.colliderect(self.rect):
+                if self.direction.y > 0:
+                    self.rect.bottom = sprite.rect.top
+                    self.direction.y = 0
+                    self.onGround=True
+                elif self.direction.y < 0:
+                    self.rect.top = sprite.rect.bottom
+                    self.direction.y = 0
+        for sprite in self.borderGroup.sprites():
             if sprite.rect.colliderect(self.rect):
                 if self.direction.y > 0:
                     self.rect.bottom = sprite.rect.top
