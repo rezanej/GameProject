@@ -42,7 +42,6 @@ class Level():
         self.subTiles.draw(self.display)
         self.kunaiGroup.update()
         self.kunaiGroup.draw(self.display)
-        print(len(self.kunaiGroup.sprites()))
         self.playerGroup.update()
         self.playerGroup.draw(self.display)
 

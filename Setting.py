@@ -7,7 +7,7 @@ PlayerSpeed=8
 PlayerJumpSpeed=35
 Gravity=3
 KunaiSpeed=50
-StartKunai=4
+StartKunai=40
 KunaiLifetime=15
 KunaiTimer=20
 BackgroundImages=[]
@@ -56,6 +56,40 @@ PlayerJumpImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/J
 PlayerJumpImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Jump__008.png"),(363/7,439/7)))
 PlayerJumpImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Jump__009.png"),(363/7,439/7)))
 PlayerJumpImagesLeft=[]
+for images in PlayerJumpImages:
+    PlayerJumpImagesLeft.append(pygame.transform.flip(images,True,False))
+for images in PlayerRunImages:
+    PlayerRunImagesLeft.append(pygame.transform.flip(images,True,False))
+
+PlayerAttackImages=[]
+PlayerAttackImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Attack__000.png"),(538/7,495/7)))
+PlayerAttackImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Attack__001.png"),(538/7,495/7)))
+PlayerAttackImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Attack__002.png"),(538/7,495/7)))
+PlayerAttackImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Attack__003.png"),(538/7,495/7)))
+PlayerAttackImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Attack__004.png"),(538/7,495/7)))
+PlayerAttackImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Attack__005.png"),(538/7,495/7)))
+PlayerAttackImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Attack__006.png"),(538/7,495/7)))
+PlayerAttackImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Attack__007.png"),(538/7,495/7)))
+PlayerAttackImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Attack__008.png"),(538/7,495/7)))
+PlayerAttackImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Attack__009.png"),(538/7,495/7)))
+PlayerAttackImagesLeft=[]
+for image in PlayerAttackImages:
+    PlayerAttackImagesLeft.append(pygame.transform.flip(image,True,False))
+
+PlayerThrowImages=[]
+PlayerThrowImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Throw__000.png"),(377/7,451/7)))
+PlayerThrowImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Throw__001.png"),(377/7,451/7)))
+PlayerThrowImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Throw__002.png"),(377/7,451/7)))
+PlayerThrowImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Throw__003.png"),(377/7,451/7)))
+PlayerThrowImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Throw__004.png"),(377/7,451/7)))
+PlayerThrowImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Throw__005.png"),(377/7,451/7)))
+PlayerThrowImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Throw__006.png"),(377/7,451/7)))
+PlayerThrowImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Throw__007.png"),(377/7,451/7)))
+PlayerThrowImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Throw__008.png"),(377/7,451/7)))
+PlayerThrowImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Throw__009.png"),(377/7,451/7)))
+PlayerThrowImagesLeft=[]
+for image in PlayerThrowImages:
+    PlayerThrowImagesLeft.append(pygame.transform.flip(image,True,False))
 
 KunaiImgae=pygame.transform.rotate(pygame.transform.scale(pygame.image.load("PlayerImages/Kunai.png"),(32/4,160/4)),90)
 KunaiImgae=pygame.transform.flip(KunaiImgae,True,False)
@@ -65,10 +99,7 @@ KunaiImgaeLeft=pygame.transform.rotate(pygame.transform.scale(pygame.image.load(
 TreeImages=[]
 TreeImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Tree_1.png"),(116/2,44/2)))
 TreeImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Tree_2.png"),(282/2,301/2)))
-for images in PlayerJumpImages:
-    PlayerJumpImagesLeft.append(pygame.transform.flip(images,True,False))
-for images in PlayerRunImages:
-    PlayerRunImagesLeft.append(pygame.transform.flip(images,True,False))
+
 Level1TileMap="00000000000000000000000000000000000000000000000000n" \
               "00000000000000000000000000000000000000000000000000n" \
               "00000000000000000000000000000000000000000000000000n" \

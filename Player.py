@@ -14,32 +14,44 @@ class Player(pygame.sprite.Sprite):
         self.speed=PlayerSpeed
         self.gravity=Gravity
         self.state="idle"
+        self.throw=False
         self.currentimageNum=0
         self.kunaiNumber=StartKunai
         self.kunaiTimer=KunaiTimer
         self.left=False
         self.onGround=False
+        self.attckOffset=True
     def setDirection(self):
-
         keys=pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
-            self.direction.x=-1
-            self.state="run"
-        elif keys[pygame.K_RIGHT]:
-            self.direction.x=1
-            self.state="run"
-
-        else:
-            self.direction.x=0
-            self.state="idle"
-
-        if keys[pygame.K_SPACE] and self.onGround:
-            self.jump()
-            self.state="jump"
         if keys[pygame.K_f] and self.kunaiNumber>0 and self.kunaiTimer==KunaiTimer:
             self.kunaiGroup.add(Kunai(self.rect.centerx,self.rect.centery,self))
             self.kunaiNumber-=1
             self.kunaiTimer=0
+            self.state="throw"
+            self.throw=True
+            self.speed=0
+            self.currentimageNum=0
+
+        else :
+            if keys[pygame.K_LEFT]:
+                self.direction.x=-1
+                self.state="run"
+                self.left=True
+            elif keys[pygame.K_RIGHT]:
+                self.direction.x=1
+                self.state="run"
+                self.left = False
+
+            elif keys[pygame.K_SPACE] and self.onGround:
+                self.jump()
+                self.state="jump"
+
+            elif keys[pygame.K_g]:
+                self.state="attack"
+                self.speed=0
+            else:
+                self.direction.x=0
+                self.state="idle"
 
     def update(self):
         self.setDirection()
@@ -51,6 +63,7 @@ class Player(pygame.sprite.Sprite):
         self.checkJump()
         self.animate()
         self.kunaiTiming()
+        self.attackLeftoffset()
     def horizontalMovement(self):
         self.rect.x += self.direction.x * self.speed
 
@@ -79,8 +92,6 @@ class Player(pygame.sprite.Sprite):
         self.direction.y += self.gravity
         self.rect.centery += self.direction.y
     def checkJump(self):
-        if self.direction.y>0:
-            self.onGround=False
         if self.direction.y <0:
             self.state="jump"
     def verticalMovement(self):
@@ -114,7 +125,37 @@ class Player(pygame.sprite.Sprite):
                 self.currentimageNum += 1
             if self.currentimageNum==10:
                 self.currentimageNum=0
+        if self.state=="attack":
 
+            if self.left:
+
+               self.image=PlayerAttackImagesLeft[self.currentimageNum]
+
+               self.currentimageNum+=1
+            else:
+                self.image=PlayerAttackImages[self.currentimageNum]
+                self.currentimageNum+=1
+            if self.currentimageNum==10:
+                self.currentimageNum=0
+        if self.state=="throw":
+            if self.left:
+               self.image=PlayerThrowImagesLeft[self.currentimageNum]
+               self.currentimageNum+=1
+            else:
+                self.image=PlayerThrowImages[self.currentimageNum]
+                self.currentimageNum+=1
+            if self.currentimageNum==10:
+                self.throw=False
+                self.currentimageNum=0
     def kunaiTiming(self):
         if self.kunaiTimer<KunaiTimer:
             self.kunaiTimer+=1
+
+    def attackLeftoffset(self):
+        if self.state == "attack" and self.left and self.attckOffset:
+
+            self.rect.left -= 40
+            self.attckOffset = False
+        elif self.left and not self.attckOffset and self.state != "attack":
+            self.attckOffset = True
+            self.rect.left += 40
