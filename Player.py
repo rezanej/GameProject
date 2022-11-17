@@ -41,17 +41,18 @@ class Player(pygame.sprite.Sprite):
                 self.direction.x=1
                 self.state="run"
                 self.left = False
-
-            elif keys[pygame.K_SPACE] and self.onGround:
-                self.jump()
-                self.state="jump"
-
-            elif keys[pygame.K_g]:
-                self.state="attack"
-                self.speed=0
             else:
                 self.direction.x=0
                 self.state="idle"
+
+            if keys[pygame.K_SPACE] and self.onGround:
+                self.jump()
+                self.state="jump"
+            if keys[pygame.K_g]:
+                self.state="attack"
+                self.speed=0
+
+
 
     def update(self):
         self.setDirection()
