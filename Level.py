@@ -5,6 +5,7 @@ from Player import *
 from GrassTile import *
 from Tree import *
 from Tile import *
+from Dog import *
 class Level():
     def __init__(self,display):
         self.initBackGround()
@@ -15,6 +16,7 @@ class Level():
         self.kunaiGroup=pygame.sprite.Group()
         self.borderGroup=pygame.sprite.Group()
         self.waterGroup=pygame.sprite.Group()
+        self.enemyGroup=pygame.sprite.Group()
         self.display=display
         self.addTiles()
         self.x=0
@@ -41,6 +43,8 @@ class Level():
                 self.subTiles.add(Tile(c*64,r*64,WaterImages[0]))
             elif tileNum=="W":
                 self.subTiles.add(Tile(c*64,r*64,WaterImages[1]))
+            elif tileNum=="D":
+                self.enemyGroup.add(Dog(c*64,r*64,self.tiles))
             c+=1
     def showAUpdate(self):
         self.scroll()
@@ -53,6 +57,8 @@ class Level():
         self.kunaiGroup.draw(self.display)
         self.playerGroup.update()
         self.playerGroup.draw(self.display)
+        self.enemyGroup.update()
+        self.enemyGroup.draw(self.display)
 
 
     def initBackGround(self):
@@ -72,6 +78,8 @@ class Level():
                 tiles.rect.x+=PlayerSpeed
             for tiles in self.borderGroup:
                 tiles.rect.x+=PlayerSpeed
+            for tiles in self.enemyGroup:
+                tiles.rect.x+=PlayerSpeed
         elif self.playerGroup.sprite.rect.x >WindowWidth*(3/4) and self.playerGroup.sprite.direction.x>0:
             self.x+=1
             self.playerGroup.sprite.speed = 0
@@ -82,6 +90,8 @@ class Level():
             for tiles in self.subTiles:
                 tiles.rect.x-=PlayerSpeed
             for tiles in self.borderGroup:
+                tiles.rect.x-=PlayerSpeed
+            for tiles in self.enemyGroup:
                 tiles.rect.x-=PlayerSpeed
         else:
             self.playerGroup.sprite.speed=PlayerSpeed

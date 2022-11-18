@@ -112,9 +112,9 @@ class Player(pygame.sprite.Sprite):
     def checkJump(self):
         if self.direction.y <0:
             self.state="jump"
-    def verticalMovement(self):
-        self.direction.y+=4
-        self.rect.y+=self.direction.y
+    # def verticalMovement(self):
+    #     self.direction.y+=4
+    #     self.rect.y+=self.direction.y
     def animate(self):
         if self.state=="idle":
             if not self.left:

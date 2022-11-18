@@ -4,6 +4,7 @@ WindowHeight=64*10 #temporary
 Fps=60
 CurrentLevel=0
 PlayerSpeed=8
+DogSpeed=3
 PlayerJumpSpeed=35
 Gravity=3
 KunaiSpeed=50
@@ -98,7 +99,34 @@ KunaiImgae=pygame.transform.rotate(pygame.transform.scale(pygame.image.load("Pla
 KunaiImgae=pygame.transform.flip(KunaiImgae,True,False)
 KunaiImgaeLeft=pygame.transform.rotate(pygame.transform.scale(pygame.image.load("PlayerImages/Kunai.png"),(32/4,160/4)),90)
 
+DogIdleImages=[]
 
+DogIdleImages.append(pygame.transform.scale(pygame.image.load("dog/Idle (1).png"),(547/7,481/7)))
+DogIdleImages.append(pygame.transform.scale(pygame.image.load("dog/Idle (2).png"),(547/7,481/7)))
+DogIdleImages.append(pygame.transform.scale(pygame.image.load("dog/Idle (3).png"),(547/7,481/7)))
+DogIdleImages.append(pygame.transform.scale(pygame.image.load("dog/Idle (4).png"),(547/7,481/7)))
+DogIdleImages.append(pygame.transform.scale(pygame.image.load("dog/Idle (5).png"),(547/7,481/7)))
+DogIdleImages.append(pygame.transform.scale(pygame.image.load("dog/Idle (6).png"),(547/7,481/7)))
+DogIdleImages.append(pygame.transform.scale(pygame.image.load("dog/Idle (7).png"),(547/7,481/7)))
+DogIdleImages.append(pygame.transform.scale(pygame.image.load("dog/Idle (8).png"),(547/7,481/7)))
+DogIdleImages.append(pygame.transform.scale(pygame.image.load("dog/Idle (9).png"),(547/7,481/7)))
+DogIdleImages.append(pygame.transform.scale(pygame.image.load("dog/Idle (10).png"),(547/7,481/7)))
+DogIdleImagesLeft=[]
+for image in DogIdleImages:
+    DogIdleImagesLeft.append(pygame.transform.flip(image,True,False))
+
+DogRunImages=[]
+DogRunImages.append(pygame.transform.scale(pygame.image.load("dog/Run (1).png"),(547/7,481/7)))
+DogRunImages.append(pygame.transform.scale(pygame.image.load("dog/Run (2).png"),(547/7,481/7)))
+DogRunImages.append(pygame.transform.scale(pygame.image.load("dog/Run (3).png"),(547/7,481/7)))
+DogRunImages.append(pygame.transform.scale(pygame.image.load("dog/Run (4).png"),(547/7,481/7)))
+DogRunImages.append(pygame.transform.scale(pygame.image.load("dog/Run (5).png"),(547/7,481/7)))
+DogRunImages.append(pygame.transform.scale(pygame.image.load("dog/Run (6).png"),(547/7,481/7)))
+DogRunImages.append(pygame.transform.scale(pygame.image.load("dog/Run (7).png"),(547/7,481/7)))
+DogRunImages.append(pygame.transform.scale(pygame.image.load("dog/Run (8).png"),(547/7,481/7)))
+DogRunImagesLeft=[]
+for image in DogRunImages:
+    DogRunImagesLeft.append(pygame.transform.flip(image,True,False))
 TreeImages=[]
 TreeImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Tree_1.png"),(116/2,44/2)))
 TreeImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Tree_2.png"),(282/2,301/2)))
@@ -108,8 +136,8 @@ Level1TileMap="00000000000000000000000000000000000000000000000000n" \
               "00000000000000000000000000000000000000000000000000n" \
               "b0000b00000000000000000000000000000000000000000000n" \
               "b0000b00000000000000000000000000000000000000000000n" \
-              "b0T00b00T000000p00000000000TT00000000000000000000n" \
-              "11111111110000011001100000111100000000000000000000n" \
+              "b0T0Db00T000000p0000D00000TT0000000000000000000000n" \
+              "11111111110000011001111111111100000000000000000000n" \
               "dddddddd0000T00000000010t01000010t0010000000000000n" \
               "dddddddd111111wwwwwwwww11wwwwwww111wwwwwwwwwwwwwwwn" \
               "ddddddddddddddWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWn"
