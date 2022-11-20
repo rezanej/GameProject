@@ -20,6 +20,8 @@ class Level():
         self.display=display
         self.addTiles()
         self.x=0
+        self.HudInit()
+        self.HelthBar()
     def addTiles(self):
         r,c=0,0
         for tileNum in Level1TileMap:
@@ -59,7 +61,7 @@ class Level():
         self.playerGroup.draw(self.display)
         self.enemyGroup.update()
         self.enemyGroup.draw(self.display)
-
+        self.HudBlit()
 
     def initBackGround(self):
 
@@ -95,5 +97,24 @@ class Level():
                 tiles.rect.x-=PlayerSpeed
         else:
             self.playerGroup.sprite.speed=PlayerSpeed
+    def HudInit(self):
+        self.font=pygame.font.Font("Level1Assets/BloodyTerror.ttf",20)
+        self.healthText=self.font.render("health:",True,(255,0,0))
+        self.healthTextRect=self.healthText.get_rect(topleft=(20,23))
+        self.kunaiImage=pygame.transform.scale(pygame.image.load("PlayerImages/Kunai.png"),(16/1.3,80/1.3))
+        self.kunaiImageRect=KunaiImgae.get_rect(topleft=(20,70))
+        self.kunaiText=self.font.render(f": {self.playerGroup.sprite.kunaiNumber}",True,(40,54,67))
+        self.kunaiTextRect=self.kunaiText.get_rect(topleft=(50,85))
 
+    def HelthBar(self):
+        self.helthBar=pygame.surface.Surface((200,16))
+        self.helthBar.fill((0,156,56))
+        self.helthBarRect=self.helthBar.get_rect(topleft=(120,34))
+        self.helthBarBackground=pygame.rect.Rect(120,34,200,16)
+    def HudBlit(self):
+        self.display.blit(self.healthText, self.healthTextRect)
+        self.display.blit(self.helthBar,self.helthBarRect)
+        pygame.draw.rect(self.display,(255,140,9),self.helthBarBackground,3)
+        self.display.blit(self.kunaiImage,self.kunaiImageRect)
+        self.display.blit(self.kunaiText,self.kunaiTextRect)
 

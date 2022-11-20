@@ -22,7 +22,6 @@ class Player(pygame.sprite.Sprite):
         self.left=False
         self.onGround=False
         self.attckOffset=True
-
     def setDirection(self):
         keys=pygame.key.get_pressed()
         if keys[pygame.K_f] and self.kunaiNumber>0 and self.kunaiTimer==KunaiTimer:
