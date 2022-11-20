@@ -7,9 +7,11 @@ from Tree import *
 from Tile import *
 from Dog import *
 from Light import Light
+
 class Level():
-    def __init__(self,display):
+    def __init__(self,display,pause):
         self.initBackGround()
+        self.pause=pause
         self.tiles=pygame.sprite.Group()
         self.subTiles=pygame.sprite.Group()
         self.playerGroup=pygame.sprite.GroupSingle()
@@ -53,22 +55,24 @@ class Level():
                 self.lightGroup.add(Light(c*64,r*64,1))
             c+=1
     def showAUpdate(self):
-        self.scroll()
-        self.tiles.update()
-        self.display.blit(self.backGround,self.backGroundRect)
-        self.tiles.draw(self.display)
-        self.TreeGroup.draw(self.display)
-        self.subTiles.draw(self.display)
-        self.kunaiGroup.update()
-        self.kunaiGroup.draw(self.display)
-        self.playerGroup.update()
-        self.playerGroup.draw(self.display)
-        self.enemyGroup.update()
-        self.enemyGroup.draw(self.display)
-        self.HudBlit()
-        # self.night()
-        # self.blitNight()
-        # self.lightGroup.draw(self.display)
+        if not self.pause[1]:
+            self.scroll()
+            self.tiles.update()
+            self.display.blit(self.backGround,self.backGroundRect)
+            self.tiles.draw(self.display)
+            self.TreeGroup.draw(self.display)
+            self.subTiles.draw(self.display)
+            self.kunaiGroup.update()
+            self.kunaiGroup.draw(self.display)
+            self.playerGroup.update()
+            self.playerGroup.draw(self.display)
+            self.enemyGroup.update()
+            self.enemyGroup.draw(self.display)
+            self.HudBlit()
+            # self.night()
+            # self.blitNight()
+            # self.lightGroup.draw(self.display)
+
     def initBackGround(self):
 
         self.backGround = BackgroundImages[CurrentLevel]
@@ -141,3 +145,5 @@ class Level():
 
     def blitNight(self):
         self.display.blit(self.fog,self.fogRect,special_flags=pygame.BLEND_MULT)
+    def reset(self):
+        self.__init__(self.display,self.pause)

@@ -3,7 +3,6 @@ import pygame
 class Light(pygame.sprite.Sprite):
     #1,2,3 for hardness
     def __init__(self,x,y,hardness):
-        print("dfd")
         super().__init__()
         if hardness==1:
             self.image = pygame.image.load("light_350_med.png").convert_alpha()
