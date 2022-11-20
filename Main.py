@@ -22,16 +22,17 @@ class Game():
             self.events=pygame.event.get()
             if self.levelTrue[0]==0:
                 self.running = self.menu.menuLoop(self.events)
+            if self.levelTrue[1]==1:
+                self.running = self.pauseMenu.menuLoop(self.events)
             for event in self.events:
                 if event.type==pygame.QUIT:
                     self.running=False
                 if event.type==pygame.KEYDOWN:
                     if event.key==pygame.K_ESCAPE:
                         self.levelTrue[1]=1
-            if self.levelTrue[1]==1:
-                self.running = self.pauseMenu.menuLoop(self.events)
+
             if self.levelTrue[0]==1:
-               self.level.showAUpdate()
+                self.level.showAUpdate()
             if self.levelTrue[2]==1:
                 self.level = Level.Level(self.display, self.levelTrue)
                 self.levelTrue[2]=0
