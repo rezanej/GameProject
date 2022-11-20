@@ -40,7 +40,6 @@ class PauseMenu():
         self.display.blit(self.button4,self.button4Rect)
         self.display.blit(self.exitText,self.exitTextRect)
     def menuLoop(self,events):
-        print("Pausemenu")
         for event in events:
 
             if event.type==pygame.KEYDOWN:
