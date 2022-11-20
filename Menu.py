@@ -39,7 +39,7 @@ class Menu():
         self.display.blit(self.button4,self.button4Rect)
         self.display.blit(self.exitText,self.exitTextRect)
     def menuLoop(self,events):
-
+        print("menu")
         for event in events:
 
             if event.type==pygame.KEYDOWN:
@@ -53,6 +53,10 @@ class Menu():
                 if event.key==pygame.K_RETURN:
                     if self.selectedButton==1:
                         self.level[0]=1
+                    if self.selectedButton==2:
+                        self.level[0]=0
+                        self.level[1]=0
+                        self.level[3]=1
                     if self.selectedButton==4:
                         return False
 

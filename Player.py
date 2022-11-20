@@ -3,7 +3,7 @@ from Setting import *
 from Kunai import *
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self,x,y,tileGroup,kunaiGroup,bordergroup):
+    def __init__(self,x,y,tileGroup,kunaiGroup=pygame.sprite.Group(),bordergroup=pygame.sprite.Group()):
         super().__init__()
         self.image=PlayerImage
         self.rect=self.image.get_rect(topleft=(x,y))
@@ -22,6 +22,7 @@ class Player(pygame.sprite.Sprite):
         self.left=False
         self.onGround=False
         self.attckOffset=True
+        self.freeRun=self.checkFreeRun()
     def setDirection(self):
         keys=pygame.key.get_pressed()
         if keys[pygame.K_f] and self.kunaiNumber>0 and self.kunaiTimer==KunaiTimer:
@@ -63,6 +64,10 @@ class Player(pygame.sprite.Sprite):
         self.gravityFun()
         self.verticalCollision()
         self.checkJump()
+        if self.freeRun:
+            if self.state!="jump":
+                self.state="run"
+            self.direction.x=1
         self.animate()
         self.kunaiTiming()
         self.attackLeftoffset()
@@ -176,3 +181,8 @@ class Player(pygame.sprite.Sprite):
         elif self.left and not self.attckOffset and self.state != "attack":
             self.attckOffset = True
             self.rect.left += 40
+    def checkFreeRun(self):
+        if len(self.borderGroup.sprites())==0:
+            return True
+        return False
+

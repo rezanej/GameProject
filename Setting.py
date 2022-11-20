@@ -153,6 +153,17 @@ Level2TileMap="00000000000000000000000000000000000000000000000000n" \
               "dddddddd0000T00000000010t01000010t0010000000000000n" \
               "dddddddd111111wwwwwwwww11wwwwwww111wwwwwwwwwwwwwwwn" \
               "ddddddddddddddWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWn"
+
+FreeRunStart= "000000000000000000000000000000n" \
+              "000000000000000000000000000000n" \
+              "000000000000000000000000000000n" \
+              "000000000000000000000000000000n" \
+              "000000000000000000000000000000n" \
+              "000000000000000000000000000000n" \
+              "00p000000000000000000000000000n" \
+              "111111111111111111111111111111n" \
+              "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwn" \
+              "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWn"
 HudFont=pygame.font.Font("Level1Assets/BloodyTerror.ttf",20)
 MenuFont=pygame.font.Font("Level1Assets/BloodyTerror.ttf",40)
 MenuButtonFont=pygame.font.Font("Level1Assets/BloodyTerror.ttf",27)
