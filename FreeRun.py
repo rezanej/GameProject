@@ -1,3 +1,5 @@
+import random
+
 import pygame
 from Setting import *
 from GrassTile import GrassTile
@@ -14,17 +16,23 @@ class FreeRun:
         self.enemyGroup=pygame.sprite.Group()
         self.lightGroup=pygame.sprite.Group()
         self.display=display
+        self.lastTileY = 0
+        self.t=[]
         self.initTiles()
         self.y=0
         self.HudInit()
         self.HelthBar()
         self.playerGroup.sprite.speed = 0
+
     def initTiles(self):
         r, c = 0, 0
         for tileNum in FreeRunStart:
 
             if tileNum == "1":
-                self.tiles.add(GrassTile(c * 64, r * 64))
+                g=GrassTile(c * 64, r * 64)
+                self.tiles.add(g)
+                self.t.append(g)
+                self.lastTileY = r*64
             elif tileNum == "p":
                 self.playerGroup.add(Player(c * 64, r * 64, self.tiles))
             elif tileNum == "n":
@@ -32,15 +40,46 @@ class FreeRun:
                 c = -1
 
             c += 1
+
+    def addTiles(self):
+        r, c = self.lastTileY//64, 20
+        r=r-random.choice([-1,-2,1])
+        for i in range(15):
+            g=GrassTile(c*64,r*64)
+            g1=GrassTile((c+1)*64,r*64)
+            self.tiles.add(g)
+            self.tiles.add(g1)
+            self.t.append(g)
+            self.t.append(g1)
+            c+=2
+    def deletetiles(self):
+        tiles=pygame.sprite.Group()
+        t=[]
+        print(len(self.t))
+        for i in range(30):
+            t.append(self.t[i+9])
+        for i in t:
+            tiles.add(t)
+        self.tiles=tiles
+        self.t=t
+        print(len(self.t))
+    def checkDeleteandAdd(self):
+        if self.t[0].rect.x<=-WindowWidth/2:
+            self.tileNumber = random.randint(10, 30)
+            print("added")
+            self.addTiles()
+            self.deletetiles()
     def showAUpdate(self):
+
         if not self.pause[1]:
+            self.checkDeleteandAdd()
             self.scroll()
             self.tiles.update()
             self.display.blit(self.backGround,self.backGroundRect)
             self.tiles.draw(self.display)
             self.TreeGroup.draw(self.display)
             self.subTiles.draw(self.display)
-            self.playerGroup.update()
+            self.playerGroup.update(self.tiles)
             self.playerGroup.draw(self.display)
             self.enemyGroup.update()
             self.enemyGroup.draw(self.display)
@@ -48,7 +87,6 @@ class FreeRun:
             # self.night()
             # self.blitNight()
             # self.lightGroup.draw(self.display)
-
     def initBackGround(self):
 
         self.backGround = BackgroundImages[CurrentLevel]
@@ -71,10 +109,6 @@ class FreeRun:
         self.font=HudFont
         self.healthText=self.font.render("health:",True,(255,0,0))
         self.healthTextRect=self.healthText.get_rect(topleft=(20,23))
-        self.kunaiImage=pygame.transform.scale(pygame.image.load("PlayerImages/Kunai.png"),(16/1.3,80/1.3))
-        self.kunaiImageRect=KunaiImgae.get_rect(topleft=(20,70))
-        self.kunaiText=self.font.render(f": {self.playerGroup.sprite.kunaiNumber}",True,(40,54,67))
-        self.kunaiTextRect=self.kunaiText.get_rect(topleft=(50,85))
 
     def HelthBar(self):
         self.helthBar=pygame.surface.Surface((200,16))
@@ -85,8 +119,6 @@ class FreeRun:
         self.display.blit(self.healthText, self.healthTextRect)
         self.display.blit(self.helthBar,self.helthBarRect)
         pygame.draw.rect(self.display,(255,140,9),self.helthBarBackground,3)
-        self.display.blit(self.kunaiImage,self.kunaiImageRect)
-        self.display.blit(self.kunaiText,self.kunaiTextRect)
         # self.display.blit(self.vintageImage,self.vintageImageRect)
 
     def vintage(self):

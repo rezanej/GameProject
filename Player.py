@@ -56,7 +56,8 @@ class Player(pygame.sprite.Sprite):
 
 
 
-    def update(self):
+    def update(self,tiles):
+        self.tileGroup=tiles
         self.setDirection()
         self.onGround=False
         self.horizontalMovement()
