@@ -98,7 +98,7 @@ class Level():
         else:
             self.playerGroup.sprite.speed=PlayerSpeed
     def HudInit(self):
-        self.font=pygame.font.Font("Level1Assets/BloodyTerror.ttf",20)
+        self.font=HudFont
         self.healthText=self.font.render("health:",True,(255,0,0))
         self.healthTextRect=self.healthText.get_rect(topleft=(20,23))
         self.kunaiImage=pygame.transform.scale(pygame.image.load("PlayerImages/Kunai.png"),(16/1.3,80/1.3))

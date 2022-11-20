@@ -1,8 +1,8 @@
 import pygame
-
-import Level
 from Setting import *
+import Level
 
+import Menu
 
 class Game():
     def __init__(self):
@@ -13,13 +13,24 @@ class Game():
         self.clock=pygame.time.Clock()
         self.level=Level.Level(self.display)
         self.running=True
+        self.events=[]
+        self.levelTrue=[0]
+        self.menu=Menu.Menu(self.display,self.levelTrue)
 
     def update(self):
         while self.running:
-            for event in pygame.event.get():
+            self.events=pygame.event.get()
+            if self.levelTrue[0]==0:
+                self.running = self.menu.menuLoop(self.events)
+            for event in self.events:
                 if event.type==pygame.QUIT:
                     self.running=False
-            self.level.showAUpdate()
+                if event.type==pygame.KEYDOWN:
+                    if event.key==pygame.K_ESCAPE:
+                        self.levelTrue[0]=0
+
+            if self.levelTrue[0]==1:
+               self.level.showAUpdate()
             pygame.display.flip()
             self.clock.tick(Fps)
 

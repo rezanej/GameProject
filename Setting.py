@@ -1,4 +1,5 @@
 import pygame
+pygame.init()
 WindowWidth=64*20 #temporary
 WindowHeight=64*10 #temporary
 Fps=60
@@ -141,4 +142,11 @@ Level1TileMap="00000000000000000000000000000000000000000000000000n" \
               "dddddddd0000T00000000010t01000010t0010000000000000n" \
               "dddddddd111111wwwwwwwww11wwwwwww111wwwwwwwwwwwwwwwn" \
               "ddddddddddddddWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWn"
-
+HudFont=pygame.font.Font("Level1Assets/BloodyTerror.ttf",20)
+MenuFont=pygame.font.Font("Level1Assets/BloodyTerror.ttf",40)
+MenuButtonFont=pygame.font.Font("Level1Assets/BloodyTerror.ttf",27)
+MenuButtonTextColor=(164,63,79)
+ButtonImages=[]
+ButtonImages.append(pygame.transform.scale(pygame.image.load("MenuImages/bt1.png"),(490//2,220//2)))
+ButtonImages.append(pygame.transform.scale(pygame.image.load("MenuImages/bt2.png"),(440//2,200//2)))
+MenuBackground=pygame.transform.scale(pygame.image.load("Level1Assets/BG/BG.png"),(WindowWidth,WindowHeight))
