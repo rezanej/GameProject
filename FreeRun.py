@@ -2,7 +2,8 @@ import random
 
 import pygame
 
-import Tile
+import Tree
+from Tile import Tile
 from Setting import *
 from GrassTile import GrassTile
 from Player import Player
@@ -37,6 +38,10 @@ class FreeRun:
                 self.lastTileY = r*64
             elif tileNum == "p":
                 self.playerGroup.add(Player(c * 64, r * 64, self.tiles))
+            elif tileNum == "d":
+                g=Tile(c * 64, r * 64, DirtImages[0])
+                self.tiles.add(g)
+                self.t.append(g)
             elif tileNum == "n":
                 r += 1
                 c = -1
@@ -47,7 +52,9 @@ class FreeRun:
         r, c = self.lastTileY//64, 20
         count=0
         j=random.randint(4, 10)
+
         for i in range(j):
+
             if r>=8:
                 r = r + -2
             elif r<=3:
@@ -56,10 +63,21 @@ class FreeRun:
                 r = r + random.choice([1, 2,-2])
             ct = random.randint(4, 10)
             for i in range(ct):
+                treePosibility = random.choice([1, 0, 0, 0, 0, 0, 0,0,0,0,0,0, 0, 0])
+                objectPosibility=random.choice([1, 0, 0, 0, 0, 0, 0,0,0,0,0,0, 0, 0])
                 for a in range(10-r):
-                    d=Tile.Tile((c+i)*64,(r+a)*64,DirtImages[0])
+                    d=Tile((c+i)*64,(r+a)*64,DirtImages[0])
                     self.tiles.add(d)
                     self.t.append(d)
+                if treePosibility and (i!=0 and i!=ct-1):
+                    treeImageRand=random.choice([0,1,1,1,1,1,1,0,0])
+                    self.TreeGroup.add(Tree.Tree(TreeImages[treeImageRand],(c+i)*64,(r-1)*64+64))
+                if objectPosibility and (i!=0 and i!=ct-1):
+                    print("Dffddf")
+                    objectImageRand=random.randint(0,4)
+                    g=Tile((c+i)*64,(r-1)*64+24,ObjectImages[objectImageRand])
+                    self.tiles.add(g)
+                    self.t.append(g)
                 g=GrassTile((c+i)*64,r*64)
                 self.tiles.add(g)
                 self.t.append(g)
@@ -78,6 +96,9 @@ class FreeRun:
             tiles.add(t)
         self.tiles=tiles
         self.t=t
+        for i in self.TreeGroup:
+            if i.rect.x<-80:
+                i.kill()
     def checkDeleteandAdd(self):
         if self.t[0].rect.x<=-WindowWidth:
             self.tileNumber = random.randint(10, 30)

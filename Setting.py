@@ -133,7 +133,13 @@ for image in DogRunImages:
 TreeImages=[]
 TreeImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Tree_1.png"),(116/2,44/2)).convert_alpha())
 TreeImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Tree_2.png"),(282/2,301/2)).convert_alpha())
-
+ObjectImages=[]
+ObjectImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Bush (1).png"),(133,65)).convert_alpha())
+ObjectImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Bush (2).png"),(133,65)).convert_alpha())
+# ObjectImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Crate.png"),(77,77)).convert_alpha())
+ObjectImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Mushroom_1.png"),(49,41)).convert_alpha())
+ObjectImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Mushroom_2.png"),(49,41)).convert_alpha())
+ObjectImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Stone.png"),(90,54)).convert_alpha())
 Level1TileMap="00000000000000000000000000000000000000000000000000n" \
               "00000000000000000000000000000000000000000000000000n" \
               "00000000000000000000000000000000000000000000000000n" \
@@ -164,8 +170,8 @@ FreeRunStart= "000000000000000000000000000000n" \
               "000000000000000000000000000000n" \
               "00p000000000000000000000000000n" \
               "1111111111111111111111111111111111111111n" \
-              "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwn" \
-              "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWn"
+              "ddddddddddddddddddddddddddddddddddddddddn" \
+              "ddddddddddddddddddddddddddddddddddddddddn"
 HudFont=pygame.font.Font("Level1Assets/BloodyTerror.ttf",20)
 MenuFont=pygame.font.Font("Level1Assets/BloodyTerror.ttf",40)
 MenuButtonFont=pygame.font.Font("Level1Assets/BloodyTerror.ttf",27)
