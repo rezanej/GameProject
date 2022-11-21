@@ -161,7 +161,7 @@ FreeRunStart= "000000000000000000000000000000n" \
               "000000000000000000000000000000n" \
               "000000000000000000000000000000n" \
               "00p000000000000000000000000000n" \
-              "111111111111111111111111111111n" \
+              "1111111111111111111111111111111111111111n" \
               "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwn" \
               "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWn"
 HudFont=pygame.font.Font("Level1Assets/BloodyTerror.ttf",20)

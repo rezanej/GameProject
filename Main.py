@@ -14,7 +14,8 @@ class Game():
         self.running=True
         self.events=[]
         # first one for main menu and second one for pause third one for new level forth for free run
-        self.levelTrue=[0,0,0,0]
+        # fifth for new free run
+        self.levelTrue=[0,0,0,0,0]
         self.freeRun=FreeRun.FreeRun(self.display,self.levelTrue)
         self.level=Level.Level(self.display,self.levelTrue)
         self.menu=Menu.Menu(self.display,self.levelTrue)
@@ -40,6 +41,9 @@ class Game():
                 self.levelTrue[2]=0
             if self.levelTrue[3]==1:
                 self.freeRun.showAUpdate()
+            if self.levelTrue[4]==1:
+                self.freeRun=FreeRun.FreeRun(self.display,self.levelTrue)
+                self.levelTrue[4] = 0
             pygame.display.flip()
             self.clock.tick(Fps)
 

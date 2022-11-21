@@ -57,6 +57,7 @@ class PauseMenu():
                         self.levelTrue[1]=0
                         self.levelTrue[0]=0
                         self.levelTrue[2]=1
+                        self.levelTrue[3]=0
 
                     if self.selectedButton==4:
                         return False

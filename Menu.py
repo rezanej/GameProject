@@ -56,6 +56,7 @@ class Menu():
                         self.level[0]=0
                         self.level[1]=0
                         self.level[3]=1
+                        self.level[4]= 1
                     if self.selectedButton==4:
                         return False
 

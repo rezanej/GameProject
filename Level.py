@@ -64,7 +64,7 @@ class Level():
             self.subTiles.draw(self.display)
             self.kunaiGroup.update()
             self.kunaiGroup.draw(self.display)
-            self.playerGroup.update()
+            self.playerGroup.update(self.tiles)
             self.playerGroup.draw(self.display)
             self.enemyGroup.update()
             self.enemyGroup.draw(self.display)
