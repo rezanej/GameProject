@@ -73,7 +73,6 @@ class FreeRun:
                     treeImageRand=random.choice([0,1,1,1,1,1,1,0,0])
                     self.TreeGroup.add(Tree.Tree(TreeImages[treeImageRand],(c+i)*64,(r-1)*64+64))
                 if objectPosibility and (i!=0 and i!=ct-1):
-                    print("Dffddf")
                     objectImageRand=random.randint(0,4)
                     g=Tile((c+i)*64,(r-1)*64+24,ObjectImages[objectImageRand])
                     self.tiles.add(g)

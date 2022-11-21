@@ -43,7 +43,7 @@ class Player(pygame.sprite.Sprite):
                 self.direction.x=1
                 self.state="run"
                 self.left = False
-            else:
+            elif self.currentimageNum==0:
                 self.direction.x=0
                 self.state="idle"
 
