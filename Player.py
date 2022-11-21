@@ -23,6 +23,7 @@ class Player(pygame.sprite.Sprite):
         self.onGround=False
         self.attckOffset=True
         self.freeRun=self.checkFreeRun()
+        self.animationSpeed=PlayerAnimationSpeed
     def setDirection(self):
         keys=pygame.key.get_pressed()
         if keys[pygame.K_f] and self.kunaiNumber>0 and self.kunaiTimer==KunaiTimer:
@@ -35,17 +36,22 @@ class Player(pygame.sprite.Sprite):
             self.currentimageNum=0
 
         else :
-            if keys[pygame.K_LEFT]:
+
+            if keys[pygame.K_LEFT] and self.state!="throw":
                 self.direction.x=-1
                 self.state="run"
                 self.left=True
-            elif keys[pygame.K_RIGHT]:
+            elif keys[pygame.K_RIGHT] and self.state!="throw":
                 self.direction.x=1
                 self.state="run"
                 self.left = False
-            elif self.currentimageNum==0:
-                self.direction.x=0
-                self.state="idle"
+            elif self.state=="throw":
+                if self.currentimageNum==0:
+                    self.direction.x=0
+                    self.state="idle"
+            else :
+                self.direction.x = 0
+                self.state = "idle"
 
             if keys[pygame.K_SPACE] and self.onGround:
                 self.jump()
@@ -73,7 +79,8 @@ class Player(pygame.sprite.Sprite):
         self.kunaiTiming()
         self.attackLeftoffset()
     def horizontalMovement(self):
-        self.rect.x += self.direction.x * self.speed
+        if self.state!="throw": # for not moving during throw
+            self.rect.x += self.direction.x * self.speed
 
     def horizontalCollision(self):
         for sprite in self.tileGroup.sprites():
@@ -125,51 +132,51 @@ class Player(pygame.sprite.Sprite):
     def animate(self):
         if self.state=="idle":
             if not self.left:
-                self.image=PlayerIdleImages[self.currentimageNum]
+                self.image=PlayerIdleImages[int(self.currentimageNum)]
             elif self.left:
-                self.image = PlayerIdleImagesLeft[self.currentimageNum]
-            self.currentimageNum += 1
-            if self.currentimageNum==10:
+                self.image = PlayerIdleImagesLeft[int(self.currentimageNum)]
+            self.currentimageNum += self.animationSpeed
+            if self.currentimageNum>=10:
                 self.currentimageNum=0
         if self.state=="run":
             if self.direction.x > 0:
                 self.left=False
-                self.image=PlayerRunImages[self.currentimageNum]
+                self.image=PlayerRunImages[int(self.currentimageNum)]
             if self.direction.x < 0:
                 self.left = True
-                self.image=PlayerRunImagesLeft[self.currentimageNum]
-            self.currentimageNum += 1
-            if self.currentimageNum==10:
+                self.image=PlayerRunImagesLeft[int(self.currentimageNum)]
+            self.currentimageNum += self.animationSpeed
+            if self.currentimageNum>=10:
                 self.currentimageNum=0
         if self.state=="jump":
             if not self.left:
-                self.image=PlayerJumpImages[self.currentimageNum]
-                self.currentimageNum+=1
+                self.image=PlayerJumpImages[int(self.currentimageNum)]
+                self.currentimageNum+=self.animationSpeed
             else:
-                self.image=PlayerJumpImagesLeft[self.currentimageNum]
-                self.currentimageNum += 1
-            if self.currentimageNum==10:
+                self.image=PlayerJumpImagesLeft[int(self.currentimageNum)]
+                self.currentimageNum += self.animationSpeed
+            if self.currentimageNum>=10:
                 self.currentimageNum=0
         if self.state=="attack":
 
             if self.left:
 
-               self.image=PlayerAttackImagesLeft[self.currentimageNum]
+               self.image=PlayerAttackImagesLeft[int(self.currentimageNum)]
 
-               self.currentimageNum+=1
+               self.currentimageNum+=self.animationSpeed
             else:
-                self.image=PlayerAttackImages[self.currentimageNum]
-                self.currentimageNum+=1
-            if self.currentimageNum==10:
+                self.image=PlayerAttackImages[int(self.currentimageNum)]
+                self.currentimageNum+=self.animationSpeed
+            if self.currentimageNum>=10:
                 self.currentimageNum=0
         if self.state=="throw":
             if self.left:
-               self.image=PlayerThrowImagesLeft[self.currentimageNum]
-               self.currentimageNum+=1
+               self.image=PlayerThrowImagesLeft[int(self.currentimageNum)]
+               self.currentimageNum+=self.animationSpeed
             else:
-                self.image=PlayerThrowImages[self.currentimageNum]
-                self.currentimageNum+=1
-            if self.currentimageNum==10:
+                self.image=PlayerThrowImages[int(self.currentimageNum)]
+                self.currentimageNum+=self.animationSpeed
+            if self.currentimageNum>=10:
                 self.throw=False
                 self.currentimageNum=0
     def kunaiTiming(self):

@@ -6,11 +6,12 @@ WindowHeight=64*10 #temporary
 Display=pygame.display.set_mode((WindowWidth,WindowHeight),flags=pygame.SCALED,vsync=1)
 Fps=60
 CurrentLevel=0
-PlayerSpeed=8
+PlayerSpeed=5
+PlayerAnimationSpeed=0.4
 DogSpeed=3
 PlayerJumpSpeed=35
 Gravity=3
-KunaiSpeed=50
+KunaiSpeed=30
 StartKunai=40
 KunaiLifetime=15
 KunaiTimer=20
