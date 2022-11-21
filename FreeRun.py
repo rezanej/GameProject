@@ -1,6 +1,8 @@
 import random
 
 import pygame
+
+import Tile
 from Setting import *
 from GrassTile import GrassTile
 from Player import Player
@@ -46,7 +48,7 @@ class FreeRun:
         count=0
         j=random.randint(4, 10)
         for i in range(j):
-            if r>=9:
+            if r>=8:
                 r = r + -2
             elif r<=3:
                 r = r + random.choice([1, 2])
@@ -54,29 +56,31 @@ class FreeRun:
                 r = r + random.choice([1, 2,-2])
             ct = random.randint(4, 10)
             for i in range(ct):
+                for a in range(10-r):
+                    d=Tile.Tile((c+i)*64,(r+a)*64,DirtImages[0])
+                    self.tiles.add(d)
+                    self.t.append(d)
                 g=GrassTile((c+i)*64,r*64)
                 self.tiles.add(g)
                 self.t.append(g)
                 count+=1
                 if count==20:
+                    self.lastTileY=g.rect.y
                     return 0
             c+=ct
-        print(len(self.t))
     def deletetiles(self):
         tiles=pygame.sprite.Group()
         t=[]
-        print(len(self.t))
-        for i in range(20,len(self.t)):
-            t.append(self.t[i])
+        for i in self.t:
+            if i.rect.x>-64:
+                t.append(i)
         for i in t:
             tiles.add(t)
         self.tiles=tiles
         self.t=t
-        # print(len(self.t))
     def checkDeleteandAdd(self):
         if self.t[0].rect.x<=-WindowWidth:
             self.tileNumber = random.randint(10, 30)
-            print("added")
             self.addTiles()
             self.deletetiles()
     def showAUpdate(self):
@@ -97,8 +101,6 @@ class FreeRun:
             # self.night()
             # self.blitNight()
             # self.lightGroup.draw(self.display)
-            for a in self.t:
-                pygame.draw.rect(self.display,(255,0,0),a,2)
     def initBackGround(self):
 
         self.backGround = BackgroundImages[CurrentLevel]

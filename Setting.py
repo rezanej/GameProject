@@ -2,6 +2,7 @@ import pygame
 pygame.init()
 WindowWidth=64*20 #temporary
 WindowHeight=64*10 #temporary
+Display=pygame.display.set_mode((WindowWidth,WindowHeight),flags=pygame.SCALED,vsync=1)
 Fps=60
 CurrentLevel=0
 PlayerSpeed=8
@@ -18,7 +19,7 @@ Grassimages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Tiles/
 BackgroundImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/BG/BG.png"),(64*20,640)))
 PlayerImage=pygame.transform.scale(pygame.image.load("PlayerImages/Idle__000.png"),(232/7,439/7))
 DirtImages=[]
-DirtImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Tiles/5.png"),(64,64)))
+DirtImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Tiles/5.png"),(64,64)).convert_alpha())
 DirtImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Tiles/8.png"),(64,64)))
 WaterImages=[]
 WaterImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Tiles/17.png"),(64,64)))

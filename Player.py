@@ -78,6 +78,8 @@ class Player(pygame.sprite.Sprite):
     def horizontalCollision(self):
         for sprite in self.tileGroup.sprites():
             if sprite.rect.colliderect(self.rect):
+                if self.freeRun:
+                    print("free Run horizontal GameOver")
                 if self.direction.x>0:
                     self.rect.right=sprite.rect.left
                 if self.direction.x<0:

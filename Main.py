@@ -7,7 +7,7 @@ import FreeRun
 class Game():
     def __init__(self):
         pygame.init()
-        self.display=pygame.display.set_mode((WindowWidth,WindowHeight),flags=pygame.SCALED,vsync=1)
+        self.display=Display
         pygame.display.set_caption("Swordman")
         # icon will be added here
         self.clock=pygame.time.Clock()
