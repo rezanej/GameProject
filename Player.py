@@ -33,6 +33,7 @@ class Player(pygame.sprite.Sprite):
         self.dead=False
         self.reduceHelathCollistion=0
         self.reduceEnemyHelathCollistion=0
+        self.fightBorderWork=False
     def setDirection(self):
         keys=pygame.key.get_pressed()
         if keys[pygame.K_f] and self.kunaiNumber>0 and self.kunaiTimer==KunaiTimer:
@@ -107,12 +108,13 @@ class Player(pygame.sprite.Sprite):
                     self.rect.right=sprite.rect.left
                 if self.direction.x<0:
                     self.rect.left=sprite.rect.right
-        for sprite in self.fightBorder.sprites():
-            if sprite.rect.colliderect(self.rect):
-                if self.direction.x>0:
-                    self.rect.right=sprite.rect.left
-                if self.direction.x<0:
-                    self.rect.left=sprite.rect.right
+        if self.fightBorderWork:
+            for sprite in self.fightBorder.sprites():
+                if sprite.rect.colliderect(self.rect):
+                    if self.direction.x>0:
+                        self.rect.right=sprite.rect.left
+                    if self.direction.x<0:
+                        self.rect.left=sprite.rect.right
         for sprite in self.enemyGroup.sprites():
             if sprite.dead == False:
                 if sprite.rect.colliderect(self.rect):
@@ -163,15 +165,16 @@ class Player(pygame.sprite.Sprite):
                 elif self.direction.y < 0:
                     self.rect.top = sprite.rect.bottom
                     self.direction.y = 0
-        for sprite in self.fightBorder.sprites():
-            if sprite.rect.colliderect(self.rect):
-                if self.direction.y > 0:
-                    self.rect.bottom = sprite.rect.top
-                    self.direction.y = 0
-                    self.onGround=True
-                elif self.direction.y < 0:
-                    self.rect.top = sprite.rect.bottom
-                    self.direction.y = 0
+        if self.fightBorderWork:
+            for sprite in self.fightBorder.sprites():
+                if sprite.rect.colliderect(self.rect):
+                    if self.direction.y > 0:
+                        self.rect.bottom = sprite.rect.top
+                        self.direction.y = 0
+                        self.onGround=True
+                    elif self.direction.y < 0:
+                        self.rect.top = sprite.rect.bottom
+                        self.direction.y = 0
         for sprite in self.enemyGroup.sprites():
             if sprite.dead==False:
                 if sprite.rect.colliderect(self.rect):

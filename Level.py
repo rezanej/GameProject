@@ -54,7 +54,7 @@ class Level():
             elif tileNum=="W":
                 self.subTiles.add(Tile(c*64,r*64,WaterImages[1]))
             elif tileNum=="D":
-                self.enemyGroup.add(Dog(c*64,r*64,self.tiles))
+                self.enemyGroup.add(Dog(c*64,r*64,self.tiles,self.playerGroup))
             elif tileNum=="L":
                 self.lightGroup.add(Light(c*64,r*64,1))
             elif tileNum=="c":

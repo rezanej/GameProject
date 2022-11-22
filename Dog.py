@@ -2,7 +2,7 @@ import pygame
 from Setting import *
 
 class Dog(pygame.sprite.Sprite):
-    def __init__(self,x,y,tileGroup):
+    def __init__(self,x,y,tileGroup,playerGroup):
         super().__init__()
         self.image = DogIdleImages[0]
         self.rect = self.image.get_rect(topleft=(x, y))
@@ -18,12 +18,20 @@ class Dog(pygame.sprite.Sprite):
         self.animationSpeed=0.4
         self.health=100
         self.dead=False
+        self.seenPlayer=True
+        self.playerGroup=playerGroup
     def setDirection(self):
-        self.movementLength-=1
-        if self.movementLength==0:
-            self.direction.x*=-1
-            self.movementLength=2*40
-            self.left= not self.left
+        b=self.seenPlayerF()
+        if not self.seenPlayer:
+            self.movementLength-=1
+            if self.movementLength==0:
+                self.direction.x*=-1
+                self.movementLength=2*40
+                self.left= not self.left
+        else:
+            self.playerGroup.sprite.fightBorderWork=True
+            self.direction.x=b
+
     def horizontalCollision(self):
         for sprite in self.tileGroup.sprites():
             if sprite.rect.colliderect(self.rect):
@@ -32,7 +40,15 @@ class Dog(pygame.sprite.Sprite):
                 if self.direction.x < 0:
                     self.rect.left = sprite.rect.right
 
+    def seenPlayerF(self):
 
+        if abs(self.rect.x - self.playerGroup.sprite.rect.x) < 150 and abs(self.rect.x - self.playerGroup.sprite.rect.x) > 20 and self.rect.x - self.playerGroup.sprite.rect.x <0:
+            self.seenPlayer=True
+            return 1
+        elif abs(self.rect.x - self.playerGroup.sprite.rect.x) < 150 and abs(self.rect.x - self.playerGroup.sprite.rect.x) > 20 and self.rect.x -self.playerGroup.sprite.rect.x > 0:
+            self.seenPlayer=True
+            return -1
+        else :self.seenPlayer=False
     def verticalCollision(self):
         for sprite in self.tileGroup.sprites():
             if sprite.rect.colliderect(self.rect):
@@ -95,6 +111,7 @@ class Dog(pygame.sprite.Sprite):
             self.die()
     def die(self):
         if self.dead and not self.currentimageNum>=10:
+            self.playerGroup.sprite.fightBorderWork = False
             if not self.left:
                 self.image = DogDeadImages[int(self.currentimageNum)]
             elif self.left:
