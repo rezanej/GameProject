@@ -75,10 +75,10 @@ class Dog(pygame.sprite.Sprite):
         self.rect.x += self.direction.x * self.speed
 
     def showHealth(self,display):
-        self.helthBar = pygame.surface.Surface((self.health, 8))
+        self.helthBar = pygame.surface.Surface((self.health/2, 8))
         self.helthBar.fill((0, 156, 56))
-        self.helthBarRect = self.helthBar.get_rect(center=(self.rect.centerx,self.rect.centery-30))
-        self.helthBarBackground = pygame.rect.Rect(self.rect.left-10,self.rect.top, 100, 8)
+        self.helthBarRect = self.helthBar.get_rect(topleft=(self.rect.centerx-24,self.rect.centery-34))
+        self.helthBarBackground = pygame.rect.Rect(self.rect.left+15,self.rect.top, 50, 8)
         display.blit(self.helthBar,self.helthBarRect)
         pygame.draw.rect(display,(255,0,0),self.helthBarBackground,2)
     def update(self):

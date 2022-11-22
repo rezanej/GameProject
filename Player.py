@@ -29,6 +29,8 @@ class Player(pygame.sprite.Sprite):
         self.health=100
         self.score=0
         self.dead=False
+        self.reduceHelathCollistion=0
+        self.reduceEnemyHelathCollistion=0
     def setDirection(self):
         keys=pygame.key.get_pressed()
         if keys[pygame.K_f] and self.kunaiNumber>0 and self.kunaiTimer==KunaiTimer:
@@ -125,6 +127,16 @@ class Player(pygame.sprite.Sprite):
                     self.direction.y = 0
         for sprite in self.enemyGroup.sprites():
             if sprite.rect.colliderect(self.rect):
+                if self.reduceEnemyHelathCollistion==0:
+                    if sprite.health>=20:
+                        sprite.health-=20
+                        self.reduceEnemyHelathCollistion=20
+                    else:
+                        pass
+                        #sprite.die()
+                elif self.reduceEnemyHelathCollistion>0:
+                    self.reduceEnemyHelathCollistion-=1
+
                 if self.direction.y > 0:
                     self.rect.bottom = sprite.rect.top
                     self.direction.y = 0
@@ -133,13 +145,18 @@ class Player(pygame.sprite.Sprite):
                     self.rect.top = sprite.rect.bottom
                     self.direction.y = 0
     def enemyCollision(self):
-        if not self.dead:
-            if pygame.sprite.spritecollide(self,self.enemyGroup,False) and self.direction.y<=0:
-                if self.health>=20:
-                    self.health-=20
-                else:
-                    self.die()
+        if not self.dead :
+            if self.reduceHelathCollistion==0:
 
+                if pygame.sprite.spritecollide(self,self.enemyGroup,False) and self.direction.y<=0 :
+                    self.reduceHelathCollistion =20
+                    if self.health>=20 :
+                        self.health-=20
+                    else:
+                        self.die()
+
+            elif self.reduceHelathCollistion>0 :
+                self.reduceHelathCollistion-=1
     def coinCollision(self):
         if not self.dead:
             if pygame.sprite.spritecollide(self,self.coinGroup,True):
