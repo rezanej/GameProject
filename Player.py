@@ -3,7 +3,8 @@ from Setting import *
 from Kunai import *
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self,x,y,tileGroup,kunaiGroup=pygame.sprite.Group(),bordergroup=pygame.sprite.Group(),enemyGroup=pygame.sprite.Group(),coinGroup=pygame.sprite.Group()):
+    def __init__(self,x,y,tileGroup,kunaiGroup=pygame.sprite.Group(),bordergroup=pygame.sprite.Group(),\
+                 enemyGroup=pygame.sprite.Group(),coinGroup=pygame.sprite.Group(),fightBorder=pygame.sprite.Group()):
         super().__init__()
         self.image=PlayerImage
         self.rect=self.image.get_rect(topleft=(x,y))
@@ -13,6 +14,7 @@ class Player(pygame.sprite.Sprite):
         self.borderGroup=bordergroup
         self.enemyGroup=enemyGroup
         self.coinGroup=coinGroup
+        self.fightBorder=fightBorder
         self.jumpSpeed=PlayerJumpSpeed
         self.speed=PlayerSpeed
         self.gravity=Gravity
@@ -105,6 +107,12 @@ class Player(pygame.sprite.Sprite):
                     self.rect.right=sprite.rect.left
                 if self.direction.x<0:
                     self.rect.left=sprite.rect.right
+        for sprite in self.fightBorder.sprites():
+            if sprite.rect.colliderect(self.rect):
+                if self.direction.x>0:
+                    self.rect.right=sprite.rect.left
+                if self.direction.x<0:
+                    self.rect.left=sprite.rect.right
         for sprite in self.enemyGroup.sprites():
             if sprite.dead == False:
                 if sprite.rect.colliderect(self.rect):
@@ -147,6 +155,15 @@ class Player(pygame.sprite.Sprite):
                     self.rect.top = sprite.rect.bottom
                     self.direction.y = 0
         for sprite in self.borderGroup.sprites():
+            if sprite.rect.colliderect(self.rect):
+                if self.direction.y > 0:
+                    self.rect.bottom = sprite.rect.top
+                    self.direction.y = 0
+                    self.onGround=True
+                elif self.direction.y < 0:
+                    self.rect.top = sprite.rect.bottom
+                    self.direction.y = 0
+        for sprite in self.fightBorder.sprites():
             if sprite.rect.colliderect(self.rect):
                 if self.direction.y > 0:
                     self.rect.bottom = sprite.rect.top

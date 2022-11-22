@@ -22,6 +22,7 @@ class Level():
         self.enemyGroup=pygame.sprite.Group()
         self.lightGroup=pygame.sprite.Group()
         self.coinGroup=pygame.sprite.Group()
+        self.fightBorder=pygame.sprite.Group()
         self.display=display
         self.addTiles()
         self.x=0
@@ -34,7 +35,7 @@ class Level():
             if tileNum=="1":
                 self.tiles.add(GrassTile(c*64,r*64))
             elif tileNum=="p":
-                self.playerGroup.add(Player(c*64,r*64,self.tiles,self.kunaiGroup,self.borderGroup,self.enemyGroup,self.coinGroup))
+                self.playerGroup.add(Player(c*64,r*64,self.tiles,self.kunaiGroup,self.borderGroup,self.enemyGroup,self.coinGroup,self.fightBorder))
             elif tileNum=="n":
                 r+=1
                 c=-1
@@ -46,6 +47,8 @@ class Level():
                 self.tiles.add(Tile(c*64,r*64,DirtImages[0]))
             elif tileNum=="b":
                 self.borderGroup.add(Tile(c*64,r*64,DirtImages[0]))
+            elif tileNum=="B":
+                self.fightBorder.add(Tile(c*64,r*64,DirtImages[0]))
             elif tileNum=="w":
                 self.subTiles.add(Tile(c*64,r*64,WaterImages[0]))
             elif tileNum=="W":
@@ -57,6 +60,7 @@ class Level():
             elif tileNum=="c":
                 self.coinGroup.add(Coin(c*64,r*64))
             c+=1
+        print(self.fightBorder)
     def showAUpdate(self):
         if not self.pause[1]:
             self.scroll()
@@ -67,7 +71,7 @@ class Level():
             self.subTiles.draw(self.display)
             self.kunaiGroup.update()
             self.kunaiGroup.draw(self.display)
-            self.playerGroup.update(self.tiles)
+            self.playerGroup.update(self.tiles) # self.tiles are for falling problem in freeRun
             self.playerGroup.draw(self.display)
             self.coinGroup.update()
             self.coinGroup.draw(self.display)
@@ -97,6 +101,8 @@ class Level():
                 tiles.rect.x+=PlayerSpeed
             for tiles in self.borderGroup:
                 tiles.rect.x+=PlayerSpeed
+            for tiles in self.fightBorder:
+                tiles.rect.x+=PlayerSpeed
             for tiles in self.enemyGroup:
                 tiles.rect.x+=PlayerSpeed
             for tiles in self.lightGroup:
@@ -113,6 +119,8 @@ class Level():
             for tiles in self.subTiles:
                 tiles.rect.x-=PlayerSpeed
             for tiles in self.borderGroup:
+                tiles.rect.x-=PlayerSpeed
+            for tiles in self.fightBorder:
                 tiles.rect.x-=PlayerSpeed
             for tiles in self.enemyGroup:
                 tiles.rect.x-=PlayerSpeed
