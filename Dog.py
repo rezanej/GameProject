@@ -2,7 +2,7 @@ import pygame
 from Setting import *
 
 class Dog(pygame.sprite.Sprite):
-    def __init__(self,x,y,tileGroup,playerGroup):
+    def __init__(self,x,y,tileGroup,playerGroup,fightBorderGroup):
         super().__init__()
         self.image = DogIdleImages[0]
         self.rect = self.image.get_rect(topleft=(x, y))
@@ -20,6 +20,7 @@ class Dog(pygame.sprite.Sprite):
         self.dead=False
         self.seenPlayer=True
         self.playerGroup=playerGroup
+        self.fightBorderGroup=fightBorderGroup
     def setDirection(self):
         b=self.seenPlayerF()
         if not self.seenPlayer:
@@ -34,6 +35,12 @@ class Dog(pygame.sprite.Sprite):
 
     def horizontalCollision(self):
         for sprite in self.tileGroup.sprites():
+            if sprite.rect.colliderect(self.rect):
+                if self.direction.x > 0:
+                    self.rect.right = sprite.rect.left
+                if self.direction.x < 0:
+                    self.rect.left = sprite.rect.right
+        for sprite in self.fightBorderGroup.sprites():
             if sprite.rect.colliderect(self.rect):
                 if self.direction.x > 0:
                     self.rect.right = sprite.rect.left
