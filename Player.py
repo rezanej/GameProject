@@ -119,13 +119,14 @@ class Player(pygame.sprite.Sprite):
                     if self.direction.x<0:
                         self.rect.left=sprite.rect.right
         for sprite in self.enemyGroup.sprites():
-            if sprite.dead == False:
+            if sprite.dead == False and self.dead==False:
                 if sprite.rect.colliderect(self.rect):
                     if self.state!="attack":
 
                         if self.reduceHelathCollistion == 0:
-                            if self.health > 20:
+                            if self.health >=10:
                                 self.health -= 20
+                                self.die()
                                 self.reduceHelathCollistion = 20
                             else:
                                 self.die()
@@ -138,7 +139,7 @@ class Player(pygame.sprite.Sprite):
                             self.rect.left = sprite.rect.right
                     else:
                         if self.reduceEnemyHelathCollistion == 0:
-                            if sprite.health > 20:
+                            if sprite.health >20:
                                 sprite.health -= 20
                                 self.reduceEnemyHelathCollistion = 20
                             else:
@@ -179,11 +180,12 @@ class Player(pygame.sprite.Sprite):
                         self.rect.top = sprite.rect.bottom
                         self.direction.y = 0
         for sprite in self.enemyGroup.sprites():
-            if sprite.dead==False:
+            if sprite.dead==False and self.dead==False:
                 if sprite.rect.colliderect(self.rect):
                     if self.reduceEnemyHelathCollistion==0:
                         if sprite.health>20:
                             sprite.health-=20
+                            self.die()
                             self.reduceEnemyHelathCollistion=20
                         else:
                             pass
@@ -304,7 +306,7 @@ class Player(pygame.sprite.Sprite):
         return False
 
     def die(self):
-        if self.health<=0:
+        if self.health<=0 and not self.dead:
             self.state="dead"
             self.dead=True
             self.currentimageNum=0

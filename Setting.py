@@ -213,8 +213,8 @@ ObjectImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Objec
 ObjectImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Mushroom_2.png"),(49,41)).convert_alpha())
 ObjectImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Stone.png"),(90,54)).convert_alpha())
 Level1TileMap="00000000000000000000000000000000000000000000000000n" \
-              "00000000000000000000000000000000000000000000000000n" \
-              "0B0000000B0000000000000000000000000000000000000000n" \
+              "bB000000000000000000000000000000000000000000000000n" \
+              "bB0000000B000000000B000000000B00000000000000000000n" \
               "bB0000000B000000000B000000000B00000000000000000000n" \
               "bB0000000B000000000B000000000B00000000000000000000n" \
               "bBT0CDCCTB00000pP00B00acccTT0B00000000000000000000n" \

@@ -90,6 +90,7 @@ class Level():
             self.HudBlit()
             self.enemyShowHealth()
             self.fallingFromScreen(self.playerGroup.sprite)
+            self.checkGameOver()
             # self.night()
             # self.blitNight()
             # self.lightGroup.draw(self.display)
@@ -158,6 +159,10 @@ class Level():
                     minCheck = checkpoint
             player.rect.topleft = minCheck.rect.topleft
             self.scrollToPlayer(-(player.rect.x-500))
+    def checkGameOver(self):
+        if self.playerGroup.sprite.health==0:
+            self.pause[5]=1
+            self.playerGroup.sprite.state="dead"
     def scrollToPlayer(self, x):
         for tiles in self.tiles:
             tiles.rect.x += x
@@ -204,6 +209,8 @@ class Level():
         # self.display.blit(self.vintageImage,self.vintageImageRect)
 
     def HudUpdate(self):
+        if self.playerGroup.sprite.health<=0:
+            self.playerGroup.sprite.health=0
         self.helthBar=pygame.surface.Surface((self.playerGroup.sprite.health*2,16))
         self.scoreText = self.font.render(f"Score: {self.playerGroup.sprite.score}", True, ((40, 54, 67)))
         self.kunaiText = self.font.render(f": {self.playerGroup.sprite.kunaiNumber}", True, (40, 54, 67))

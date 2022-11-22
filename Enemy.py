@@ -35,7 +35,7 @@ class Enemy(pygame.sprite.Sprite):
                 self.direction.x*=-1
                 self.movementLength=2*40
                 self.left= not self.left
-        else:
+        elif self.playerGroup.sprite.dead!=True:
             self.playerGroup.sprite.fightBorderWork=True
             self.direction.x=b
 
@@ -50,8 +50,10 @@ class Enemy(pygame.sprite.Sprite):
             if sprite.rect.colliderect(self.rect):
                 if self.direction.x > 0:
                     self.rect.right = sprite.rect.left
+                    self.direction.x*=-1
                 if self.direction.x < 0:
                     self.rect.left = sprite.rect.right
+                    self.direction.x *= -1
 
     def seenPlayerF(self):
 
