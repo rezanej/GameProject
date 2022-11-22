@@ -35,3 +35,4 @@ class Kunai(pygame.sprite.Sprite):
                 if sprite.health>20:
                     sprite.health-=20
                 else:sprite.dead=True
+                self.kill()
