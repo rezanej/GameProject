@@ -26,7 +26,7 @@ class FreeRun:
         self.HudInit()
         self.HelthBar()
         self.playerGroup.sprite.speed = 0
-
+        self.addScorSpeed=0.1
     def initTiles(self):
         r, c = 0, 0
         for tileNum in FreeRunStart:
@@ -118,6 +118,9 @@ class FreeRun:
             self.enemyGroup.update()
             self.enemyGroup.draw(self.display)
             self.HudBlit()
+            self.HudUpdate()
+            self.checkGameOver()
+            self.addScore()
             # self.night()
             # self.blitNight()
             # self.lightGroup.draw(self.display)
@@ -127,33 +130,43 @@ class FreeRun:
         self.backGroundRect = self.backGround.get_rect()
 
     def scroll(self):
-        for tiles in self.tiles:
-            tiles.rect.x-=PlayerSpeed
-        for tiles in self.TreeGroup:
-            tiles.rect.x-=PlayerSpeed
-        for tiles in self.subTiles:
-            tiles.rect.x-=PlayerSpeed
+        if not self.playerGroup.sprite.dead:
+            for tiles in self.tiles:
+                tiles.rect.x-=PlayerSpeed
+            for tiles in self.TreeGroup:
+                tiles.rect.x-=PlayerSpeed
+            for tiles in self.subTiles:
+                tiles.rect.x-=PlayerSpeed
 
-        for tiles in self.enemyGroup:
-            tiles.rect.x-=PlayerSpeed
-        for tiles in self.lightGroup:
-            tiles.rect.x-=PlayerSpeed
+            for tiles in self.enemyGroup:
+                tiles.rect.x-=PlayerSpeed
+            for tiles in self.lightGroup:
+                tiles.rect.x-=PlayerSpeed
 
     def HudInit(self):
         self.font=HudFont
         self.healthText=self.font.render("health:",True,(255,0,0))
         self.healthTextRect=self.healthText.get_rect(topleft=(20,23))
+        self.scoreText = self.font.render(f"Score: {int(self.playerGroup.sprite.score)}", True, ((40, 54, 67)))
+        self.scoreTextRect = self.scoreText.get_rect(topleft=(350, 23))
 
     def HelthBar(self):
-        self.helthBar=pygame.surface.Surface((200,16))
-        self.helthBar.fill((0,156,56))
-        self.helthBarRect=self.helthBar.get_rect(topleft=(120,34))
-        self.helthBarBackground=pygame.rect.Rect(120,34,200,16)
+        self.helthBar = pygame.surface.Surface((200, 16))
+        self.helthBar.fill((0, 156, 56))
+        self.helthBarRect = self.helthBar.get_rect(topleft=(120, 34))
+        self.helthBarBackground = pygame.rect.Rect(120, 34, 200, 16)
     def HudBlit(self):
         self.display.blit(self.healthText, self.healthTextRect)
         self.display.blit(self.helthBar,self.helthBarRect)
         pygame.draw.rect(self.display,(255,140,9),self.helthBarBackground,3)
+        self.display.blit(self.scoreText, self.scoreTextRect)
         # self.display.blit(self.vintageImage,self.vintageImageRect)
+
+    def HudUpdate(self):
+        if self.playerGroup.sprite.health<=0:
+            self.playerGroup.sprite.health=0
+        self.helthBar=pygame.surface.Surface((self.playerGroup.sprite.health*2,16))
+        self.scoreText = self.font.render(f"Score: {int(self.playerGroup.sprite.score)}", True, ((40, 54, 67)))
 
     def vintage(self):
         self.vintageImage=pygame.transform.scale(pygame.image.load("vintage2.jpg").convert_alpha(),(WindowWidth,WindowHeight))
@@ -169,3 +182,11 @@ class FreeRun:
         self.display.blit(self.fog,self.fogRect,special_flags=pygame.BLEND_MULT)
     def reset(self):
         self.__init__(self.display,self.pause)
+    def checkGameOver(self):
+        if self.playerGroup.sprite.health==0:
+            self.pause[5]=1
+            self.playerGroup.sprite.freeRun=False
+            self.playerGroup.sprite.die()
+    def addScore(self):
+        if self.playerGroup.sprite.dead==False:
+            self.playerGroup.sprite.score+=self.addScorSpeed
