@@ -7,7 +7,7 @@ from Tree import *
 from Tile import *
 from Dog import *
 from Light import Light
-
+from Coin import Coin
 class Level():
     def __init__(self,display,pause):
         self.initBackGround()
@@ -21,6 +21,7 @@ class Level():
         self.waterGroup=pygame.sprite.Group()
         self.enemyGroup=pygame.sprite.Group()
         self.lightGroup=pygame.sprite.Group()
+        self.coinGroup=pygame.sprite.Group()
         self.display=display
         self.addTiles()
         self.x=0
@@ -28,7 +29,7 @@ class Level():
         self.HelthBar()
     def addTiles(self):
         r,c=0,0
-        for tileNum in Level2TileMap:
+        for tileNum in Level1TileMap:
 
             if tileNum=="1":
                 self.tiles.add(GrassTile(c*64,r*64))
@@ -53,6 +54,8 @@ class Level():
                 self.enemyGroup.add(Dog(c*64,r*64,self.tiles))
             elif tileNum=="L":
                 self.lightGroup.add(Light(c*64,r*64,1))
+            elif tileNum=="c":
+                self.coinGroup.add(Coin(c*64,r*64))
             c+=1
     def showAUpdate(self):
         if not self.pause[1]:
@@ -66,6 +69,8 @@ class Level():
             self.kunaiGroup.draw(self.display)
             self.playerGroup.update(self.tiles)
             self.playerGroup.draw(self.display)
+            self.coinGroup.update()
+            self.coinGroup.draw(self.display)
             self.enemyGroup.update()
             self.enemyGroup.draw(self.display)
             self.HudBlit()
@@ -94,6 +99,8 @@ class Level():
                 tiles.rect.x+=PlayerSpeed
             for tiles in self.lightGroup:
                 tiles.rect.x+=PlayerSpeed
+            for tiles in self.coinGroup:
+                tiles.rect.x+=PlayerSpeed
         elif self.playerGroup.sprite.rect.x >WindowWidth*(3/4) and self.playerGroup.sprite.direction.x>0:
             self.x+=1
             self.playerGroup.sprite.speed = 0
@@ -108,6 +115,8 @@ class Level():
             for tiles in self.enemyGroup:
                 tiles.rect.x-=PlayerSpeed
             for tiles in self.lightGroup:
+                tiles.rect.x-=PlayerSpeed
+            for tiles in self.coinGroup:
                 tiles.rect.x-=PlayerSpeed
         else:
             self.playerGroup.sprite.speed=PlayerSpeed
