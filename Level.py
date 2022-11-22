@@ -58,9 +58,10 @@ class Level():
             elif tileNum=="L":
                 self.lightGroup.add(Light(c*64,r*64,1))
             elif tileNum=="c":
-                self.coinGroup.add(Coin(c*64,r*64))
+                self.coinGroup.add(Coin(c*64,r*64,self.playerGroup,10,CoinImages))
+            elif tileNum=="C":
+                self.coinGroup.add(Coin(c*64,r*64,self.playerGroup,20,GoldCoinImages))
             c+=1
-        print(self.fightBorder)
     def showAUpdate(self):
         if not self.pause[1]:
             self.scroll()

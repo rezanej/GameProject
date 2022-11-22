@@ -173,9 +173,9 @@ ObjectImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Objec
 Level1TileMap="00000000000000000000000000000000000000000000000000n" \
               "00000000000000000000000000000000000000000000000000n" \
               "00000000000000000000000000000000000000000000000000n" \
-              "b0000b00000000000000000000000000000000000000000000n" \
-              "b0000b00000000000000000000000000000000000000000000n" \
-              "b0T0Db00Tc00000p0000D00cccTT0000000000000000000000n" \
+              "b0000000000000000000000000000000000000000000000000n" \
+              "b0000000000000000000000000000000000000000000000000n" \
+              "b0TDC0CCTc00000pC000D00cccTT0000000000000000000000n" \
               "11111111110000011001111111111100000000000000000000n" \
               "dddddddd0000T00000000010t01000010t0010000000000000n" \
               "dddddddd111111wwwwwwwww11wwwwwww111wwwwwwwwwwwwwwwn" \
@@ -219,3 +219,12 @@ CoinImages.append(pygame.transform.scale(pygame.image.load("CoinImages/SILVER/SM
 CoinImages.append(pygame.transform.scale(pygame.image.load("CoinImages/SILVER/SMALL/SMALL_0005_Capa-6.png"),(26,26)).convert_alpha())
 CoinImages.append(pygame.transform.scale(pygame.image.load("CoinImages/SILVER/SMALL/SMALL_0006_Capa-7.png"),(26,26)).convert_alpha())
 CoinImages.append(pygame.transform.scale(pygame.image.load("CoinImages/SILVER/SMALL/SMALL_0007_Capa-8.png"),(26,26)).convert_alpha())
+GoldCoinImages=[]
+GoldCoinImages.append(pygame.transform.scale(pygame.image.load("CoinImages/GOLD/SMALL/SMALL_0000_Capa-1.png"),(26,26)).convert_alpha())
+GoldCoinImages.append(pygame.transform.scale(pygame.image.load("CoinImages/GOLD/SMALL/SMALL_0001_Capa-2.png"),(26,26)).convert_alpha())
+GoldCoinImages.append(pygame.transform.scale(pygame.image.load("CoinImages/GOLD/SMALL/SMALL_0002_Capa-3.png"),(26,26)).convert_alpha())
+GoldCoinImages.append(pygame.transform.scale(pygame.image.load("CoinImages/GOLD/SMALL/SMALL_0003_Capa-4.png"),(26,26)).convert_alpha())
+GoldCoinImages.append(pygame.transform.scale(pygame.image.load("CoinImages/GOLD/SMALL/SMALL_0004_Capa-5.png"),(26,26)).convert_alpha())
+GoldCoinImages.append(pygame.transform.scale(pygame.image.load("CoinImages/GOLD/SMALL/SMALL_0005_Capa-6.png"),(26,26)).convert_alpha())
+GoldCoinImages.append(pygame.transform.scale(pygame.image.load("CoinImages/GOLD/SMALL/SMALL_0006_Capa-7.png"),(26,26)).convert_alpha())
+GoldCoinImages.append(pygame.transform.scale(pygame.image.load("CoinImages/GOLD/SMALL/SMALL_0007_Capa-8.png"),(26,26)).convert_alpha())

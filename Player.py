@@ -196,8 +196,8 @@ class Player(pygame.sprite.Sprite):
 
     def coinCollision(self):
         if not self.dead:
-            if pygame.sprite.spritecollide(self,self.coinGroup,True):
-                self.score+=10
+            pygame.sprite.spritecollide(self,self.coinGroup,True)
+
     def jump(self):
         self.direction.y=-self.jumpSpeed
     def gravityFun(self):
