@@ -145,6 +145,21 @@ DogRunImages.append(pygame.transform.scale(pygame.image.load("dog/Run (8).png"),
 DogRunImagesLeft=[]
 for image in DogRunImages:
     DogRunImagesLeft.append(pygame.transform.flip(image,True,False))
+DogDeadImages=[]
+DogDeadImages.append(pygame.transform.scale(pygame.image.load("dog/Dead (1).png"),(580/7,510/7)).convert_alpha())
+DogDeadImages.append(pygame.transform.scale(pygame.image.load("dog/Dead (2).png"),(580/7,510/7)).convert_alpha())
+DogDeadImages.append(pygame.transform.scale(pygame.image.load("dog/Dead (3).png"),(580/7,510/7)).convert_alpha())
+DogDeadImages.append(pygame.transform.scale(pygame.image.load("dog/Dead (4).png"),(580/7,510/7)).convert_alpha())
+DogDeadImages.append(pygame.transform.scale(pygame.image.load("dog/Dead (5).png"),(580/7,510/7)).convert_alpha())
+DogDeadImages.append(pygame.transform.scale(pygame.image.load("dog/Dead (6).png"),(580/7,510/7)).convert_alpha())
+DogDeadImages.append(pygame.transform.scale(pygame.image.load("dog/Dead (7).png"),(580/7,510/7)).convert_alpha())
+DogDeadImages.append(pygame.transform.scale(pygame.image.load("dog/Dead (8).png"),(580/7,510/7)).convert_alpha())
+DogDeadImages.append(pygame.transform.scale(pygame.image.load("dog/Dead (9).png"),(580/7,510/7)).convert_alpha())
+DogDeadImages.append(pygame.transform.scale(pygame.image.load("dog/Dead (10).png"),(580/7,510/7)).convert_alpha())
+DogDeadImagesLeft=[]
+for image in DogDeadImages:
+    DogDeadImagesLeft.append(pygame.transform.flip(image,True,False))
+
 TreeImages=[]
 TreeImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Tree_1.png"),(116/2,44/2)).convert_alpha())
 TreeImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Tree_2.png"),(282/2,301/2)).convert_alpha())

@@ -17,6 +17,7 @@ class Dog(pygame.sprite.Sprite):
         self.direction.x=1
         self.animationSpeed=0.4
         self.health=100
+        self.dead=False
     def setDirection(self):
         self.movementLength-=1
         if self.movementLength==0:
@@ -75,16 +76,27 @@ class Dog(pygame.sprite.Sprite):
         self.rect.x += self.direction.x * self.speed
 
     def showHealth(self,display):
-        self.helthBar = pygame.surface.Surface((self.health/2, 8))
-        self.helthBar.fill((0, 156, 56))
-        self.helthBarRect = self.helthBar.get_rect(topleft=(self.rect.centerx-24,self.rect.centery-34))
-        self.helthBarBackground = pygame.rect.Rect(self.rect.left+15,self.rect.top, 50, 8)
-        display.blit(self.helthBar,self.helthBarRect)
-        pygame.draw.rect(display,(255,0,0),self.helthBarBackground,2)
+        if not self.dead:
+            self.helthBar = pygame.surface.Surface((self.health/2, 8))
+            self.helthBar.fill((0, 156, 56))
+            self.helthBarRect = self.helthBar.get_rect(topleft=(self.rect.centerx-24,self.rect.centery-34))
+            self.helthBarBackground = pygame.rect.Rect(self.rect.left+15,self.rect.top, 50, 8)
+            display.blit(self.helthBar,self.helthBarRect)
+            pygame.draw.rect(display,(255,0,0),self.helthBarBackground,2)
     def update(self):
-        self.setDirection()
-        self.horizontalMovement()
-        self.horizontalCollision()
-        self.gravityFun()
-        self.verticalCollision()
-        self.animate()
+        if not self.dead:
+            self.setDirection()
+            self.horizontalMovement()
+            self.horizontalCollision()
+            self.gravityFun()
+            self.verticalCollision()
+            self.animate()
+        else:
+            self.die()
+    def die(self):
+        if self.dead and not self.currentimageNum>=10:
+            if not self.left:
+                self.image = DogDeadImages[int(self.currentimageNum)]
+            elif self.left:
+                self.image = DogDeadImagesLeft[int(self.currentimageNum)]
+            self.currentimageNum += self.animationSpeed
