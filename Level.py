@@ -5,7 +5,7 @@ from Player import *
 from GrassTile import *
 from Tree import *
 from Tile import *
-from Dog import *
+from Enemy import *
 from Light import Light
 from Coin import Coin
 class Level():
@@ -54,7 +54,8 @@ class Level():
             elif tileNum=="W":
                 self.subTiles.add(Tile(c*64,r*64,WaterImages[1]))
             elif tileNum=="D":
-                self.enemyGroup.add(Dog(c*64,r*64,self.tiles,self.playerGroup,self.fightBorder))
+                self.enemyGroup.add(Enemy(c*64,r*64,DogSpeed,self.tiles,self.playerGroup,self.fightBorder,DogIdleImages\
+                                          ,DogRunImages,DogDeadImages,DogIdleImagesLeft,DogRunImagesLeft,DogDeadImagesLeft))
             elif tileNum=="L":
                 self.lightGroup.add(Light(c*64,r*64,1))
             elif tileNum=="c":

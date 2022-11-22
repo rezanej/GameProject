@@ -1,14 +1,20 @@
 import pygame
 from Setting import *
 
-class Dog(pygame.sprite.Sprite):
-    def __init__(self,x,y,tileGroup,playerGroup,fightBorderGroup):
+class Enemy(pygame.sprite.Sprite):
+    def __init__(self,x,y,speed,tileGroup,playerGroup,fightBorderGroup,idleAnim,runAnim,deadAnim,idleAnimL,runAnimL,deadAnimL):
         super().__init__()
-        self.image = DogIdleImages[0]
+        self.idleAnim=idleAnim
+        self.runAnim=runAnim
+        self.deadAnim=deadAnim
+        self.idleAnimL=idleAnimL
+        self.runAnimL=runAnimL
+        self.deadAnimL=deadAnimL
+        self.image = self.idleAnim[0]
         self.rect = self.image.get_rect(topleft=(x, y))
         self.direction = pygame.math.Vector2()
         self.tileGroup = tileGroup
-        self.speed = DogSpeed
+        self.speed = speed
         self.gravity = Gravity
         self.state = "run"
         self.currentimageNum = 0
@@ -49,10 +55,10 @@ class Dog(pygame.sprite.Sprite):
 
     def seenPlayerF(self):
 
-        if abs(self.rect.x - self.playerGroup.sprite.rect.x) < 150 and abs(self.rect.x - self.playerGroup.sprite.rect.x) > 20 and self.rect.x - self.playerGroup.sprite.rect.x <0:
+        if abs(self.rect.x - self.playerGroup.sprite.rect.x) < 100 and abs(self.rect.x - self.playerGroup.sprite.rect.x) > 20 and self.rect.x - self.playerGroup.sprite.rect.x <0:
             self.seenPlayer=True
             return 1
-        elif abs(self.rect.x - self.playerGroup.sprite.rect.x) < 150 and abs(self.rect.x - self.playerGroup.sprite.rect.x) > 20 and self.rect.x -self.playerGroup.sprite.rect.x > 0:
+        elif abs(self.rect.x - self.playerGroup.sprite.rect.x) < 100 and abs(self.rect.x - self.playerGroup.sprite.rect.x) > 20 and self.rect.x -self.playerGroup.sprite.rect.x > 0:
             self.seenPlayer=True
             return -1
         else :self.seenPlayer=False
@@ -78,9 +84,9 @@ class Dog(pygame.sprite.Sprite):
     def animate(self):
         if self.state=="idle":
             if not self.left:
-                self.image=DogIdleImages[int(self.currentimageNum)]
+                self.image=self.idleAnim[int(self.currentimageNum)]
             elif self.left:
-                self.image = DogIdleImagesLeft[int(self.currentimageNum)]
+                self.image =self.idleAnimL[int(self.currentimageNum)]
             self.currentimageNum += self.animationSpeed
             if self.currentimageNum>=10:
                 self.currentimageNum=0
@@ -88,10 +94,10 @@ class Dog(pygame.sprite.Sprite):
             if self.direction.x > 0:
                 self.left=False
 
-                self.image=DogRunImages[int(self.currentimageNum)]
+                self.image=self.runAnim[int(self.currentimageNum)]
             if self.direction.x < 0:
                 self.left = True
-                self.image=DogRunImagesLeft[int(self.currentimageNum)]
+                self.image=self.runAnimL[int(self.currentimageNum)]
             self.currentimageNum += self.animationSpeed
             if self.currentimageNum>=8:
                 self.currentimageNum=0
@@ -120,7 +126,7 @@ class Dog(pygame.sprite.Sprite):
         if self.dead and not self.currentimageNum>=10:
             self.playerGroup.sprite.fightBorderWork = False
             if not self.left:
-                self.image = DogDeadImages[int(self.currentimageNum)]
+                self.image = self.deadAnim[int(self.currentimageNum)]
             elif self.left:
-                self.image = DogDeadImagesLeft[int(self.currentimageNum)]
+                self.image = self.deadAnimL[int(self.currentimageNum)]
             self.currentimageNum += self.animationSpeed
