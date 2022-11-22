@@ -98,6 +98,20 @@ PlayerThrowImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/
 PlayerThrowImagesLeft=[]
 for image in PlayerThrowImages:
     PlayerThrowImagesLeft.append(pygame.transform.flip(image,True,False))
+PlayerDeadImages=[]
+PlayerDeadImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Dead__000.png"),(482/7,498/7)).convert_alpha())
+PlayerDeadImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Dead__001.png"),(482/7,498/7)).convert_alpha())
+PlayerDeadImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Dead__002.png"),(482/7,498/7)).convert_alpha())
+PlayerDeadImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Dead__003.png"),(482/7,498/7)).convert_alpha())
+PlayerDeadImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Dead__004.png"),(482/7,498/7)).convert_alpha())
+PlayerDeadImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Dead__005.png"),(482/7,498/7)).convert_alpha())
+PlayerDeadImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Dead__006.png"),(482/7,498/7)).convert_alpha())
+PlayerDeadImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Dead__007.png"),(482/7,498/7)).convert_alpha())
+PlayerDeadImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Dead__008.png"),(482/7,498/7)).convert_alpha())
+PlayerDeadImages.append(pygame.transform.scale(pygame.image.load("PlayerImages/Dead__009.png"),(482/7,498/7)).convert_alpha())
+PlayerDeadImagesLeft=[]
+for image in PlayerDeadImages:
+    PlayerDeadImagesLeft.append(pygame.transform.flip(image,True,False))
 
 KunaiImgae=pygame.transform.rotate(pygame.transform.scale(pygame.image.load("PlayerImages/Kunai.png"),(32/4,160/4)),90).convert_alpha()
 KunaiImgae=pygame.transform.flip(KunaiImgae,True,False)

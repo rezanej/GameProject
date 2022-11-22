@@ -21,9 +21,12 @@ class Player(pygame.sprite.Sprite):
         self.kunaiTimer=KunaiTimer
         self.left=False
         self.onGround=False
-        self.attckOffset=True
+        self.attackAdeadOffset=True
         self.freeRun=self.checkFreeRun()
         self.animationSpeed=PlayerAnimationSpeed
+        self.health=0
+        self.score=0
+        self.dead=False
     def setDirection(self):
         keys=pygame.key.get_pressed()
         if keys[pygame.K_f] and self.kunaiNumber>0 and self.kunaiTimer==KunaiTimer:
@@ -64,7 +67,8 @@ class Player(pygame.sprite.Sprite):
 
     def update(self,tiles):
         self.tileGroup=tiles
-        self.setDirection()
+        if not self.dead:
+            self.setDirection()
         self.onGround=False
         self.horizontalMovement()
         self.horizontalCollision()
@@ -78,6 +82,7 @@ class Player(pygame.sprite.Sprite):
         self.animate()
         self.kunaiTiming()
         self.attackLeftoffset()
+        self.deadLeftOffset()
     def horizontalMovement(self):
         if self.state!="throw": # for not moving during throw
             self.rect.x += self.direction.x * self.speed
@@ -179,20 +184,45 @@ class Player(pygame.sprite.Sprite):
             if self.currentimageNum>=10:
                 self.throw=False
                 self.currentimageNum=0
+        if self.state=="dead":
+            if self.dead and self.currentimageNum>=9:
+                self.currentimageNum=9
+            else:
+
+                if self.left:
+                   self.image=PlayerDeadImagesLeft[int(self.currentimageNum)]
+                   self.currentimageNum+=self.animationSpeed
+                else:
+                    self.image=PlayerDeadImages[int(self.currentimageNum)]
+                    self.currentimageNum+=self.animationSpeed
+
     def kunaiTiming(self):
         if self.kunaiTimer<KunaiTimer:
             self.kunaiTimer+=1
 
     def attackLeftoffset(self):
-        if self.state == "attack" and self.left and self.attckOffset:
+        if self.state == "attack" and self.left and self.attackAdeadOffset:
 
             self.rect.left -= 40
-            self.attckOffset = False
-        elif self.left and not self.attckOffset and self.state != "attack":
-            self.attckOffset = True
+            self.attackAdeadOffset = False
+        elif self.left and not self.attackAdeadOffset and self.state != "attack":
+            self.attackAdeadOffset = True
+            self.rect.left += 40
+    def deadLeftOffset(self):
+        if self.state == "dead" and self.left and self.attackAdeadOffset:
+
+            self.rect.left -= 40
+            self.attackAdeadOffset = False
+        elif self.left and not self.attackAdeadOffset and self.state != "dead":
+            self.attackAdeadOffset = True
             self.rect.left += 40
     def checkFreeRun(self):
         if len(self.borderGroup.sprites())==0:
             return True
         return False
 
+    def die(self):
+        if self.health<=0:
+            self.state="dead"
+            self.dead=True
+            self.currentimageNum=0
