@@ -159,6 +159,48 @@ DogDeadImages.append(pygame.transform.scale(pygame.image.load("dog/Dead (10).png
 DogDeadImagesLeft=[]
 for image in DogDeadImages:
     DogDeadImagesLeft.append(pygame.transform.flip(image,True,False))
+CatIdleImages=[]
+
+CatIdleImages.append(pygame.transform.scale(pygame.image.load("cat/Idle (1).png"),(547/7,481/7)).convert_alpha())
+CatIdleImages.append(pygame.transform.scale(pygame.image.load("cat/Idle (2).png"),(547/7,481/7)).convert_alpha())
+CatIdleImages.append(pygame.transform.scale(pygame.image.load("cat/Idle (3).png"),(547/7,481/7)).convert_alpha())
+CatIdleImages.append(pygame.transform.scale(pygame.image.load("cat/Idle (4).png"),(547/7,481/7)).convert_alpha())
+CatIdleImages.append(pygame.transform.scale(pygame.image.load("cat/Idle (5).png"),(547/7,481/7)).convert_alpha())
+CatIdleImages.append(pygame.transform.scale(pygame.image.load("cat/Idle (6).png"),(547/7,481/7)).convert_alpha())
+CatIdleImages.append(pygame.transform.scale(pygame.image.load("cat/Idle (7).png"),(547/7,481/7)).convert_alpha())
+CatIdleImages.append(pygame.transform.scale(pygame.image.load("cat/Idle (8).png"),(547/7,481/7)).convert_alpha())
+CatIdleImages.append(pygame.transform.scale(pygame.image.load("cat/Idle (9).png"),(547/7,481/7)).convert_alpha())
+CatIdleImages.append(pygame.transform.scale(pygame.image.load("cat/Idle (10).png"),(547/7,481/7)).convert_alpha())
+CatIdleImagesLeft=[]
+for image in CatIdleImages:
+    CatIdleImagesLeft.append(pygame.transform.flip(image,True,False))
+
+CatRunImages=[]
+CatRunImages.append(pygame.transform.scale(pygame.image.load("cat/Run (1).png"),(547/7,481/7)).convert_alpha())
+CatRunImages.append(pygame.transform.scale(pygame.image.load("cat/Run (2).png"),(547/7,481/7)).convert_alpha())
+CatRunImages.append(pygame.transform.scale(pygame.image.load("cat/Run (3).png"),(547/7,481/7)).convert_alpha())
+CatRunImages.append(pygame.transform.scale(pygame.image.load("cat/Run (4).png"),(547/7,481/7)).convert_alpha())
+CatRunImages.append(pygame.transform.scale(pygame.image.load("cat/Run (5).png"),(547/7,481/7)).convert_alpha())
+CatRunImages.append(pygame.transform.scale(pygame.image.load("cat/Run (6).png"),(547/7,481/7)).convert_alpha())
+CatRunImages.append(pygame.transform.scale(pygame.image.load("cat/Run (7).png"),(547/7,481/7)).convert_alpha())
+CatRunImages.append(pygame.transform.scale(pygame.image.load("cat/Run (8).png"),(547/7,481/7)).convert_alpha())
+CatRunImagesLeft=[]
+for image in CatRunImages:
+    CatRunImagesLeft.append(pygame.transform.flip(image,True,False))
+CatDeadImages=[]
+CatDeadImages.append(pygame.transform.scale(pygame.image.load("cat/Dead (1).png"),(580/7,510/7)).convert_alpha())
+CatDeadImages.append(pygame.transform.scale(pygame.image.load("cat/Dead (2).png"),(580/7,510/7)).convert_alpha())
+CatDeadImages.append(pygame.transform.scale(pygame.image.load("cat/Dead (3).png"),(580/7,510/7)).convert_alpha())
+CatDeadImages.append(pygame.transform.scale(pygame.image.load("cat/Dead (4).png"),(580/7,510/7)).convert_alpha())
+CatDeadImages.append(pygame.transform.scale(pygame.image.load("cat/Dead (5).png"),(580/7,510/7)).convert_alpha())
+CatDeadImages.append(pygame.transform.scale(pygame.image.load("cat/Dead (6).png"),(580/7,510/7)).convert_alpha())
+CatDeadImages.append(pygame.transform.scale(pygame.image.load("cat/Dead (7).png"),(580/7,510/7)).convert_alpha())
+CatDeadImages.append(pygame.transform.scale(pygame.image.load("cat/Dead (8).png"),(580/7,510/7)).convert_alpha())
+CatDeadImages.append(pygame.transform.scale(pygame.image.load("cat/Dead (9).png"),(580/7,510/7)).convert_alpha())
+CatDeadImages.append(pygame.transform.scale(pygame.image.load("cat/Dead (10).png"),(580/7,510/7)).convert_alpha())
+CatDeadImagesLeft=[]
+for image in CatDeadImages:
+    CatDeadImagesLeft.append(pygame.transform.flip(image,True,False))
 
 TreeImages=[]
 TreeImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Tree_1.png"),(116/2,44/2)).convert_alpha())
@@ -175,7 +217,7 @@ Level1TileMap="00000000000000000000000000000000000000000000000000n" \
               "0B0000000B0000000000000000000000000000000000000000n" \
               "bB0000000B000000000B000000000B00000000000000000000n" \
               "bB0000000B000000000B000000000B00000000000000000000n" \
-              "bBT0CDCCTB00000pC00B00DcccTT0B00000000000000000000n" \
+              "bBT0CDCCTB00000pC00B00acccTT0B00000000000000000000n" \
               "11111111110000011001111111111100000000000000000000n" \
               "dddddddd0000T00000000010t01000010t0010000000000000n" \
               "dddddddd111111wwwwwwwww11wwwwwww111wwwwwwwwwwwwwwwn" \

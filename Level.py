@@ -56,6 +56,9 @@ class Level():
             elif tileNum=="D":
                 self.enemyGroup.add(Enemy(c*64,r*64,DogSpeed,self.tiles,self.playerGroup,self.fightBorder,DogIdleImages\
                                           ,DogRunImages,DogDeadImages,DogIdleImagesLeft,DogRunImagesLeft,DogDeadImagesLeft))
+            elif tileNum=="a":
+                self.enemyGroup.add(Enemy(c * 64, r * 64, DogSpeed, self.tiles, self.playerGroup, self.fightBorder, CatIdleImages\
+                          , CatRunImages, CatDeadImages, CatIdleImagesLeft, CatRunImagesLeft, CatDeadImagesLeft))
             elif tileNum=="L":
                 self.lightGroup.add(Light(c*64,r*64,1))
             elif tileNum=="c":
