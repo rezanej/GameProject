@@ -108,19 +108,34 @@ class Player(pygame.sprite.Sprite):
         for sprite in self.enemyGroup.sprites():
             if sprite.dead == False:
                 if sprite.rect.colliderect(self.rect):
-                    if self.reduceHelathCollistion == 0:
-                        if self.health > 20:
-                            self.health -= 20
-                            self.reduceHelathCollistion = 20
-                        else:
-                            self.die()
-                    elif self.reduceHelathCollistion > 0:
-                        self.reduceHelathCollistion -= 1
+                    if self.state!="attack":
 
-                    if self.direction.x>0:
-                        self.rect.right=sprite.rect.left
-                    if self.direction.x<0:
-                        self.rect.left=sprite.rect.right
+                        if self.reduceHelathCollistion == 0:
+                            if self.health > 20:
+                                self.health -= 20
+                                self.reduceHelathCollistion = 20
+                            else:
+                                self.die()
+                        elif self.reduceHelathCollistion > 0:
+                            self.reduceHelathCollistion -= 1
+
+                        if self.direction.x > 0:
+                            self.rect.right = sprite.rect.left
+                        if self.direction.x < 0:
+                            self.rect.left = sprite.rect.right
+                    else:
+                        if self.reduceEnemyHelathCollistion == 0:
+                            if sprite.health > 20:
+                                sprite.health -= 20
+                                self.reduceEnemyHelathCollistion = 20
+                            else:
+                                pass
+                                sprite.dead = True
+                                sprite.currentImageNum = 0
+                        elif self.reduceEnemyHelathCollistion > 0:
+                            self.reduceEnemyHelathCollistion -= 1
+
+
     def verticalCollision(self):
         for sprite in self.tileGroup.sprites():
             if sprite.rect.colliderect(self.rect):
