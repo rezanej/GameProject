@@ -4,7 +4,8 @@ from Kunai import *
 
 class Player(pygame.sprite.Sprite):
     def __init__(self,x,y,tileGroup,kunaiGroup=pygame.sprite.Group(),bordergroup=pygame.sprite.Group(),\
-                 enemyGroup=pygame.sprite.Group(),coinGroup=pygame.sprite.Group(),fightBorder=pygame.sprite.Group()):
+                 enemyGroup=pygame.sprite.Group(),coinGroup=pygame.sprite.Group(),fightBorder=pygame.sprite.Group(),\
+                 checkpoints=pygame.sprite.Group()):
         super().__init__()
         self.image=PlayerImage
         self.rect=self.image.get_rect(topleft=(x,y))
@@ -15,6 +16,7 @@ class Player(pygame.sprite.Sprite):
         self.enemyGroup=enemyGroup
         self.coinGroup=coinGroup
         self.fightBorder=fightBorder
+        self.checkpoints=checkpoints
         self.jumpSpeed=PlayerJumpSpeed
         self.speed=PlayerSpeed
         self.gravity=Gravity
@@ -34,6 +36,7 @@ class Player(pygame.sprite.Sprite):
         self.reduceHelathCollistion=0
         self.reduceEnemyHelathCollistion=0
         self.fightBorderWork=False
+        self.scrollState=True
     def setDirection(self):
         keys=pygame.key.get_pressed()
         if keys[pygame.K_f] and self.kunaiNumber>0 and self.kunaiTimer==KunaiTimer:
@@ -305,3 +308,4 @@ class Player(pygame.sprite.Sprite):
             self.state="dead"
             self.dead=True
             self.currentimageNum=0
+

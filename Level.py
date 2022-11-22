@@ -23,6 +23,7 @@ class Level():
         self.lightGroup=pygame.sprite.Group()
         self.coinGroup=pygame.sprite.Group()
         self.fightBorder=pygame.sprite.Group()
+        self.checkpoints=pygame.sprite.Group()
         self.display=display
         self.addTiles()
         self.x=0
@@ -35,7 +36,8 @@ class Level():
             if tileNum=="1":
                 self.tiles.add(GrassTile(c*64,r*64))
             elif tileNum=="p":
-                self.playerGroup.add(Player(c*64,r*64,self.tiles,self.kunaiGroup,self.borderGroup,self.enemyGroup,self.coinGroup,self.fightBorder))
+                self.playerGroup.add(Player(c*64,r*64,self.tiles,self.kunaiGroup,self.borderGroup,self.enemyGroup,\
+                                            self.coinGroup,self.fightBorder,self.checkpoints))
             elif tileNum=="n":
                 r+=1
                 c=-1
@@ -61,6 +63,8 @@ class Level():
                           , CatRunImages, CatDeadImages, CatIdleImagesLeft, CatRunImagesLeft, CatDeadImagesLeft))
             elif tileNum=="L":
                 self.lightGroup.add(Light(c*64,r*64,1))
+            elif tileNum=="P":
+                self.checkpoints.add(Tile(c*64,r*64,DirtImages[0]))
             elif tileNum=="c":
                 self.coinGroup.add(Coin(c*64,r*64,self.playerGroup,10,CoinImages))
             elif tileNum=="C":
@@ -85,6 +89,7 @@ class Level():
             self.HudUpdate()
             self.HudBlit()
             self.enemyShowHealth()
+            self.fallingFromScreen(self.playerGroup.sprite)
             # self.night()
             # self.blitNight()
             # self.lightGroup.draw(self.display)
@@ -113,6 +118,8 @@ class Level():
                 tiles.rect.x+=PlayerSpeed
             for tiles in self.coinGroup:
                 tiles.rect.x+=PlayerSpeed
+            for tiles in self.checkpoints:
+                tiles.rect.x+=PlayerSpeed
         elif self.playerGroup.sprite.rect.x >WindowWidth*(3/4) and self.playerGroup.sprite.direction.x>0:
             self.x+=1
             self.playerGroup.sprite.speed = 0
@@ -132,8 +139,46 @@ class Level():
                 tiles.rect.x-=PlayerSpeed
             for tiles in self.coinGroup:
                 tiles.rect.x-=PlayerSpeed
+            for tiles in self.checkpoints:
+                tiles.rect.x-=PlayerSpeed
         else:
             self.playerGroup.sprite.speed=PlayerSpeed
+
+    def fallingFromScreen(self,player):
+        if player.rect.top > WindowHeight:
+            player.health -= 50
+            if player.health<0:
+                player.health=0
+            player.die()  # checks dead
+            minCheck = self.checkpoints.sprites()[0]
+            min = abs(player.rect.x - minCheck.rect.x)
+            for checkpoint in self.checkpoints.sprites():
+                if abs(player.rect.x - checkpoint.rect.x) < min:
+                    min = abs(player.rect.x - checkpoint.rect.x)
+                    minCheck = checkpoint
+            player.rect.topleft = minCheck.rect.topleft
+            self.scrollToPlayer(-(player.rect.x-500))
+    def scrollToPlayer(self, x):
+        for tiles in self.tiles:
+            tiles.rect.x += x
+        for tiles in self.TreeGroup:
+            tiles.rect.x += x
+        for tiles in self.subTiles:
+            tiles.rect.x += x
+        for tiles in self.borderGroup:
+            tiles.rect.x += x
+        for tiles in self.fightBorder:
+            tiles.rect.x += x
+        for tiles in self.enemyGroup:
+            tiles.rect.x += x
+        for tiles in self.lightGroup:
+            tiles.rect.x += x
+        for tiles in self.coinGroup:
+            tiles.rect.x += x
+        for tiles in self.checkpoints:
+            tiles.rect.x += x
+        for tiles in self.playerGroup:
+            tiles.rect.x += x
     def HudInit(self):
         self.font=HudFont
         self.healthText=self.font.render("Health:",True,(255,0,0))
