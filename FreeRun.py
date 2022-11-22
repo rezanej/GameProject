@@ -7,6 +7,8 @@ from Tile import Tile
 from Setting import *
 from GrassTile import GrassTile
 from Player import Player
+from Coin import Coin
+from Heart import Heart
 class FreeRun:
     def __init__(self,display,pause):
         self.initBackGround()
@@ -18,6 +20,8 @@ class FreeRun:
         self.waterGroup=pygame.sprite.Group()
         self.enemyGroup=pygame.sprite.Group()
         self.lightGroup=pygame.sprite.Group()
+        self.coinGroup=pygame.sprite.Group()
+        self.heartGroup=pygame.sprite.Group()
         self.display=display
         self.lastTileY = 0
         self.t=[]
@@ -37,7 +41,7 @@ class FreeRun:
                 self.t.append(g)
                 self.lastTileY = r*64
             elif tileNum == "p":
-                self.playerGroup.add(Player(c * 64, r * 64, self.tiles))
+                self.playerGroup.add(Player(c * 64, r * 64, self.tiles,coinGroup=self.coinGroup,heartGroup=self.heartGroup))
             elif tileNum == "d":
                 g=Tile(c * 64, r * 64, DirtImages[0])
                 self.tiles.add(g)
@@ -65,6 +69,8 @@ class FreeRun:
             for i in range(ct):
                 treePosibility = random.choice([1, 0, 0, 0, 0, 0, 0,0,0,0,0,0, 0, 0])
                 objectPosibility=random.choice([1, 0, 0, 0, 0, 0, 0,0,0,0,0,0, 0, 0])
+                coinPosibility=random.choice([1, 1,1,1,0,0,0,0,0,0,0,0])
+                heartPosibility=random.choice([1, 0, 0, 0, 0, 0, 0,0,0,0,0,0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0])
                 for a in range(10-r):
                     d=Tile((c+i)*64,(r+a)*64,DirtImages[0])
                     self.tiles.add(d)
@@ -77,6 +83,14 @@ class FreeRun:
                     g=Tile((c+i)*64,(r-1)*64+24,ObjectImages[objectImageRand])
                     self.tiles.add(g)
                     self.t.append(g)
+                if coinPosibility:
+                    a=random.choice([0,1,2,3])
+                    g=random.choice([Coin((c+i)*64,(r-1-a)*64,self.playerGroup,10,CoinImages),Coin((c+i)*64,(r-1)*64,self.playerGroup,30,GoldCoinImages)])
+                    self.coinGroup.add(g)
+                if heartPosibility:
+                    a = random.choice([0, 1, 2, 3])
+                    g =Heart((c+i)*64,(r-1-a)*64,self.playerGroup,20)
+                    self.heartGroup.add(g)
                 g=GrassTile((c+i)*64,r*64)
                 self.tiles.add(g)
                 self.t.append(g)
@@ -93,6 +107,9 @@ class FreeRun:
                 t.append(i)
         for i in t:
             tiles.add(t)
+        for i in self.coinGroup:
+            if i.rect.x<-80:
+                i.kill()
         self.tiles=tiles
         self.t=t
         for i in self.TreeGroup:
@@ -117,10 +134,15 @@ class FreeRun:
             self.playerGroup.draw(self.display)
             self.enemyGroup.update()
             self.enemyGroup.draw(self.display)
+            self.coinGroup.update()
+            self.coinGroup.draw(self.display)
+            self.heartGroup.update()
+            self.heartGroup.draw(self.display)
             self.HudBlit()
             self.HudUpdate()
             self.checkGameOver()
             self.addScore()
+
             # self.night()
             # self.blitNight()
             # self.lightGroup.draw(self.display)
@@ -142,6 +164,10 @@ class FreeRun:
                 tiles.rect.x-=PlayerSpeed
             for tiles in self.lightGroup:
                 tiles.rect.x-=PlayerSpeed
+            for tiles in self.coinGroup:
+                tiles.rect.x -= PlayerSpeed
+            for tiles in self.heartGroup:
+                tiles.rect.x -= PlayerSpeed
 
     def HudInit(self):
         self.font=HudFont

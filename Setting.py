@@ -270,3 +270,10 @@ GoldCoinImages.append(pygame.transform.scale(pygame.image.load("CoinImages/GOLD/
 GoldCoinImages.append(pygame.transform.scale(pygame.image.load("CoinImages/GOLD/SMALL/SMALL_0005_Capa-6.png"),(26,26)).convert_alpha())
 GoldCoinImages.append(pygame.transform.scale(pygame.image.load("CoinImages/GOLD/SMALL/SMALL_0006_Capa-7.png"),(26,26)).convert_alpha())
 GoldCoinImages.append(pygame.transform.scale(pygame.image.load("CoinImages/GOLD/SMALL/SMALL_0007_Capa-8.png"),(26,26)).convert_alpha())
+HeartImages=[]
+HeartImages.append(pygame.transform.scale(pygame.image.load("HeartImages/tile000.png"),(26,26)).convert_alpha())
+HeartImages.append(pygame.transform.scale(pygame.image.load("HeartImages/tile001.png"),(26,26)).convert_alpha())
+HeartImages.append(pygame.transform.scale(pygame.image.load("HeartImages/tile002.png"),(26,26)).convert_alpha())
+HeartImages.append(pygame.transform.scale(pygame.image.load("HeartImages/tile003.png"),(26,26)).convert_alpha())
+HeartImages.append(pygame.transform.scale(pygame.image.load("HeartImages/tile004.png"),(26,26)).convert_alpha())
+HeartImages.append(pygame.transform.scale(pygame.image.load("HeartImages/tile005.png"),(26,26)).convert_alpha())

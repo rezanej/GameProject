@@ -5,7 +5,7 @@ from Kunai import *
 class Player(pygame.sprite.Sprite):
     def __init__(self,x,y,tileGroup,kunaiGroup=pygame.sprite.Group(),bordergroup=pygame.sprite.Group(),\
                  enemyGroup=pygame.sprite.Group(),coinGroup=pygame.sprite.Group(),fightBorder=pygame.sprite.Group(),\
-                 checkpoints=pygame.sprite.Group()):
+                 checkpoints=pygame.sprite.Group(),heartGroup=pygame.sprite.Group):
         super().__init__()
         self.image=PlayerImage
         self.rect=self.image.get_rect(topleft=(x,y))
@@ -17,6 +17,7 @@ class Player(pygame.sprite.Sprite):
         self.coinGroup=coinGroup
         self.fightBorder=fightBorder
         self.checkpoints=checkpoints
+        self.heartGroup=heartGroup
         self.jumpSpeed=PlayerJumpSpeed
         self.speed=PlayerSpeed
         self.gravity=Gravity
@@ -83,6 +84,7 @@ class Player(pygame.sprite.Sprite):
         self.gravityFun()
         self.verticalCollision()
         self.coinCollision()
+        self.heartCollision()
         self.checkJump()
         if self.freeRun:
             if self.state!="jump":
@@ -206,6 +208,9 @@ class Player(pygame.sprite.Sprite):
     def coinCollision(self):
         if not self.dead:
             pygame.sprite.spritecollide(self,self.coinGroup,True)
+    def heartCollision(self):
+        if not self.dead:
+            pygame.sprite.spritecollide(self,self.heartGroup,True)
 
     def jump(self):
         self.direction.y=-self.jumpSpeed
