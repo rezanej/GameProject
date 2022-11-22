@@ -3,7 +3,7 @@ from Setting import *
 from Kunai import *
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self,x,y,tileGroup,kunaiGroup=pygame.sprite.Group(),bordergroup=pygame.sprite.Group()):
+    def __init__(self,x,y,tileGroup,kunaiGroup=pygame.sprite.Group(),bordergroup=pygame.sprite.Group(),enemyGroup=pygame.sprite.Group(),coinGroup=pygame.sprite.Group()):
         super().__init__()
         self.image=PlayerImage
         self.rect=self.image.get_rect(topleft=(x,y))
@@ -11,6 +11,8 @@ class Player(pygame.sprite.Sprite):
         self.tileGroup=tileGroup
         self.kunaiGroup=kunaiGroup
         self.borderGroup=bordergroup
+        self.enemyGroup=enemyGroup
+        self.coinGroup=coinGroup
         self.jumpSpeed=PlayerJumpSpeed
         self.speed=PlayerSpeed
         self.gravity=Gravity
@@ -24,7 +26,7 @@ class Player(pygame.sprite.Sprite):
         self.attackAdeadOffset=True
         self.freeRun=self.checkFreeRun()
         self.animationSpeed=PlayerAnimationSpeed
-        self.health=0
+        self.health=100
         self.score=0
         self.dead=False
     def setDirection(self):
@@ -63,8 +65,6 @@ class Player(pygame.sprite.Sprite):
                 self.state="attack"
                 self.speed=0
 
-
-
     def update(self,tiles):
         self.tileGroup=tiles
         if not self.dead:
@@ -74,6 +74,8 @@ class Player(pygame.sprite.Sprite):
         self.horizontalCollision()
         self.gravityFun()
         self.verticalCollision()
+        self.enemyCollision()
+        self.coinCollision()
         self.checkJump()
         if self.freeRun:
             if self.state!="jump":
@@ -102,7 +104,6 @@ class Player(pygame.sprite.Sprite):
                     self.rect.right=sprite.rect.left
                 if self.direction.x<0:
                     self.rect.left=sprite.rect.right
-
     def verticalCollision(self):
         for sprite in self.tileGroup.sprites():
             if sprite.rect.colliderect(self.rect):
@@ -122,7 +123,27 @@ class Player(pygame.sprite.Sprite):
                 elif self.direction.y < 0:
                     self.rect.top = sprite.rect.bottom
                     self.direction.y = 0
+        for sprite in self.enemyGroup.sprites():
+            if sprite.rect.colliderect(self.rect):
+                if self.direction.y > 0:
+                    self.rect.bottom = sprite.rect.top
+                    self.direction.y = 0
+                    self.onGround=True
+                elif self.direction.y < 0:
+                    self.rect.top = sprite.rect.bottom
+                    self.direction.y = 0
+    def enemyCollision(self):
+        if not self.dead:
+            if pygame.sprite.spritecollide(self,self.enemyGroup,False) and self.direction.y<=0:
+                if self.health>=20:
+                    self.health-=20
+                else:
+                    self.die()
 
+    def coinCollision(self):
+        if not self.dead:
+            if pygame.sprite.spritecollide(self,self.coinGroup,True):
+                self.score+=10
     def jump(self):
         self.direction.y=-self.jumpSpeed
     def gravityFun(self):
@@ -185,6 +206,7 @@ class Player(pygame.sprite.Sprite):
                 self.throw=False
                 self.currentimageNum=0
         if self.state=="dead":
+            self.direction.x=0
             if self.dead and self.currentimageNum>=9:
                 self.currentimageNum=9
             else:

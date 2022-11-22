@@ -34,7 +34,7 @@ class Level():
             if tileNum=="1":
                 self.tiles.add(GrassTile(c*64,r*64))
             elif tileNum=="p":
-                self.playerGroup.add(Player(c*64,r*64,self.tiles,self.kunaiGroup,self.borderGroup))
+                self.playerGroup.add(Player(c*64,r*64,self.tiles,self.kunaiGroup,self.borderGroup,self.enemyGroup,self.coinGroup))
             elif tileNum=="n":
                 r+=1
                 c=-1
@@ -73,6 +73,7 @@ class Level():
             self.coinGroup.draw(self.display)
             self.enemyGroup.update()
             self.enemyGroup.draw(self.display)
+            self.HudUpdate()
             self.HudBlit()
             # self.night()
             # self.blitNight()
@@ -122,13 +123,14 @@ class Level():
             self.playerGroup.sprite.speed=PlayerSpeed
     def HudInit(self):
         self.font=HudFont
-        self.healthText=self.font.render("health:",True,(255,0,0))
+        self.healthText=self.font.render("Health:",True,(255,0,0))
         self.healthTextRect=self.healthText.get_rect(topleft=(20,23))
         self.kunaiImage=pygame.transform.scale(pygame.image.load("PlayerImages/Kunai.png"),(16/1.3,80/1.3))
         self.kunaiImageRect=KunaiImgae.get_rect(topleft=(20,70))
         self.kunaiText=self.font.render(f": {self.playerGroup.sprite.kunaiNumber}",True,(40,54,67))
         self.kunaiTextRect=self.kunaiText.get_rect(topleft=(50,85))
-
+        self.scoreText=self.font.render(f"Score: {self.playerGroup.sprite.score}",True,((40,54,67)))
+        self.scoreTextRect=self.scoreText.get_rect(topleft=(350,23))
     def HelthBar(self):
         self.helthBar=pygame.surface.Surface((200,16))
         self.helthBar.fill((0,156,56))
@@ -140,8 +142,12 @@ class Level():
         pygame.draw.rect(self.display,(255,140,9),self.helthBarBackground,3)
         self.display.blit(self.kunaiImage,self.kunaiImageRect)
         self.display.blit(self.kunaiText,self.kunaiTextRect)
+        self.display.blit(self.scoreText,self.scoreTextRect)
         # self.display.blit(self.vintageImage,self.vintageImageRect)
-
+    def HudUpdate(self):
+        self.helthBar=pygame.surface.Surface((self.playerGroup.sprite.health*2,16))
+        self.scoreText = self.font.render(f"Score: {self.playerGroup.sprite.score}", True, ((40, 54, 67)))
+        self.kunaiText = self.font.render(f": {self.playerGroup.sprite.kunaiNumber}", True, (40, 54, 67))
     def vintage(self):
         self.vintageImage=pygame.transform.scale(pygame.image.load("vintage2.jpg").convert_alpha(),(WindowWidth,WindowHeight))
         self.vintageImageRect=self.vintageImage.get_rect()
