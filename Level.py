@@ -75,6 +75,7 @@ class Level():
             self.enemyGroup.draw(self.display)
             self.HudUpdate()
             self.HudBlit()
+            self.enemyShowHealth()
             # self.night()
             # self.blitNight()
             # self.lightGroup.draw(self.display)
@@ -144,10 +145,14 @@ class Level():
         self.display.blit(self.kunaiText,self.kunaiTextRect)
         self.display.blit(self.scoreText,self.scoreTextRect)
         # self.display.blit(self.vintageImage,self.vintageImageRect)
+
     def HudUpdate(self):
         self.helthBar=pygame.surface.Surface((self.playerGroup.sprite.health*2,16))
         self.scoreText = self.font.render(f"Score: {self.playerGroup.sprite.score}", True, ((40, 54, 67)))
         self.kunaiText = self.font.render(f": {self.playerGroup.sprite.kunaiNumber}", True, (40, 54, 67))
+    def enemyShowHealth(self):
+        for enemy in self.enemyGroup.sprites():
+            enemy.showHealth(self.display)
     def vintage(self):
         self.vintageImage=pygame.transform.scale(pygame.image.load("vintage2.jpg").convert_alpha(),(WindowWidth,WindowHeight))
         self.vintageImageRect=self.vintageImage.get_rect()
