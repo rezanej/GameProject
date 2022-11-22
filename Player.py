@@ -34,7 +34,7 @@ class Player(pygame.sprite.Sprite):
     def setDirection(self):
         keys=pygame.key.get_pressed()
         if keys[pygame.K_f] and self.kunaiNumber>0 and self.kunaiTimer==KunaiTimer:
-            self.kunaiGroup.add(Kunai(self.rect.centerx,self.rect.centery,self))
+            self.kunaiGroup.add(Kunai(self.rect.centerx,self.rect.centery,self,self.enemyGroup))
             self.kunaiNumber-=1
             self.kunaiTimer=0
             self.state="throw"
@@ -109,7 +109,7 @@ class Player(pygame.sprite.Sprite):
             if sprite.dead == False:
                 if sprite.rect.colliderect(self.rect):
                     if self.reduceHelathCollistion == 0:
-                        if self.health >= 20:
+                        if self.health > 20:
                             self.health -= 20
                             self.reduceHelathCollistion = 20
                         else:
@@ -144,7 +144,7 @@ class Player(pygame.sprite.Sprite):
             if sprite.dead==False:
                 if sprite.rect.colliderect(self.rect):
                     if self.reduceEnemyHelathCollistion==0:
-                        if sprite.health>=20:
+                        if sprite.health>20:
                             sprite.health-=20
                             self.reduceEnemyHelathCollistion=20
                         else:
