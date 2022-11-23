@@ -11,6 +11,7 @@ from Coin import Coin
 from Heart import Heart
 from NinjaGirl import NinjaGirl
 from os import remove
+from OptionMenu import OptionMenu
 class Level():
     def __init__(self,display,pause):
         self.currentLevel=0
@@ -37,7 +38,7 @@ class Level():
         self.loadCheckpoint()
         self.HudInit()
         self.HelthBar()
-
+        self.playMusic()
 
     def loadSave(self):
         if exists("save.txt"):
@@ -49,6 +50,9 @@ class Level():
                 self.playerGroup.sprite.score = int(SaveFile.readline())
                 self.playerGroup.sprite.kunaiNumber = int(SaveFile.readline())
                 self.playerGroup.sprite.health = int(SaveFile.readline())
+                if int(SaveFile.readline())==0:
+                    OptionMenu.PlayMusic=False
+                else :OptionMenu.PlayMusic=True
             if self.playerGroup.sprite.health==0:
                 remove("save.txt")
                 self.reset()
@@ -63,6 +67,8 @@ class Level():
                 SaveFile.write(f"{self.playerGroup.sprite.kunaiNumber}")
                 SaveFile.write("\n")
                 SaveFile.write("100")
+                SaveFile.write("\n")
+                SaveFile.write("0")
     def loadCheckpoint(self):
         for checkpoint in self.checkpoints:
             if checkpoint.rect.x==self.lastCheckPoint[0] and checkpoint.rect.y==self.lastCheckPoint[1]:
@@ -318,3 +324,8 @@ class Level():
         self.display.blit(self.fog,self.fogRect,special_flags=pygame.BLEND_MULT)
     def reset(self):
         self.__init__(self.display,self.pause)
+    def playMusic(self):
+        if OptionMenu.PlayMusic==True:
+            pygame.mixer.music.load("Music/NinjaManFightVer(remixAgain1).mp3")
+            pygame.mixer.music.play()
+            print("ddddd")

@@ -1,10 +1,14 @@
+import os
+
 import pygame
 from Setting import *
-from Level import Level
+from os import remove
 class OptionMenu():
-    def __init__(self,display,levelTrue):
+    PlayMusic = False
+    def __init__(self,display,levelTrue,level):
         self.display=display
         self.levelTrue=levelTrue
+        self.level=level
         self.background=MenuBackground
         self.backgroundRect=self.background.get_rect()
         self.pauseText=MenuFont.render("Options",True,(40,56,32))
@@ -18,13 +22,14 @@ class OptionMenu():
         self.button2Rect=self.button2.get_rect(center=(WindowWidth//2,WindowHeight//2+self.buttonOffset+100))
         self.button3=ButtonImages[1]
         self.button3Rect=self.button3.get_rect(center=(WindowWidth//2,WindowHeight//2+self.buttonOffset+120))
-        self.resumeText=MenuButtonFont.render("Reset Save",True,MenuButtonTextColor)
+        self.resumeText=MenuButtonFont.render("Music : ON",True,MenuButtonTextColor)
         self.resumeTextRect=self.resumeText.get_rect(center=(WindowWidth//2,WindowHeight//2+self.buttonOffset))
-        self.mainMenuText=MenuButtonFont.render("Music : ON",True,MenuButtonTextColor)
+        self.mainMenuText=MenuButtonFont.render("Reset Save",True,MenuButtonTextColor)
         self.mainMenuTextRect=self.mainMenuText.get_rect(center=(WindowWidth//2,WindowHeight//2+100+self.buttonOffset))
         self.optionText=MenuButtonFont.render("Back",True,MenuButtonTextColor)
         self.optionTextRect=self.optionText.get_rect(center=(WindowWidth//2,WindowHeight//2+200+self.buttonOffset))
         self.lastMenu=0
+
     def blit(self):
         self.display.blit(self.background,self.backgroundRect)
         self.display.blit(self.pauseText,self.pauseTextRect)
@@ -49,20 +54,32 @@ class OptionMenu():
                         self.selectedButton-=1
                 if event.key==pygame.K_RETURN:
                     if self.selectedButton==1:
-                        pass
-                        # if self.lastMenu==0:
-                        #     self.levelTrue[0]=0
-                        #     self.levelTrue[6] = 0
-                        # else :
-                        #     self.levelTrue[1]=1
-                        #     self.levelTrue[6]=0
+                        if OptionMenu.PlayMusic==True:
+                            pygame.mixer.music.pause()
+                            with open("save.txt", "r") as save:
+                                lines = save.readlines()
+                            with open("save.txt", "w") as f:
+                                for i in range(len(lines)-1):
+                                    f.writelines(lines[i].strip("\n")+"\n")
+                                f.writelines("0")
+                            OptionMenu.PlayMusic = False
+                        elif OptionMenu.PlayMusic==False:
+                            pygame.mixer.music.load("Music/NinjaManFightVer(remixAgain1).mp3")
+                            pygame.mixer.music.play()
+                            with open("save.txt", "r") as save:
+                                lines = save.readlines()
+                            with open("save.txt", "w") as f:
+                                for i in range(len(lines)-1):
+                                    f.writelines(lines[i].strip("\n")+"\n")
+                                f.writelines("1")
+                            OptionMenu.PlayMusic=True
+
                     if self.selectedButton==2:
-                        pass
-                        #
-                        # self.levelTrue[1]=0
-                        # self.levelTrue[0]=0
-                        # self.levelTrue[2]=1
-                        # self.levelTrue[3]=0
+                        remove("save.txt")
+                        self.level.reset()
+                        self.levelTrue[0] = 0
+                        self.levelTrue[6] = 0
+                        self.levelTrue[7] = 0
                     if self.selectedButton==3:
                         if self.lastMenu==0:
                             self.levelTrue[0]=0

@@ -23,7 +23,7 @@ class Game():
         self.menu=Menu.Menu(self.display,self.levelTrue)
         self.pauseMenu=PauseMenu(self.display,self.levelTrue)
         self.gameoverMenu=GameOver.GameoverMenu(self.display,self.levelTrue)
-        self.optionMenu=OptionMenu.OptionMenu(self.display,self.levelTrue)
+        self.optionMenu=OptionMenu.OptionMenu(self.display,self.levelTrue,self.level)
     def update(self):
         while self.running:
             self.events=pygame.event.get()

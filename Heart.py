@@ -19,7 +19,7 @@ class Heart(pygame.sprite.Sprite):
         self.image=self.heartImages[int(self.currentImgeNum)]
     def update(self):
         self.animate()
-    def kill(self,addHealth=0):
+    def kill(self,addHealth=1):
         self.playerGroup.sprite.health+=self.health*addHealth #for not adding health when loading save
         if self.playerGroup.sprite.health>100:
             self.playerGroup.sprite.health=100
