@@ -13,7 +13,7 @@ PlayerJumpSpeed=32
 Gravity=2
 KunaiSpeed=30
 StartKunai=40
-KunaiLifetime=15
+KunaiLifetime=4
 KunaiTimer=20
 BackgroundImages=[]
 Grassimages=[]
@@ -202,6 +202,64 @@ CatDeadImagesLeft=[]
 for image in CatDeadImages:
     CatDeadImagesLeft.append(pygame.transform.flip(image,True,False))
 
+NinjaGirlIdleImages=[]
+NinjaGirlIdleImagesLeft=[]
+NinjaGirlIdleImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Idle__000.png"),(290/7,500/7)).convert_alpha())
+NinjaGirlIdleImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Idle__001.png"),(290/7,500/7)).convert_alpha())
+NinjaGirlIdleImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Idle__002.png"),(290/7,500/7)).convert_alpha())
+NinjaGirlIdleImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Idle__003.png"),(290/7,500/7)).convert_alpha())
+NinjaGirlIdleImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Idle__004.png"),(290/7,500/7)).convert_alpha())
+NinjaGirlIdleImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Idle__005.png"),(290/7,500/7)).convert_alpha())
+NinjaGirlIdleImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Idle__006.png"),(290/7,500/7)).convert_alpha())
+NinjaGirlIdleImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Idle__007.png"),(290/7,500/7)).convert_alpha())
+NinjaGirlIdleImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Idle__008.png"),(290/7,500/7)).convert_alpha())
+NinjaGirlIdleImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Idle__009.png"),(290/7,500/7)).convert_alpha())
+for image in NinjaGirlIdleImages:
+    NinjaGirlIdleImagesLeft.append(pygame.transform.flip(image,True,False))
+NinjaGirlRunImages=[]
+NinjaGirlRunImagesLeft=[]
+NinjaGirlRunImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Run__000.png"),(376/7,520/7)).convert_alpha())
+NinjaGirlRunImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Run__001.png"),(376/7,520/7)).convert_alpha())
+NinjaGirlRunImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Run__002.png"),(376/7,520/7)).convert_alpha())
+NinjaGirlRunImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Run__003.png"),(376/7,520/7)).convert_alpha())
+NinjaGirlRunImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Run__004.png"),(376/7,520/7)).convert_alpha())
+NinjaGirlRunImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Run__005.png"),(376/7,520/7)).convert_alpha())
+NinjaGirlRunImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Run__006.png"),(376/7,520/7)).convert_alpha())
+NinjaGirlRunImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Run__007.png"),(376/7,520/7)).convert_alpha())
+NinjaGirlRunImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Run__008.png"),(376/7,520/7)).convert_alpha())
+NinjaGirlRunImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Run__009.png"),(376/7,520/7)).convert_alpha())
+for images in NinjaGirlRunImages:
+    NinjaGirlRunImagesLeft.append(pygame.transform.flip(images,True,False))
+
+NinjaGirlThrowImages=[]
+NinjaGirlThrowImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Throw__000.png"),(377/7,451/7)).convert_alpha())
+NinjaGirlThrowImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Throw__001.png"),(377/7,451/7)).convert_alpha())
+NinjaGirlThrowImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Throw__002.png"),(377/7,451/7)).convert_alpha())
+NinjaGirlThrowImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Throw__003.png"),(377/7,451/7)).convert_alpha())
+NinjaGirlThrowImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Throw__004.png"),(377/7,451/7)).convert_alpha())
+NinjaGirlThrowImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Throw__005.png"),(377/7,451/7)).convert_alpha())
+NinjaGirlThrowImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Throw__006.png"),(377/7,451/7)).convert_alpha())
+NinjaGirlThrowImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Throw__007.png"),(377/7,451/7)).convert_alpha())
+NinjaGirlThrowImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Throw__008.png"),(377/7,451/7)).convert_alpha())
+NinjaGirlThrowImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Throw__009.png"),(377/7,451/7)).convert_alpha())
+NinjaGirlThrowImagesLeft=[]
+for image in NinjaGirlThrowImages:
+    NinjaGirlThrowImagesLeft.append(pygame.transform.flip(image,True,False))
+NinjaGirlDeadImages=[]
+NinjaGirlDeadImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Dead__000.png"),(578/7,599/7)).convert_alpha())
+NinjaGirlDeadImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Dead__001.png"),(578/7,599/7)).convert_alpha())
+NinjaGirlDeadImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Dead__002.png"),(578/7,599/7)).convert_alpha())
+NinjaGirlDeadImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Dead__003.png"),(578/7,599/7)).convert_alpha())
+NinjaGirlDeadImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Dead__004.png"),(578/7,599/7)).convert_alpha())
+NinjaGirlDeadImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Dead__005.png"),(578/7,599/7)).convert_alpha())
+NinjaGirlDeadImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Dead__006.png"),(578/7,599/7)).convert_alpha())
+NinjaGirlDeadImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Dead__007.png"),(578/7,599/7)).convert_alpha())
+NinjaGirlDeadImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Dead__008.png"),(578/7,599/7)).convert_alpha())
+NinjaGirlDeadImages.append(pygame.transform.scale(pygame.image.load("NinjaGirlImages/Dead__009.png"),(578/7,599/7)).convert_alpha())
+NinjaGirlDeadImagesLeft=[]
+for image in NinjaGirlDeadImages:
+    NinjaGirlDeadImagesLeft.append(pygame.transform.flip(image,True,False))
+
 TreeImages=[]
 TreeImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Tree_1.png"),(116/2,44/2)).convert_alpha())
 TreeImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Tree_2.png"),(282/2,301/2)).convert_alpha())
@@ -217,9 +275,9 @@ Level1TileMap="00000000000000000000000000000000000000000000000000n" \
               "bB0000000B000000000B000000000B00000000000000000000n" \
               "bB0000000B000000000B000000000B00000000000000000000n" \
               "bB0000000B000000000B000000000B00000000000000000000n" \
-              "bBT0CDCCTB00000pP00B00acccTT0B00000000000000000000n" \
-              "1111111111000001100111111111110000000P00000000000n" \
-              "dddddddd0000T00000000010t01000010t0011100000000000n" \
+              "bBT0CDCCTB00000pP00B00NcccTT0B00000000000000000000n" \
+              "111111111100000110011111111111000000hP00000000000n" \
+              "ddddddddh000T00000000010t01000010t0011100000000000n" \
               "dddddddd111111wwwwwwwww11wwwwwww111wwwwwwwwwwwwwwwn" \
               "ddddddddddddddWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWn"
 

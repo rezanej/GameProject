@@ -49,11 +49,11 @@ class Enemy(pygame.sprite.Sprite):
         for sprite in self.fightBorderGroup.sprites():
             if sprite.rect.colliderect(self.rect):
                 if self.direction.x > 0:
-                    self.rect.right = sprite.rect.left
-                    self.direction.x*=-1
-                if self.direction.x < 0:
-                    self.rect.left = sprite.rect.right
                     self.direction.x *= -1
+                    self.rect.right = sprite.rect.left
+                if self.direction.x < 0:
+                    self.direction.x *= -1
+                    self.rect.left = sprite.rect.right
 
     def seenPlayerF(self):
 
@@ -63,7 +63,9 @@ class Enemy(pygame.sprite.Sprite):
         elif abs(self.rect.x - self.playerGroup.sprite.rect.x) < 100 and abs(self.rect.x - self.playerGroup.sprite.rect.x) > 20 and self.rect.x -self.playerGroup.sprite.rect.x > 0:
             self.seenPlayer=True
             return -1
-        else :self.seenPlayer=False
+        else :
+            self.seenPlayer=False
+            return 0
     def verticalCollision(self):
         for sprite in self.tileGroup.sprites():
             if sprite.rect.colliderect(self.rect):

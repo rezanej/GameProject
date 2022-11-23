@@ -8,6 +8,8 @@ from Tile import *
 from Enemy import *
 from Light import Light
 from Coin import Coin
+from Heart import Heart
+from NinjaGirl import NinjaGirl
 class Level():
     def __init__(self,display,pause):
         self.initBackGround()
@@ -24,6 +26,7 @@ class Level():
         self.coinGroup=pygame.sprite.Group()
         self.fightBorder=pygame.sprite.Group()
         self.checkpoints=pygame.sprite.Group()
+        self.heartGroup=pygame.sprite.Group()
         self.display=display
         self.addTiles()
         self.x=0
@@ -37,7 +40,7 @@ class Level():
                 self.tiles.add(GrassTile(c*64,r*64))
             elif tileNum=="p":
                 self.playerGroup.add(Player(c*64,r*64,self.tiles,self.kunaiGroup,self.borderGroup,self.enemyGroup,\
-                                            self.coinGroup,self.fightBorder,self.checkpoints))
+                                            self.coinGroup,self.fightBorder,self.checkpoints,self.heartGroup))
             elif tileNum=="n":
                 r+=1
                 c=-1
@@ -61,6 +64,10 @@ class Level():
             elif tileNum=="a":
                 self.enemyGroup.add(Enemy(c * 64, r * 64, DogSpeed, self.tiles, self.playerGroup, self.fightBorder, CatIdleImages\
                           , CatRunImages, CatDeadImages, CatIdleImagesLeft, CatRunImagesLeft, CatDeadImagesLeft))
+            elif tileNum=="N":
+                self.enemyGroup.add(NinjaGirl(c * 64, r * 64, DogSpeed, self.tiles, self.playerGroup, self.fightBorder, NinjaGirlIdleImages\
+                          , NinjaGirlRunImages, NinjaGirlDeadImages, NinjaGirlIdleImagesLeft, NinjaGirlRunImagesLeft, NinjaGirlDeadImagesLeft,\
+                            NinjaGirlThrowImages,NinjaGirlThrowImagesLeft,self.kunaiGroup ))
             elif tileNum=="L":
                 self.lightGroup.add(Light(c*64,r*64,1))
             elif tileNum=="P":
@@ -69,6 +76,8 @@ class Level():
                 self.coinGroup.add(Coin(c*64,r*64,self.playerGroup,10,CoinImages))
             elif tileNum=="C":
                 self.coinGroup.add(Coin(c*64,r*64,self.playerGroup,20,GoldCoinImages))
+            elif tileNum=="h":
+                self.heartGroup.add(Heart(c*64,r*64,self.playerGroup,20))
             c+=1
     def showAUpdate(self):
         if not self.pause[1]:
@@ -86,6 +95,8 @@ class Level():
             self.coinGroup.draw(self.display)
             self.enemyGroup.update()
             self.enemyGroup.draw(self.display)
+            self.heartGroup.update()
+            self.heartGroup.draw(self.display)
             self.HudUpdate()
             self.HudBlit()
             self.enemyShowHealth()
@@ -121,6 +132,8 @@ class Level():
                 tiles.rect.x+=PlayerSpeed
             for tiles in self.checkpoints:
                 tiles.rect.x+=PlayerSpeed
+            for tiles in self.heartGroup:
+                tiles.rect.x+=PlayerSpeed
         elif self.playerGroup.sprite.rect.x >WindowWidth*(3/4) and self.playerGroup.sprite.direction.x>0:
             self.x+=1
             self.playerGroup.sprite.speed = 0
@@ -141,6 +154,8 @@ class Level():
             for tiles in self.coinGroup:
                 tiles.rect.x-=PlayerSpeed
             for tiles in self.checkpoints:
+                tiles.rect.x-=PlayerSpeed
+            for tiles in self.heartGroup:
                 tiles.rect.x-=PlayerSpeed
         else:
             self.playerGroup.sprite.speed=PlayerSpeed
@@ -183,6 +198,8 @@ class Level():
         for tiles in self.checkpoints:
             tiles.rect.x += x
         for tiles in self.playerGroup:
+            tiles.rect.x += x
+        for tiles in self.heartGroup:
             tiles.rect.x += x
     def HudInit(self):
         self.font=HudFont

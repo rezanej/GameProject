@@ -41,7 +41,7 @@ class Player(pygame.sprite.Sprite):
     def setDirection(self):
         keys=pygame.key.get_pressed()
         if keys[pygame.K_f] and self.kunaiNumber>0 and self.kunaiTimer==KunaiTimer:
-            self.kunaiGroup.add(Kunai(self.rect.centerx,self.rect.centery,self,self.enemyGroup))
+            self.kunaiGroup.add(Kunai(self.rect.centerx,self.rect.centery,self,self.enemyGroup,KunaiSpeed))
             self.kunaiNumber-=1
             self.kunaiTimer=0
             self.state="throw"
