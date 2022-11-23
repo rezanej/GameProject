@@ -1,6 +1,6 @@
 import pygame
 from Setting import *
-
+import random
 class Enemy(pygame.sprite.Sprite):
     def __init__(self,x,y,speed,tileGroup,playerGroup,fightBorderGroup,idleAnim,runAnim,deadAnim,idleAnimL,runAnimL,deadAnimL):
         super().__init__()
@@ -14,9 +14,10 @@ class Enemy(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft=(x, y))
         self.direction = pygame.math.Vector2()
         self.tileGroup = tileGroup
-        self.speed = speed
+        self.speed = 0
+        self.speedTemp=speed
         self.gravity = Gravity
-        self.state = "run"
+        self.state = "idle"
         self.currentimageNum = 0
         self.left = False
         self.movementLength=2*40
@@ -27,15 +28,37 @@ class Enemy(pygame.sprite.Sprite):
         self.seenPlayer=True
         self.playerGroup=playerGroup
         self.fightBorderGroup=fightBorderGroup
+        self.idleTimer=60
+        self.once=False
+        self.once1=True
+    def chekcIdle(self):
+        if self.once1:
+            if self.idleTimer>0:
+                self.idleTimer-=1
+            elif self.idleTimer==0 and self.once:
+                self.state="idle"
+                self.idleTimer=random.randint(30,100)
+                self.speed = 0
+                self.once=False
+            elif self.idleTimer==0 and not self.once:
+                self.state = "run"
+                self.idleTimer = random.randint(30,100)
+                self.speed =self.speedTemp
+                self.once = True
+        else:
+            self.state = "run"
+            self.speed = self.speedTemp
     def setDirection(self):
         b=self.seenPlayerF()
         if not self.seenPlayer:
-            self.movementLength-=1
+            if self.state=="run":
+                self.movementLength-=1
             if self.movementLength==0:
                 self.direction.x*=-1
                 self.movementLength=2*40
                 self.left= not self.left
         elif self.playerGroup.sprite.dead!=True:
+            self.once1=False
             self.playerGroup.sprite.fightBorderWork=True
             self.direction.x=b
 
@@ -92,7 +115,7 @@ class Enemy(pygame.sprite.Sprite):
             elif self.left:
                 self.image =self.idleAnimL[int(self.currentimageNum)]
             self.currentimageNum += self.animationSpeed
-            if self.currentimageNum>=10:
+            if self.currentimageNum>=8:
                 self.currentimageNum=0
         if self.state=="run":
             if self.direction.x > 0:
@@ -118,6 +141,7 @@ class Enemy(pygame.sprite.Sprite):
             pygame.draw.rect(display,(255,0,0),self.helthBarBackground,2)
     def update(self):
         if not self.dead:
+            self.chekcIdle()
             self.setDirection()
             self.horizontalMovement()
             self.horizontalCollision()
