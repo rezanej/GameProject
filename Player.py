@@ -92,8 +92,8 @@ class Player(pygame.sprite.Sprite):
             self.direction.x=1
         self.animate()
         self.kunaiTiming()
-        self.attackLeftoffset()
         self.deadLeftOffset()
+        self.attackLeftoffset()
     def horizontalMovement(self):
         if self.state!="throw": # for not moving during throw
             self.rect.x += self.direction.x * self.speed
