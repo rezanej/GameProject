@@ -10,6 +10,7 @@ from Light import Light
 from Coin import Coin
 from Heart import Heart
 from NinjaGirl import NinjaGirl
+from os import remove
 class Level():
     def __init__(self,display,pause):
         self.currentLevel=0
@@ -48,6 +49,9 @@ class Level():
                 self.playerGroup.sprite.score = int(SaveFile.readline())
                 self.playerGroup.sprite.kunaiNumber = int(SaveFile.readline())
                 self.playerGroup.sprite.health = int(SaveFile.readline())
+            if self.playerGroup.sprite.health==0:
+                remove("save.txt")
+                self.reset()
         else:
             with  open("save.txt", "a") as SaveFile:
 
@@ -210,8 +214,7 @@ class Level():
             if abs(player.rect.x - checkpoint.rect.x) < min:
                 min = abs(player.rect.x - checkpoint.rect.x)
                 minCheck = checkpoint
-                if minCheck.rect.x!=self.lastCheckPoint[0] and minCheck.rect.y!=self.lastCheckPoint[1]:
-                    print(checkpoint.rect.x,checkpoint.rect.y)
+                if minCheck.rect.x!=self.lastCheckPoint[0] and minCheck.rect.y!=self.lastCheckPoint[1] and minCheck.rect.x<=self.playerGroup.sprite.rect.x :
                     self.lastCheckPoint=[checkpoint.rect.x,checkpoint.rect.y]
                     self.save()
     def save(self):
@@ -235,7 +238,7 @@ class Level():
             minCheck = self.checkpoints.sprites()[0]
             min = abs(player.rect.x - minCheck.rect.x)
             for checkpoint in self.checkpoints.sprites():
-                if abs(player.rect.x - checkpoint.rect.x) < min:
+                if abs(player.rect.x - checkpoint.rect.x) < min and checkpoint.rect.x<= player.rect.x:
                     min = abs(player.rect.x - checkpoint.rect.x)
                     minCheck = checkpoint
             player.rect.topleft = minCheck.rect.topleft
