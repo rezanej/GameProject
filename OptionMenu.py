@@ -22,10 +22,13 @@ class OptionMenu():
         self.button2Rect=self.button2.get_rect(center=(WindowWidth//2,WindowHeight//2+self.buttonOffset+100))
         self.button3=ButtonImages[1]
         self.button3Rect=self.button3.get_rect(center=(WindowWidth//2,WindowHeight//2+self.buttonOffset+120))
-        self.resumeText=MenuButtonFont.render("Music : ON",True,MenuButtonTextColor)
-        self.resumeTextRect=self.resumeText.get_rect(center=(WindowWidth//2,WindowHeight//2+self.buttonOffset))
-        self.mainMenuText=MenuButtonFont.render("Reset Save",True,MenuButtonTextColor)
-        self.mainMenuTextRect=self.mainMenuText.get_rect(center=(WindowWidth//2,WindowHeight//2+100+self.buttonOffset))
+        if OptionMenu.PlayMusic:
+            self.musicText=MenuButtonFont.render("Music : ON",True,MenuButtonTextColor)
+        else:
+            self.musicText = MenuButtonFont.render("Music : OFF", True, MenuButtonTextColor)
+        self.musicTextRect=self.musicText.get_rect(center=(WindowWidth//2,WindowHeight//2+self.buttonOffset))
+        self.resetText=MenuButtonFont.render("Reset Save",True,MenuButtonTextColor)
+        self.resetTextRect=self.resetText.get_rect(center=(WindowWidth//2,WindowHeight//2+100+self.buttonOffset))
         self.optionText=MenuButtonFont.render("Back",True,MenuButtonTextColor)
         self.optionTextRect=self.optionText.get_rect(center=(WindowWidth//2,WindowHeight//2+200+self.buttonOffset))
         self.lastMenu=0
@@ -34,9 +37,9 @@ class OptionMenu():
         self.display.blit(self.background,self.backgroundRect)
         self.display.blit(self.pauseText,self.pauseTextRect)
         self.display.blit(self.button1,self.button1Rect)
-        self.display.blit(self.resumeText,self.resumeTextRect)
+        self.display.blit(self.musicText,self.musicTextRect)
         self.display.blit(self.button2, self.button2Rect)
-        self.display.blit(self.mainMenuText,self.mainMenuTextRect)
+        self.display.blit(self.resetText,self.resetTextRect)
         self.display.blit(self.button3, self.button3Rect)
         self.display.blit(self.optionText,self.optionTextRect)
     def menuLoop(self,events,lastMenu):
@@ -63,6 +66,7 @@ class OptionMenu():
                                     f.writelines(lines[i].strip("\n")+"\n")
                                 f.writelines("0")
                             OptionMenu.PlayMusic = False
+                            self.musicText = MenuButtonFont.render("Music : Off", True, MenuButtonTextColor)
                         elif OptionMenu.PlayMusic==False:
                             pygame.mixer.music.load("Music/NinjaManFightVer(remixAgain1).mp3")
                             pygame.mixer.music.play()
@@ -73,7 +77,7 @@ class OptionMenu():
                                     f.writelines(lines[i].strip("\n")+"\n")
                                 f.writelines("1")
                             OptionMenu.PlayMusic=True
-
+                            self.musicText = MenuButtonFont.render("Music : ON", True, MenuButtonTextColor)
                     if self.selectedButton==2:
                         remove("save.txt")
                         self.level.reset()

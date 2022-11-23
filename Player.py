@@ -86,7 +86,7 @@ class Player(pygame.sprite.Sprite):
         self.coinCollision()
         self.heartCollision()
         self.checkJump()
-        if self.freeRun:
+        if self.freeRun and self.dead==False:
             if self.state!="jump":
                 self.state="run"
             self.direction.x=1
@@ -103,6 +103,8 @@ class Player(pygame.sprite.Sprite):
             if sprite.rect.colliderect(self.rect):
                 if self.freeRun:
                     self.health-=20
+                    if self.health<=0:
+                        self.die()
                     self.rect.y-=120
                 if self.direction.x>0:
                     self.rect.right=sprite.rect.left

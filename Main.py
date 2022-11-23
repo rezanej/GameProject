@@ -46,6 +46,9 @@ class Game():
                         elif self.levelTrue[1]==1 and self.levelTrue[0]==1:
                              self.levelTrue[0]=1
                              self.levelTrue[1]=0
+                        elif self.levelTrue[3]==1:
+                             self.levelTrue[0]=1
+                             self.levelTrue[1]=1
 
             if self.levelTrue[0]==1 and self.levelTrue[6]==0:
                 self.level.showAUpdate()

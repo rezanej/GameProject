@@ -234,7 +234,12 @@ class Level():
             SaveFile.write("\n")
             SaveFile.write(f"{self.playerGroup.sprite.kunaiNumber}")
             SaveFile.write("\n")
-            SaveFile.write(f"{self.playerGroup.sprite.health}")
+            SaveFile.write(f"{self.playerGroup.sprite.health}\n")
+            if OptionMenu.PlayMusic:
+                SaveFile.write("1")
+            else:
+                SaveFile.write("0")
+
     def fallingFromScreen(self,player):
         if player.rect.top > WindowHeight:
             player.health -= 50
@@ -328,4 +333,3 @@ class Level():
         if OptionMenu.PlayMusic==True:
             pygame.mixer.music.load("Music/NinjaManFightVer(remixAgain1).mp3")
             pygame.mixer.music.play()
-            print("ddddd")
