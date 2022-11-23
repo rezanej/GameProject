@@ -126,7 +126,7 @@ class Level():
                 self.heartGroup.add(Heart(c*64,r*64,self.playerGroup,20))
             c+=1
     def showAUpdate(self):
-        if not self.pause[1]:
+        if not self.pause[1] and not self.pause[7]:
             self.scroll()
             self.tiles.update()
             self.display.blit(self.backGround,self.backGroundRect)
