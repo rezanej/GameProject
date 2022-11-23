@@ -19,6 +19,6 @@ class Coin(pygame.sprite.Sprite):
         self.image=self.coinImages[int(self.currentImgeNum)]
     def update(self):
         self.animate()
-    def kill(self):
-        self.playerGroup.sprite.score+=self.score
+    def kill(self,addScore=1):
+        self.playerGroup.sprite.score+=self.score*addScore #for not adding score when loading save
         super().kill()

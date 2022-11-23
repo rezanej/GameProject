@@ -12,6 +12,7 @@ from Heart import Heart
 from NinjaGirl import NinjaGirl
 class Level():
     def __init__(self,display,pause):
+        self.currentLevel=0
         self.initBackGround()
         self.pause=pause
         self.tiles=pygame.sprite.Group()
@@ -28,10 +29,51 @@ class Level():
         self.checkpoints=pygame.sprite.Group()
         self.heartGroup=pygame.sprite.Group()
         self.display=display
-        self.addTiles()
         self.x=0
+        self.addTiles()
+        self.lastCheckPoint=[0,0]
+        self.loadSave()
+        self.loadCheckpoint()
         self.HudInit()
         self.HelthBar()
+
+
+    def loadSave(self):
+        if exists("save.txt"):
+            with  open("save.txt", "r") as SaveFile:
+                self.currentLevel = int(SaveFile.readline())
+                LastCheckpoint = SaveFile.readline().split(",")
+                self.lastCheckPoint[0] = int(LastCheckpoint[0])
+                self.lastCheckPoint[1] = int(LastCheckpoint[1])
+                self.playerGroup.sprite.score = int(SaveFile.readline())
+                self.playerGroup.sprite.kunaiNumber = int(SaveFile.readline())
+                self.playerGroup.sprite.health = int(SaveFile.readline())
+        else:
+            with  open("save.txt", "a") as SaveFile:
+
+                # level , last checkpoint ,score,kunai number,health
+                SaveFile.write(f"{self.currentLevel}")
+                SaveFile.write("\n")
+                SaveFile.write("0,0\n")
+                SaveFile.write("0\n")
+                SaveFile.write(f"{self.playerGroup.sprite.kunaiNumber}")
+                SaveFile.write("\n")
+                SaveFile.write("100")
+    def loadCheckpoint(self):
+        for checkpoint in self.checkpoints:
+            if checkpoint.rect.x==self.lastCheckPoint[0] and checkpoint.rect.y==self.lastCheckPoint[1]:
+                self.playerGroup.sprite.rect.topleft=checkpoint.rect.topleft
+                self.scrollToPlayer(-(self.playerGroup.sprite.rect.x - 500))
+        for coin in self.coinGroup:
+            if coin.rect.x<self.lastCheckPoint[0]:
+                coin.kill(0)
+        for enemy in self.enemyGroup:
+            if enemy.rect.x<self.lastCheckPoint[0]:
+                enemy.kill()
+        for heart in self.heartGroup:
+             if heart.rect.x<self.lastCheckPoint[0]:
+                 heart.kill(0)
+
     def addTiles(self):
         r,c=0,0
         for tileNum in Level1TileMap:
@@ -101,6 +143,7 @@ class Level():
             self.HudBlit()
             self.enemyShowHealth()
             self.fallingFromScreen(self.playerGroup.sprite)
+            self.setCheckPoint()
             self.checkGameOver()
             # self.night()
             # self.blitNight()
@@ -112,7 +155,7 @@ class Level():
 
     def scroll(self):
         if self.playerGroup.sprite.rect.x <WindowWidth/4 and self.playerGroup.sprite.direction.x<0:
-            self.x-=1
+            self.x+=PlayerSpeed
             self.playerGroup.sprite.speed=0
             for tiles in self.tiles:
                 tiles.rect.x+=PlayerSpeed
@@ -135,7 +178,7 @@ class Level():
             for tiles in self.heartGroup:
                 tiles.rect.x+=PlayerSpeed
         elif self.playerGroup.sprite.rect.x >WindowWidth*(3/4) and self.playerGroup.sprite.direction.x>0:
-            self.x+=1
+            self.x-=PlayerSpeed
             self.playerGroup.sprite.speed = 0
             for tiles in self.tiles:
                 tiles.rect.x -= PlayerSpeed
@@ -159,7 +202,30 @@ class Level():
                 tiles.rect.x-=PlayerSpeed
         else:
             self.playerGroup.sprite.speed=PlayerSpeed
-
+    def setCheckPoint(self):
+        player=self.playerGroup.sprite
+        minCheck = self.checkpoints.sprites()[0]
+        min = abs(player.rect.x - minCheck.rect.x)
+        for checkpoint in self.checkpoints.sprites():
+            if abs(player.rect.x - checkpoint.rect.x) < min:
+                min = abs(player.rect.x - checkpoint.rect.x)
+                minCheck = checkpoint
+                if minCheck.rect.x!=self.lastCheckPoint[0] and minCheck.rect.y!=self.lastCheckPoint[1]:
+                    print(checkpoint.rect.x,checkpoint.rect.y)
+                    self.lastCheckPoint=[checkpoint.rect.x,checkpoint.rect.y]
+                    self.save()
+    def save(self):
+        with  open("save.txt", "w") as SaveFile:
+            # level , last checkpoint ,score,kunai number,health
+            SaveFile.write(f"{CurrentLevel}")
+            SaveFile.write("\n")
+            SaveFile.write(f"{self.lastCheckPoint[0]-self.x},{self.lastCheckPoint[1]}")
+            SaveFile.write("\n")
+            SaveFile.write(f"{self.playerGroup.sprite.score}")
+            SaveFile.write("\n")
+            SaveFile.write(f"{self.playerGroup.sprite.kunaiNumber}")
+            SaveFile.write("\n")
+            SaveFile.write(f"{self.playerGroup.sprite.health}")
     def fallingFromScreen(self,player):
         if player.rect.top > WindowHeight:
             player.health -= 50
@@ -179,6 +245,7 @@ class Level():
             self.pause[5]=1
             self.playerGroup.sprite.state="dead"
     def scrollToPlayer(self, x):
+        self.x+=x
         for tiles in self.tiles:
             tiles.rect.x += x
         for tiles in self.TreeGroup:

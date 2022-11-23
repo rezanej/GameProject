@@ -1,4 +1,5 @@
 import pygame
+from os.path import exists
 pygame.init()
 WindowWidth=64*20 #temporary
 WindowHeight=64*10 #temporary
