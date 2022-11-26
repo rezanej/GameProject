@@ -12,6 +12,7 @@ from Heart import Heart
 from NinjaGirl import NinjaGirl
 from os import remove
 from OptionMenu import OptionMenu
+import Portal
 class Level():
     def __init__(self,display,pause):
         self.currentLevel=0
@@ -30,6 +31,7 @@ class Level():
         self.fightBorder=pygame.sprite.Group()
         self.checkpoints=pygame.sprite.Group()
         self.heartGroup=pygame.sprite.Group()
+        self.portalGroup=pygame.sprite.Group()
         self.display=display
         self.x=0
         self.addTiles()
@@ -136,6 +138,8 @@ class Level():
                 self.coinGroup.add(Coin(c*64,r*64,self.playerGroup,20,GoldCoinImages))
             elif tileNum=="h":
                 self.heartGroup.add(Heart(c*64,r*64,self.playerGroup,20))
+            elif tileNum=="o":
+                self.portalGroup.add(Portal.Portal(PortalImages,c*64,r*64,self.playerGroup))
             c+=1
     def showAUpdate(self):
         if not self.pause[1] and not self.pause[7]:
@@ -155,12 +159,14 @@ class Level():
             self.enemyGroup.draw(self.display)
             self.heartGroup.update()
             self.heartGroup.draw(self.display)
+            self.portalGroup.draw(self.display)
             self.HudUpdate()
             self.HudBlit()
             self.enemyShowHealth()
             self.fallingFromScreen(self.playerGroup.sprite)
             self.setCheckPoint()
             self.checkGameOver()
+            self.portalGroup.update()
             # self.night()
             # self.blitNight()
             # self.lightGroup.draw(self.display)
@@ -193,6 +199,8 @@ class Level():
                 tiles.rect.x+=PlayerSpeed
             for tiles in self.heartGroup:
                 tiles.rect.x+=PlayerSpeed
+            for tiles in self.portalGroup:
+                tiles.rect.x+=PlayerSpeed
         elif self.playerGroup.sprite.rect.x >WindowWidth*(3/4) and self.playerGroup.sprite.direction.x>0:
             self.x-=PlayerSpeed
             self.playerGroup.sprite.speed = 0
@@ -215,6 +223,8 @@ class Level():
             for tiles in self.checkpoints:
                 tiles.rect.x-=PlayerSpeed
             for tiles in self.heartGroup:
+                tiles.rect.x-=PlayerSpeed
+            for tiles in self.portalGroup:
                 tiles.rect.x-=PlayerSpeed
         else:
             self.playerGroup.sprite.speed=PlayerSpeed
@@ -282,6 +292,8 @@ class Level():
         for tiles in self.playerGroup:
             tiles.rect.x += x
         for tiles in self.heartGroup:
+            tiles.rect.x += x
+        for tiles in self.portalGroup:
             tiles.rect.x += x
     def HudInit(self):
         self.font=HudFont
