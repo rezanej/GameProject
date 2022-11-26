@@ -101,8 +101,12 @@ class Level():
                 self.TreeGroup.add(Tree(TreeImages[0],c*64,r*64+64))
             elif tileNum=="T":
                 self.TreeGroup.add(Tree(TreeImages[1],c*64,r*64+64))
+            elif tileNum=="e":
+                self.TreeGroup.add(Tree(TreeImages[3],c*64,r*64+74))
+            elif tileNum=="j":
+                self.TreeGroup.add(Tree(TreeImages[4],c*64,r*64+74))
             elif tileNum=="d":
-                self.tiles.add(Tile(c*64,r*64,DirtImages[0]))
+                self.tiles.add(Tile(c*64,r*64,DirtImages[self.currentLevel]))
             elif tileNum=="b":
                 self.borderGroup.add(Tile(c*64,r*64,DirtImages[0]))
             elif tileNum=="B":
@@ -124,6 +128,7 @@ class Level():
             elif tileNum=="L":
                 self.lightGroup.add(Light(c*64,r*64,1))
             elif tileNum=="P":
+                self.TreeGroup.add(Tree(TreeImages[2], c * 64, r * 64 + 74))
                 self.checkpoints.add(Tile(c*64,r*64,DirtImages[0]))
             elif tileNum=="c":
                 self.coinGroup.add(Coin(c*64,r*64,self.playerGroup,10,CoinImages))
@@ -137,8 +142,8 @@ class Level():
             self.scroll()
             self.tiles.update()
             self.display.blit(self.backGround,self.backGroundRect)
-            self.tiles.draw(self.display)
             self.TreeGroup.draw(self.display)
+            self.tiles.draw(self.display)
             self.subTiles.draw(self.display)
             self.kunaiGroup.update()
             self.kunaiGroup.draw(self.display)
