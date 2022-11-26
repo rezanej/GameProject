@@ -74,6 +74,7 @@ class Level():
             if checkpoint.rect.x==self.lastCheckPoint[0] and checkpoint.rect.y==self.lastCheckPoint[1]:
                 self.playerGroup.sprite.rect.topleft=checkpoint.rect.topleft
                 self.scrollToPlayer(-(self.playerGroup.sprite.rect.x - 500))
+                self.lastCheckPoint=[self.playerGroup.sprite.rect.x,self.playerGroup.sprite.rect.y]
         for coin in self.coinGroup:
             if coin.rect.x<self.lastCheckPoint[0]:
                 coin.kill(0)
@@ -220,15 +221,16 @@ class Level():
             if abs(player.rect.x - checkpoint.rect.x) < min:
                 min = abs(player.rect.x - checkpoint.rect.x)
                 minCheck = checkpoint
-                if minCheck.rect.x!=self.lastCheckPoint[0] and minCheck.rect.y!=self.lastCheckPoint[1] and minCheck.rect.x<=self.playerGroup.sprite.rect.x :
-                    self.lastCheckPoint=[checkpoint.rect.x,checkpoint.rect.y]
-                    self.save()
+
+        if (minCheck.rect.x-self.x)!=self.lastCheckPoint[0] and (minCheck.rect.x-self.x)>self.lastCheckPoint[0] and (minCheck.rect.x-self.x)<=self.playerGroup.sprite.rect.x-self.x :
+            self.lastCheckPoint=[minCheck.rect.x-self.x,minCheck.rect.y]
+            self.save()
     def save(self):
         with  open("save.txt", "w") as SaveFile:
             # level , last checkpoint ,score,kunai number,health
             SaveFile.write(f"{CurrentLevel}")
             SaveFile.write("\n")
-            SaveFile.write(f"{self.lastCheckPoint[0]-self.x},{self.lastCheckPoint[1]}")
+            SaveFile.write(f"{self.lastCheckPoint[0]},{self.lastCheckPoint[1]}")
             SaveFile.write("\n")
             SaveFile.write(f"{self.playerGroup.sprite.score}")
             SaveFile.write("\n")
@@ -246,16 +248,10 @@ class Level():
             if player.health<0:
                 player.health=0
             player.die()  # checks dead
-            minCheck = self.checkpoints.sprites()[0]
-            min = abs(player.rect.x - minCheck.rect.x)
-            for checkpoint in self.checkpoints.sprites():
-                if abs(player.rect.x - checkpoint.rect.x) < min and checkpoint.rect.x<= player.rect.x:
-                    min = abs(player.rect.x - checkpoint.rect.x)
-                    minCheck = checkpoint
-            player.rect.topleft = minCheck.rect.topleft
-            self.scrollToPlayer(-(player.rect.x-500))
+            self.playerGroup.sprite.rect.topleft = (self.lastCheckPoint[0]+self.x,self.lastCheckPoint[1]-80)
+            self.scrollToPlayer(-(self.playerGroup.sprite.rect.x-500))
     def checkGameOver(self):
-        if self.playerGroup.sprite.health==0:
+        if self.playerGroup.sprite.health<=0:
             self.pause[5]=1
             self.playerGroup.sprite.state="dead"
     def scrollToPlayer(self, x):

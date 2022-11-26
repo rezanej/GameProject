@@ -54,7 +54,6 @@ class Game():
                 self.level.showAUpdate()
 
             if self.levelTrue[2]==1:
-                self.level = Level.Level(self.display, self.levelTrue)
                 self.level.reset()
                 self.levelTrue[2]=0
                 self.levelTrue[5]=0
