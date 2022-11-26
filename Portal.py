@@ -1,7 +1,7 @@
 import pygame
 
 class Portal(pygame.sprite.Sprite):
-    def __init__(self,images,x,y,playerGroup):
+    def __init__(self,images,x,y,playerGroup,level):
         super().__init__()
         self.playerGroup=playerGroup
         self.images=images
@@ -11,6 +11,7 @@ class Portal(pygame.sprite.Sprite):
         self.imageNum=0
         self.timer=20
         self.once=True
+        self.level=level
     def animate(self):
         if self.imageNum>=63:
             self.imageNum=0
@@ -25,5 +26,7 @@ class Portal(pygame.sprite.Sprite):
         if pygame.sprite.spritecollide(self,self.playerGroup,False):
             self.timer-=1
         if self.timer<0 and self.once:
-            print("Done")
+            self.level.currentLevel=1
+            self.level.save()
+            self.level.reset()
             self.once=False

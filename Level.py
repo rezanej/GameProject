@@ -16,12 +16,13 @@ import Portal
 class Level():
     def __init__(self,display,pause):
         self.currentLevel=0
+        self.setLevel()
         self.initBackGround()
         self.pause=pause
         self.tiles=pygame.sprite.Group()
         self.subTiles=pygame.sprite.Group()
         self.playerGroup=pygame.sprite.GroupSingle()
-        self.TreeGroup=pygame.sprite.Group()
+        self.treeAndObjectGroup=pygame.sprite.Group()
         self.kunaiGroup=pygame.sprite.Group()
         self.borderGroup=pygame.sprite.Group()
         self.waterGroup=pygame.sprite.Group()
@@ -41,7 +42,10 @@ class Level():
         self.HudInit()
         self.HelthBar()
         self.playMusic()
-
+    def setLevel(self):
+        if exists("save.txt"):
+            with  open("save.txt", "r") as SaveFile:
+                self.currentLevel = int(SaveFile.readline())
     def loadSave(self):
         if exists("save.txt"):
             with  open("save.txt", "r") as SaveFile:
@@ -89,10 +93,10 @@ class Level():
 
     def addTiles(self):
         r,c=0,0
-        for tileNum in Level1TileMap:
+        for tileNum in LevelMaps[self.currentLevel]:
 
             if tileNum=="1":
-                self.tiles.add(GrassTile(c*64,r*64))
+                self.tiles.add(GrassTile(c*64,r*64,self.currentLevel))
             elif tileNum=="p":
                 self.playerGroup.add(Player(c*64,r*64,self.tiles,self.kunaiGroup,self.borderGroup,self.enemyGroup,\
                                             self.coinGroup,self.fightBorder,self.checkpoints,self.heartGroup))
@@ -100,13 +104,21 @@ class Level():
                 r+=1
                 c=-1
             elif tileNum=="t":
-                self.TreeGroup.add(Tree(TreeImages[0],c*64,r*64+64))
+                self.treeAndObjectGroup.add(Tree(TreeImages[0],c*64,r*64+64))
             elif tileNum=="T":
-                self.TreeGroup.add(Tree(TreeImages[1],c*64,r*64+64))
+                self.treeAndObjectGroup.add(Tree(TreeImages[1],c*64,r*64+64))
             elif tileNum=="e":
-                self.TreeGroup.add(Tree(TreeImages[3],c*64,r*64+74))
+                self.treeAndObjectGroup.add(Tree(TreeImages[3],c*64,r*64+74))
             elif tileNum=="j":
-                self.TreeGroup.add(Tree(TreeImages[4],c*64,r*64+74))
+                self.treeAndObjectGroup.add(Tree(TreeImages[4],c*64,r*64+74))
+            elif tileNum=="2":
+                self.treeAndObjectGroup.add(Tile(c*64,r*64,ObjectImages[7]))
+            elif tileNum=="3":
+                self.treeAndObjectGroup.add(Tile(c*64,r*64+10,ObjectImages[6]))
+            elif tileNum=="4":
+                self.treeAndObjectGroup.add(Tile(c*64,r*64,ObjectImages[5]))
+            elif tileNum=="5":
+                self.treeAndObjectGroup.add(Tree(TreeImages[5],c*64,r*64+74))
             elif tileNum=="d":
                 self.tiles.add(Tile(c*64,r*64,DirtImages[self.currentLevel]))
             elif tileNum=="b":
@@ -130,7 +142,7 @@ class Level():
             elif tileNum=="L":
                 self.lightGroup.add(Light(c*64,r*64,1))
             elif tileNum=="P":
-                self.TreeGroup.add(Tree(TreeImages[2], c * 64, r * 64 + 74))
+                self.treeAndObjectGroup.add(Tree(TreeImages[2], c * 64, r * 64 + 74))
                 self.checkpoints.add(Tile(c*64,r*64,DirtImages[0]))
             elif tileNum=="c":
                 self.coinGroup.add(Coin(c*64,r*64,self.playerGroup,10,CoinImages))
@@ -139,14 +151,14 @@ class Level():
             elif tileNum=="h":
                 self.heartGroup.add(Heart(c*64,r*64,self.playerGroup,20))
             elif tileNum=="o":
-                self.portalGroup.add(Portal.Portal(PortalImages,c*64,r*64,self.playerGroup))
+                self.portalGroup.add(Portal.Portal(PortalImages,c*64,r*64,self.playerGroup,self))
             c+=1
     def showAUpdate(self):
         if not self.pause[1] and not self.pause[7]:
             self.scroll()
             self.tiles.update()
             self.display.blit(self.backGround,self.backGroundRect)
-            self.TreeGroup.draw(self.display)
+            self.treeAndObjectGroup.draw(self.display)
             self.tiles.draw(self.display)
             self.subTiles.draw(self.display)
             self.kunaiGroup.update()
@@ -167,12 +179,13 @@ class Level():
             self.setCheckPoint()
             self.checkGameOver()
             self.portalGroup.update()
-            # self.night()
-            # self.blitNight()
-            # self.lightGroup.draw(self.display)
+            if self.currentLevel==2:
+                self.night()
+                self.blitNight()
+                self.lightGroup.draw(self.display)
     def initBackGround(self):
 
-        self.backGround = BackgroundImages[CurrentLevel]
+        self.backGround = BackgroundImages[self.currentLevel]
         self.backGroundRect = self.backGround.get_rect()
 
     def scroll(self):
@@ -181,7 +194,7 @@ class Level():
             self.playerGroup.sprite.speed=0
             for tiles in self.tiles:
                 tiles.rect.x+=PlayerSpeed
-            for tiles in self.TreeGroup:
+            for tiles in self.treeAndObjectGroup:
                 tiles.rect.x+=PlayerSpeed
             for tiles in self.subTiles:
                 tiles.rect.x+=PlayerSpeed
@@ -206,7 +219,7 @@ class Level():
             self.playerGroup.sprite.speed = 0
             for tiles in self.tiles:
                 tiles.rect.x -= PlayerSpeed
-            for tiles in self.TreeGroup:
+            for tiles in self.treeAndObjectGroup:
                 tiles.rect.x-=PlayerSpeed
             for tiles in self.subTiles:
                 tiles.rect.x-=PlayerSpeed
@@ -243,7 +256,7 @@ class Level():
     def save(self):
         with  open("save.txt", "w") as SaveFile:
             # level , last checkpoint ,score,kunai number,health
-            SaveFile.write(f"{CurrentLevel}")
+            SaveFile.write(f"{self.currentLevel}")
             SaveFile.write("\n")
             SaveFile.write(f"{self.lastCheckPoint[0]},{self.lastCheckPoint[1]}")
             SaveFile.write("\n")
@@ -273,7 +286,7 @@ class Level():
         self.x+=x
         for tiles in self.tiles:
             tiles.rect.x += x
-        for tiles in self.TreeGroup:
+        for tiles in self.treeAndObjectGroup:
             tiles.rect.x += x
         for tiles in self.subTiles:
             tiles.rect.x += x

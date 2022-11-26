@@ -36,7 +36,7 @@ class FreeRun:
         for tileNum in FreeRunStart:
 
             if tileNum == "1":
-                g=GrassTile(c * 64, r * 64)
+                g=GrassTile(c * 64, r * 64,1)
                 self.tiles.add(g)
                 self.t.append(g)
                 self.lastTileY = r*64

@@ -19,11 +19,13 @@ KunaiTimer=20
 BackgroundImages=[]
 Grassimages=[]
 Grassimages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Tiles/2.png"),(64,64)).convert_alpha())
+Grassimages.append(pygame.transform.scale(pygame.image.load("Level2/Tiles/Tile (2).png"),(64,64)).convert_alpha())
 BackgroundImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/BG/BG.png"),(64*20,640)).convert_alpha())
+BackgroundImages.append(pygame.transform.scale(pygame.image.load("Level2/BG.png"),(64*20,640)).convert_alpha())
 PlayerImage=pygame.transform.scale(pygame.image.load("PlayerImages/Idle__000.png"),(232/7,439/7)).convert_alpha()
 DirtImages=[]
 DirtImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Tiles/5.png"),(64,64)).convert_alpha())
-DirtImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Tiles/8.png"),(64,64)))
+DirtImages.append(pygame.transform.scale(pygame.image.load("Level2/Tiles/Tile (5).png"),(64,64)))
 WaterImages=[]
 WaterImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Tiles/17.png"),(64,64)).convert_alpha())
 WaterImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Tiles/18.png"),(64,64)).convert_alpha())
@@ -267,6 +269,8 @@ TreeImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/
 TreeImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Tree1.png"),(111,117)).convert_alpha())
 TreeImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Tree2.png"),(90,151)).convert_alpha())
 TreeImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Tree3.png"),(63,96)).convert_alpha())
+TreeImages.append(pygame.transform.scale(pygame.image.load("Level2/Objects/Tree.png"),(286/2,239/2)).convert_alpha())
+TreeImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Tree3.png"),(63,96)).convert_alpha())
 ObjectImages=[]
 ObjectImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Bush (1).png"),(133,65)).convert_alpha())
 ObjectImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Bush (2).png"),(133,65)).convert_alpha())
@@ -274,6 +278,11 @@ ObjectImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Objec
 ObjectImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Mushroom_1.png"),(49,41)).convert_alpha())
 ObjectImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Mushroom_2.png"),(49,41)).convert_alpha())
 ObjectImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Object/Stone.png"),(90,54)).convert_alpha())
+ObjectImages.append(pygame.transform.scale(pygame.image.load("Level2/Objects/DeadBush.png"),(132,74)).convert_alpha())
+ObjectImages.append(pygame.transform.scale(pygame.image.load("Level2/Objects/TombStone (1).png"),(54,55)).convert_alpha())
+ObjectImages.append(pygame.transform.scale(pygame.image.load("Level2/Objects/TombStone (2).png"),(53,76)).convert_alpha())
+
+
 Level1TileMap="0000000000000000000000000000000000000000000000000000000000000000000ddddddddddddddd00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000n" \
               "b000000000000000000000000000000000000000000000000000001111111110000ddddddddddddddd0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000BB0000hC000000000h000000BB00000000000000000000000n" \
               "b000000000000000B000000000000B000000000000000000000001ddddddddd1000ddddddddddddddd00BB000000000000h00000000000000BB000000000000000000000000000000000CC00000000000000000000000000000000000000BB0001111000000111100000BB00000000000000000000000n" \
@@ -289,12 +298,12 @@ Level2TileMap="00000000000000000000000000000000000000000000000000n" \
               "00000000000000000000000000000000000000000000000000n" \
               "00000000000000000000000000000000000000000000000000n" \
               "b0000b00000000000000000000000000000000000000000000n" \
-              "b0000b00000000000000000000000000000000000000000000n" \
-              "b0TLDb00T000000pL000D00L00TT0000000000000000000000n" \
+              "b0000b00000L00000000000000000000000000000000000000n" \
+              "b05LDb250500000pP003D40L40550000000000000000000000n" \
               "11111111110000011001111111111100000000000000000000n" \
-              "dddddddd0000T00000000010t01000010t0010000000000000n" \
-              "dddddddd111111wwwwwwwww11wwwwwww111wwwwwwwwwwwwwwwn" \
-              "ddddddddddddddWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWn"
+              "dddddddd0000500000000010t01000010t0010000000000000n" \
+              "dddddddd111111ddddddddd11wwwwwww111wwwwwwwwwwwwwwwn" \
+              "ddddddddddddddddddddddddddddddddddddddddddddddddddn"
 
 FreeRunStart= "000000000000000000000000000000n" \
               "000000000000000000000000000000n" \
@@ -306,6 +315,7 @@ FreeRunStart= "000000000000000000000000000000n" \
               "1111111111111111111111111111111111111111n" \
               "ddddddddddddddddddddddddddddddddddddddddn" \
               "ddddddddddddddddddddddddddddddddddddddddn"
+LevelMaps=[Level1TileMap,Level2TileMap]
 HudFont=pygame.font.Font("Level1Assets/BloodyTerror.ttf",20)
 MenuFont=pygame.font.Font("Level1Assets/BloodyTerror.ttf",40)
 MenuButtonFont=pygame.font.Font("Level1Assets/BloodyTerror.ttf",27)
