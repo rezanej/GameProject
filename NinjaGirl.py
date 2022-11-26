@@ -48,3 +48,11 @@ class NinjaGirl(Enemy.Enemy):
     def throwF(self):
         self.kunaiGroup.add(Kunai(self.rect.centerx, self.rect.centery, self, self.playerGroup,KunaiSpeed//2))
         self.throwTimer = 0
+    def showHealth(self,display):
+        if not self.dead:
+            self.helthBar = pygame.surface.Surface((self.health/2, 8))
+            self.helthBar.fill((0, 156, 56))
+            self.helthBarRect = self.helthBar.get_rect(topleft=(self.rect.centerx-14,self.rect.centery-34))
+            self.helthBarBackground = pygame.rect.Rect(self.rect.left+5,self.rect.top, 50, 8)
+            display.blit(self.helthBar,self.helthBarRect)
+            pygame.draw.rect(display,(255,0,0),self.helthBarBackground,2)
