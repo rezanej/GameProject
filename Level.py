@@ -1,4 +1,6 @@
 import pygame
+
+import Kunai
 from Setting import *
 from Kunai import *
 from Player import *
@@ -152,6 +154,8 @@ class Level():
                 self.heartGroup.add(Heart(c*64,r*64,self.playerGroup,20))
             elif tileNum=="o":
                 self.portalGroup.add(Portal.Portal(PortalImages,c*64,r*64,self.playerGroup,self))
+            elif tileNum=="k":
+                self.kunaiGroup.add(Kunai(c*64+20,r*64+50,self.playerGroup.sprite,self.enemyGroup,0,True))
             c+=1
     def showAUpdate(self):
         if not self.pause[1] and not self.pause[7]:
@@ -214,6 +218,8 @@ class Level():
                 tiles.rect.x+=PlayerSpeed
             for tiles in self.portalGroup:
                 tiles.rect.x+=PlayerSpeed
+            for tiles in self.kunaiGroup:
+                tiles.rect.x+=PlayerSpeed
         elif self.playerGroup.sprite.rect.x >WindowWidth*(3/4) and self.playerGroup.sprite.direction.x>0:
             self.x-=PlayerSpeed
             self.playerGroup.sprite.speed = 0
@@ -238,6 +244,8 @@ class Level():
             for tiles in self.heartGroup:
                 tiles.rect.x-=PlayerSpeed
             for tiles in self.portalGroup:
+                tiles.rect.x-=PlayerSpeed
+            for tiles in self.kunaiGroup:
                 tiles.rect.x-=PlayerSpeed
         else:
             self.playerGroup.sprite.speed=PlayerSpeed
@@ -307,6 +315,8 @@ class Level():
         for tiles in self.heartGroup:
             tiles.rect.x += x
         for tiles in self.portalGroup:
+            tiles.rect.x += x
+        for tiles in self.kunaiGroup:
             tiles.rect.x += x
     def HudInit(self):
         self.font=HudFont

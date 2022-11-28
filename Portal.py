@@ -30,6 +30,5 @@ class Portal(pygame.sprite.Sprite):
             self.level.currentLevel=1
             self.level.lastCheckPoint=[0,0]
             self.level.save()
-            print(self.level.lastCheckPoint)
             self.level.reset()
             self.once=False
