@@ -48,6 +48,7 @@ class Player(pygame.sprite.Sprite):
             self.state="throw"
             self.throw=True
             self.speed=0
+            self.direction.x=0
             self.currentimageNum=0
 
         else :
