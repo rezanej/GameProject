@@ -19,7 +19,8 @@ class Portal(pygame.sprite.Sprite):
             self.imageNum+=self.animationSpeed
             self.image=self.images[int(self.imageNum)]
 
-    def update(self):
+    def update(self,level):
+        self.level=level
         self.animate()
         self.colide()
     def colide(self):
@@ -27,6 +28,8 @@ class Portal(pygame.sprite.Sprite):
             self.timer-=1
         if self.timer<0 and self.once:
             self.level.currentLevel=1
+            self.level.lastCheckPoint=[0,0]
             self.level.save()
+            print(self.level.lastCheckPoint)
             self.level.reset()
             self.once=False

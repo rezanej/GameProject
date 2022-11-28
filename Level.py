@@ -171,6 +171,7 @@ class Level():
             self.enemyGroup.draw(self.display)
             self.heartGroup.update()
             self.heartGroup.draw(self.display)
+            self.portalGroup.update(self)
             self.portalGroup.draw(self.display)
             self.HudUpdate()
             self.HudBlit()
@@ -178,7 +179,6 @@ class Level():
             self.fallingFromScreen(self.playerGroup.sprite)
             self.setCheckPoint()
             self.checkGameOver()
-            self.portalGroup.update()
             if self.currentLevel==2:
                 self.night()
                 self.blitNight()
