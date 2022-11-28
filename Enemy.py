@@ -29,6 +29,7 @@ class Enemy(pygame.sprite.Sprite):
         self.playerGroup=playerGroup
         self.fightBorderGroup=fightBorderGroup
         self.idleTimer=60
+        self.borderTimer=0
         self.once=False
         self.once1=True
     def chekcIdle(self):
@@ -50,6 +51,9 @@ class Enemy(pygame.sprite.Sprite):
             self.speed = self.speedTemp
     def setDirection(self):
         b=self.seenPlayerF()
+        if self.borderTimer>0:
+            self.seenPlayer=False
+            self.borderTimer-=1
         if not self.seenPlayer:
             if self.state=="run":
                 self.movementLength-=1
@@ -72,11 +76,13 @@ class Enemy(pygame.sprite.Sprite):
         for sprite in self.fightBorderGroup.sprites():
             if sprite.rect.colliderect(self.rect):
                 if self.direction.x > 0:
-                    self.direction.x *= -1
                     self.rect.right = sprite.rect.left
-                if self.direction.x < 0:
                     self.direction.x *= -1
+                    self.borderTimer=10
+                elif self.direction.x < 0:
                     self.rect.left = sprite.rect.right
+                    self.direction.x *= -1
+                    self.borderTimer=10
 
     def seenPlayerF(self):
 
