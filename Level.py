@@ -341,7 +341,6 @@ class Level():
         self.scoreTextRect=self.scoreText.get_rect(topleft=(350,23))
     def HelthBar(self):
         self.helthBar=pygame.surface.Surface((200,16))
-        self.helthBar.fill((0,156,56))
         self.helthBarRect=self.helthBar.get_rect(topleft=(120,34))
         self.helthBarBackground=pygame.rect.Rect(120,34,200,16)
     def HudBlit(self):
@@ -357,6 +356,7 @@ class Level():
         if self.playerGroup.sprite.health<=0:
             self.playerGroup.sprite.health=0
         self.helthBar=pygame.surface.Surface((self.playerGroup.sprite.health*2,16))
+        self.helthBar.fill((152,142,24))
         self.scoreText = self.font.render(f"Score: {self.playerGroup.sprite.score}", True, ((40, 54, 67)))
         self.kunaiText = self.font.render(f": {self.playerGroup.sprite.kunaiNumber}", True, (40, 54, 67))
     def enemyShowHealth(self):
