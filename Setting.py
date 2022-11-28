@@ -294,9 +294,9 @@ Level1TileMap="000000000000000000000000000000000000000000000000000000000ccckCc00
               "dddddddddd1111wwwwwwwwwwwwwwwwwwwwww111111111111ddddddddddddddd0001111111111111111111wwwwwwwwwwwwwwwwwwwwwwwwwwww11111110011100000dddd000dddddd000000000000000000000000000111111111111dddddddddddddddddddddddddddddddddddddddddddddddddddddddn" \
               "ddddddddddddddWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW1WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW00n"
 
-Level2TileMap="00000000000000000000000000000330BBBBBBBBBBBBBBBBBBBBdddd00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000BB0000hk0000000000000000000BB0ddddddddddd00000000000000000000000000000000000000000000000n" \
+Level2TileMap="000000000000000000000000000003P0BBBBBBBBBBBBBBBBBBBBdddd00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000BB0000hk0000000000000000000BB0ddddddddddd00000000000000000000000000000000000000000000000n" \
               "b0000000000000dddddddddd00000110BB0000000000000000BBdddd00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000BB0000110000000000000000000BB0ddddddddddd0000000BB00000000000000000000000000000000BB0000n" \
-              "b0000000000000dddddddddd00200000BB0050200Z05045000BBdddd000000000000000000000000000000000000000BB00000h500000000kC0000BB0000000000000000000000000000000BB0000000000000000000000000BB0ddddddddddd0000000BB00000000000000000000000000000000BB0000n" \
+              "b0000000000000dddddddddd00200000BB005020z05045000BBdddd000000000000000000000000000000000000000BB00000h500000000kC0000BB0000000000000000000000000000000BB0000000000000000000000000BB0ddddddddddd0000000BB00000000000000000000000000000000BB0000n" \
               "b0000000000000dddddddddd0011000011111111111111111101dddd000000000000000000000000000000000000000BB000001100000000110000BB00000000000000004050h0000040500BB0502003004030500330402000BB0dddddddddddd000000BB00000000000000000000000000000000BB00b0n" \
               "b05L00p5050L00dddddddddd00000000dddddddd00000030000ddddd00000000BB0000000000000000000BB00000000BB000000000000000000000BB003030c22h5PCc01111110011111110111111111111111111111111111101dddddddddddd000000BB00000000000000000000000000000000BB00b0n" \
               "11111111110000dddddddddd11111000dddddddd0ddddddddddddddd00000000BB0000000000000000000BB00000000BB005400002300Z05000405BB01111111111111ddddddd00ddddddd0dddddddddddddddddddddddddddd0ddddddddddddddd0000BB00000000000000000000000000000000BB00b0n" \
@@ -414,3 +414,107 @@ PortalImages.append(pygame.transform.scale(pygame.image.load("portal/portal_261.
 PortalImages.append(pygame.transform.scale(pygame.image.load("portal/portal_262.png"),(400,300)).convert_alpha())
 PortalImages.append(pygame.transform.scale(pygame.image.load("portal/portal_263.png"),(400,300)).convert_alpha())
 PortalImages.append(pygame.transform.scale(pygame.image.load("portal/portal_264.png"),(400,300)).convert_alpha())
+
+
+zombieMaleIdleImages=[]
+zombieMaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Idle (1).png"),(430/7,517/7)).convert_alpha())
+zombieMaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Idle (2).png"),(430/7,517/7)).convert_alpha())
+zombieMaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Idle (3).png"),(430/7,517/7)).convert_alpha())
+zombieMaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Idle (4).png"),(430/7,517/7)).convert_alpha())
+zombieMaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Idle (5).png"),(430/7,517/7)).convert_alpha())
+zombieMaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Idle (6).png"),(430/7,517/7)).convert_alpha())
+zombieMaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Idle (7).png"),(430/7,517/7)).convert_alpha())
+zombieMaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Idle (8).png"),(430/7,517/7)).convert_alpha())
+zombieMaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Idle (9).png"),(430/7,517/7)).convert_alpha())
+zombieMaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Idle (10).png"),(430/7,517/7)).convert_alpha())
+zombieMaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Idle (11).png"),(430/7,517/7)).convert_alpha())
+zombieMaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Idle (12).png"),(430/7,517/7)).convert_alpha())
+zombieMaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Idle (13).png"),(430/7,517/7)).convert_alpha())
+zombieMaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Idle (14).png"),(430/7,517/7)).convert_alpha())
+zombieMaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Idle (15).png"),(430/7,517/7)).convert_alpha())
+zombieMaleIdleImagesLeft=[]
+for image in zombieMaleIdleImages:
+    zombieMaleIdleImagesLeft.append(pygame.transform.flip(image,True,False))
+
+zombieMaleWalkImages=[]
+zombieMaleWalkImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Walk (1).png"),(430/7,517/7)).convert_alpha())
+zombieMaleWalkImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Walk (2).png"),(430/7,517/7)).convert_alpha())
+zombieMaleWalkImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Walk (3).png"),(430/7,517/7)).convert_alpha())
+zombieMaleWalkImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Walk (4).png"),(430/7,517/7)).convert_alpha())
+zombieMaleWalkImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Walk (5).png"),(430/7,517/7)).convert_alpha())
+zombieMaleWalkImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Walk (6).png"),(430/7,517/7)).convert_alpha())
+zombieMaleWalkImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Walk (7).png"),(430/7,517/7)).convert_alpha())
+zombieMaleWalkImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Walk (8).png"),(430/7,517/7)).convert_alpha())
+zombieMaleWalkImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Walk (9).png"),(430/7,517/7)).convert_alpha())
+zombieMaleWalkImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Walk (10).png"),(430/7,517/7)).convert_alpha())
+zombieMaleWalkImagesLeft=[]
+for image in zombieMaleWalkImages:
+    zombieMaleWalkImagesLeft.append(pygame.transform.flip(image,True,False))
+zombieMaleDeadImages=[]
+zombieMaleDeadImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Dead (1).png"),(629/7,526/7)).convert_alpha())
+zombieMaleDeadImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Dead (2).png"),(629/7,526/7)).convert_alpha())
+zombieMaleDeadImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Dead (3).png"),(629/7,526/7)).convert_alpha())
+zombieMaleDeadImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Dead (4).png"),(629/7,526/7)).convert_alpha())
+zombieMaleDeadImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Dead (5).png"),(629/7,526/7)).convert_alpha())
+zombieMaleDeadImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Dead (6).png"),(629/7,526/7)).convert_alpha())
+zombieMaleDeadImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Dead (7).png"),(629/7,526/7)).convert_alpha())
+zombieMaleDeadImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Dead (8).png"),(629/7,526/7)).convert_alpha())
+zombieMaleDeadImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Dead (9).png"),(629/7,526/7)).convert_alpha())
+zombieMaleDeadImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Dead (10).png"),(629/7,526/7)).convert_alpha())
+zombieMaleDeadImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Dead (11).png"),(629/7,526/7)).convert_alpha())
+zombieMaleDeadImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/male/Dead (12).png"),(629/7,526/7)).convert_alpha())
+zombieMaleDeadImagesLeft=[]
+for image in zombieMaleDeadImages:
+    zombieMaleDeadImagesLeft.append(pygame.transform.flip(image,True,False))
+
+
+zombieFemaleIdleImages=[]
+zombieFemaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Idle (1).png"),(430/7,517/7)).convert_alpha())
+zombieFemaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Idle (2).png"),(430/7,517/7)).convert_alpha())
+zombieFemaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Idle (3).png"),(430/7,517/7)).convert_alpha())
+zombieFemaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Idle (4).png"),(430/7,517/7)).convert_alpha())
+zombieFemaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Idle (5).png"),(430/7,517/7)).convert_alpha())
+zombieFemaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Idle (6).png"),(430/7,517/7)).convert_alpha())
+zombieFemaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Idle (7).png"),(430/7,517/7)).convert_alpha())
+zombieFemaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Idle (8).png"),(430/7,517/7)).convert_alpha())
+zombieFemaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Idle (9).png"),(430/7,517/7)).convert_alpha())
+zombieFemaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Idle (10).png"),(430/7,517/7)).convert_alpha())
+zombieFemaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Idle (11).png"),(430/7,517/7)).convert_alpha())
+zombieFemaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Idle (12).png"),(430/7,517/7)).convert_alpha())
+zombieFemaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Idle (13).png"),(430/7,517/7)).convert_alpha())
+zombieFemaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Idle (14).png"),(430/7,517/7)).convert_alpha())
+zombieFemaleIdleImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Idle (15).png"),(430/7,517/7)).convert_alpha())
+zombieFemaleIdleImagesLeft=[]
+for image in zombieFemaleIdleImages:
+    zombieFemaleIdleImagesLeft.append(pygame.transform.flip(image,True,False))
+
+zombieFemaleWalkImages=[]
+zombieFemaleWalkImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Walk (1).png"),(430/7,517/7)).convert_alpha())
+zombieFemaleWalkImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Walk (2).png"),(430/7,517/7)).convert_alpha())
+zombieFemaleWalkImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Walk (3).png"),(430/7,517/7)).convert_alpha())
+zombieFemaleWalkImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Walk (4).png"),(430/7,517/7)).convert_alpha())
+zombieFemaleWalkImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Walk (5).png"),(430/7,517/7)).convert_alpha())
+zombieFemaleWalkImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Walk (6).png"),(430/7,517/7)).convert_alpha())
+zombieFemaleWalkImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Walk (7).png"),(430/7,517/7)).convert_alpha())
+zombieFemaleWalkImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Walk (8).png"),(430/7,517/7)).convert_alpha())
+zombieFemaleWalkImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Walk (9).png"),(430/7,517/7)).convert_alpha())
+zombieFemaleWalkImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Walk (10).png"),(430/7,517/7)).convert_alpha())
+zombieFemaleWalkImagesLeft=[]
+for image in zombieFemaleWalkImages:
+    zombieFemaleWalkImagesLeft.append(pygame.transform.flip(image,True,False))
+zombieFemaleDeadImages=[]
+zombieFemaleDeadImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Dead (1).png"),(629/7,526/7)).convert_alpha())
+zombieFemaleDeadImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Dead (2).png"),(629/7,526/7)).convert_alpha())
+zombieFemaleDeadImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Dead (3).png"),(629/7,526/7)).convert_alpha())
+zombieFemaleDeadImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Dead (4).png"),(629/7,526/7)).convert_alpha())
+zombieFemaleDeadImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Dead (5).png"),(629/7,526/7)).convert_alpha())
+zombieFemaleDeadImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Dead (6).png"),(629/7,526/7)).convert_alpha())
+zombieFemaleDeadImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Dead (7).png"),(629/7,526/7)).convert_alpha())
+zombieFemaleDeadImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Dead (8).png"),(629/7,526/7)).convert_alpha())
+zombieFemaleDeadImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Dead (9).png"),(629/7,526/7)).convert_alpha())
+zombieFemaleDeadImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Dead (10).png"),(629/7,526/7)).convert_alpha())
+zombieFemaleDeadImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Dead (11).png"),(629/7,526/7)).convert_alpha())
+zombieFemaleDeadImages.append(pygame.transform.scale(pygame.image.load("Zombie/png/Female/Dead (12).png"),(629/7,526/7)).convert_alpha())
+zombieFemaleDeadImagesLeft=[]
+for image in zombieFemaleDeadImages:
+    zombieFemaleDeadImagesLeft.append(pygame.transform.flip(image,True,False))

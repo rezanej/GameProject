@@ -106,34 +106,30 @@ class Enemy(pygame.sprite.Sprite):
                     self.rect.top = sprite.rect.bottom
                     self.direction.y = 0
 
-                elif self.direction.y < 0:
-                    self.rect.top = sprite.rect.bottom
-                    self.direction.y = 0
-
     def gravityFun(self):
         self.direction.y += self.gravity
         self.rect.centery += self.direction.y
 
     def animate(self):
         if self.state=="idle":
+            if self.currentimageNum>=len(self.idleAnim)-2:
+                self.currentimageNum=0
             if not self.left:
                 self.image=self.idleAnim[int(self.currentimageNum)]
             elif self.left:
                 self.image =self.idleAnimL[int(self.currentimageNum)]
             self.currentimageNum += self.animationSpeed
-            if self.currentimageNum>=8:
-                self.currentimageNum=0
         if self.state=="run":
+            if self.currentimageNum>=len(self.runAnim)-2:
+                self.currentimageNum=0
             if self.direction.x > 0:
                 self.left=False
-
                 self.image=self.runAnim[int(self.currentimageNum)]
             if self.direction.x < 0:
                 self.left = True
                 self.image=self.runAnimL[int(self.currentimageNum)]
             self.currentimageNum += self.animationSpeed
-            if self.currentimageNum>=8:
-                self.currentimageNum=0
+
     def horizontalMovement(self):
         self.rect.x += self.direction.x * self.speed
 
@@ -157,7 +153,7 @@ class Enemy(pygame.sprite.Sprite):
         else:
             self.die()
     def die(self):
-        if self.dead and not self.currentimageNum>=10:
+        if self.dead and not self.currentimageNum>=len(self.deadAnim)-1:
             self.playerGroup.sprite.fightBorderWork = False
             if not self.left:
                 self.image = self.deadAnim[int(self.currentimageNum)]

@@ -15,6 +15,7 @@ from NinjaGirl import NinjaGirl
 from os import remove
 from OptionMenu import OptionMenu
 import Portal
+from Zombie import Zombie
 class Level():
     def __init__(self,display,pause):
         self.currentLevel=0
@@ -145,6 +146,12 @@ class Level():
                 self.enemyGroup.add(NinjaGirl(c * 64, r * 64, DogSpeed, self.tiles, self.playerGroup, self.fightBorder, NinjaGirlIdleImages\
                           , NinjaGirlRunImages, NinjaGirlDeadImages, NinjaGirlIdleImagesLeft, NinjaGirlRunImagesLeft, NinjaGirlDeadImagesLeft,\
                             NinjaGirlThrowImages,NinjaGirlThrowImagesLeft,self.kunaiGroup ))
+            elif tileNum=="Z":
+                self.enemyGroup.add(Zombie(c * 64, r * 64, DogSpeed, self.tiles, self.playerGroup, self.fightBorder, zombieMaleIdleImages\
+                          , zombieMaleWalkImages, zombieMaleDeadImages, zombieMaleIdleImagesLeft, zombieMaleWalkImagesLeft, zombieMaleDeadImagesLeft))
+            elif tileNum=="z":
+                self.enemyGroup.add(Zombie(c * 64, r * 64, DogSpeed, self.tiles, self.playerGroup, self.fightBorder,zombieFemaleIdleImages \
+                                           , zombieFemaleWalkImages, zombieFemaleDeadImages, zombieFemaleIdleImagesLeft,zombieFemaleWalkImagesLeft, zombieFemaleDeadImagesLeft))
             elif tileNum=="L":
                 self.lightGroup.add(Light(c*64,r*64,1))
             elif tileNum=="P":
