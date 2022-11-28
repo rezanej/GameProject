@@ -55,7 +55,7 @@ class NinjaGirl(Enemy.Enemy):
             self.helthBar = pygame.surface.Surface((self.health/4, 8))
             self.helthBar.fill((0, 156, 56))
             self.helthBarRect = self.helthBar.get_rect(topleft=(self.rect.centerx-14,self.rect.centery-34))
-            self.helthBarBackground = pygame.rect.Rect(self.rect.left+5,self.rect.top, 50, 8)
+            self.helthBarBackground = pygame.rect.Rect(self.rect.left+6,self.rect.top, 50, 8)
             display.blit(self.helthBar,self.helthBarRect)
             pygame.draw.rect(display,(255,0,0),self.helthBarBackground,2)
     def die(self):

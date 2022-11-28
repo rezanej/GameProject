@@ -7,7 +7,6 @@ class Zombie(Enemy.Enemy):
         super().__init__(x,y,speed,tileGroup,playerGroup,fightBorderGroup,idleAnim,\
                          runAnim,deadAnim,idleAnimL,runAnimL,deadAnimL)
         self.health=150
-        self.rect.height-=3
 
     def gravityFun(self):
         self.direction.y += self.gravity

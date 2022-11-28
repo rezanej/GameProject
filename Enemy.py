@@ -32,6 +32,7 @@ class Enemy(pygame.sprite.Sprite):
         self.borderTimer=0
         self.once=False
         self.once1=True
+        self.rect.height -= 5
     def chekcIdle(self):
         if self.once1:
             if self.idleTimer>0:
@@ -138,7 +139,7 @@ class Enemy(pygame.sprite.Sprite):
             self.helthBar = pygame.surface.Surface((self.health/2, 8))
             self.helthBar.fill((0, 156, 56))
             self.helthBarRect = self.helthBar.get_rect(topleft=(self.rect.centerx-24,self.rect.centery-34))
-            self.helthBarBackground = pygame.rect.Rect(self.rect.left+15,self.rect.top, 50, 8)
+            self.helthBarBackground = pygame.rect.Rect(self.rect.left+15,self.rect.top-2, 50, 8)
             display.blit(self.helthBar,self.helthBarRect)
             pygame.draw.rect(display,(255,0,0),self.helthBarBackground,2)
     def update(self):

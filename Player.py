@@ -38,6 +38,7 @@ class Player(pygame.sprite.Sprite):
         self.reduceEnemyHelathCollistion=0
         self.fightBorderWork=False
         self.scrollState=True
+        self.rect.height -= 3
     def setDirection(self):
         keys=pygame.key.get_pressed()
         if keys[pygame.K_f] and self.kunaiNumber>0 and self.kunaiTimer==KunaiTimer:
