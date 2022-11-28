@@ -296,8 +296,8 @@ Level1TileMap="000000000000000000000000000000000000000000000000000000000ccckCc00
 
 Level2TileMap="000000000000000000000000000003P0BBBBBBBBBBBBBBBBBBBBdddd00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000BB0000hk0000000000000000000BB0ddddddddddd00000000000000000000000000000000000000000000000n" \
               "b0000000000000dddddddddd00000110BB0000000000000000BBdddd00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000BB0000110000000000000000000BB0ddddddddddd0000000BB00000000000000000000000000000000BB0000n" \
-              "b0000000000000dddddddddd00200000BB005020N05045000BBdddd000000000000000000000000000000000000000BB00000h500000000kC0000BB0000000000000000000000000000000BB0000000000000000000000000BB0ddddddddddd0000000BB00000000000000000000000000000000BB0000n" \
-              "b0000000000000dddddddddd0011000011111111111111111101dddd000000000000000000000000000000000000000BB000001100000000110000BB00000000000000004050h0000040500BB0502003004030500330402000BB0dddddddddddd000000BB00000000000000000000000000000000BB00b0n" \
+              "b0000000000000dddddddddd00200000BB005020Z05045000BBdddd000000000000000000000000000000000000000BB00000h500000000kC0000BB0000000000000000000000000000000BB0000000000000000000000000BB0ddddddddddd0000000BB00000000000000000000000000000000BB0000n" \
+              "b0000000000000dddddddddd0011000011111111111111111101dddd000000000000000000000000000000000000000BB000001100000000110000BB00000000000000004050h0000040500BB05020030040305N0330402000BB0dddddddddddd000000BB00000000000000000000000000000000BB00b0n" \
               "b05L00p5050L00dddddddddd00000000dddddddd00000030000ddddd00000000BB0000000000000000000BB00000000BB000000000000000000000BB003030c22h5PCc01111110011111110111111111111111111111111111101dddddddddddd000000BB00000000000000000000000000000000BB00b0n" \
               "11111111110000dddddddddd11111000dddddddd0ddddddddddddddd00000000BB0000000000000000000BB00000000BB005400002300Z05000405BB01111111111111ddddddd00ddddddd0dddddddddddddddddddddddddddd0ddddddddddddddd0000BB00000000000000000000000000000000BB00b0n" \
               "dk00000000000ddddddddddd00000000dd000000000kk000dddddddd00000000BB0000000000000000000BB0000000011111111111111111111111111dddddddddddddddddddd00ddddddd0ddddddd0000000000000000000000ddddddddddddddd0000BB00000000000000000000000000000000BB00b0n" \
@@ -518,3 +518,40 @@ zombieFemaleDeadImages.append(pygame.transform.scale(pygame.image.load("Zombie/p
 zombieFemaleDeadImagesLeft=[]
 for image in zombieFemaleDeadImages:
     zombieFemaleDeadImagesLeft.append(pygame.transform.flip(image,True,False))
+
+BossIdleImages0=[]
+BossIdleImages0.append(pygame.transform.scale(pygame.image.load("Boss/0/tile000.png"),(85*2,94*2)).convert_alpha())
+BossIdleImages0.append(pygame.transform.scale(pygame.image.load("Boss/0/tile001.png"),(85*2,94*2)).convert_alpha())
+BossIdleImages0.append(pygame.transform.scale(pygame.image.load("Boss/0/tile002.png"),(85*2,94*2)).convert_alpha())
+BossIdleImages0.append(pygame.transform.scale(pygame.image.load("Boss/0/tile003.png"),(85*2,94*2)).convert_alpha())
+BossIdleImages0.append(pygame.transform.scale(pygame.image.load("Boss/0/tile004.png"),(85*2,94*2)).convert_alpha())
+BossIdleImages0.append(pygame.transform.scale(pygame.image.load("Boss/0/tile005.png"),(85*2,94*2)).convert_alpha())
+BossIdleImages0.append(pygame.transform.scale(pygame.image.load("Boss/0/tile006.png"),(85*2,94*2)).convert_alpha())
+BossIdleImages0.append(pygame.transform.scale(pygame.image.load("Boss/0/tile007.png"),(85*2,94*2)).convert_alpha())
+BossIdleImages0Left=[]
+for image in BossIdleImages0:
+    BossIdleImages0Left.append(pygame.transform.flip(image,True,False))
+BossIdleImages1=[]
+BossIdleImages1.append(pygame.transform.scale(pygame.image.load("Boss/1/tile000.png"),(122*2,110*2)).convert_alpha())
+BossIdleImages1.append(pygame.transform.scale(pygame.image.load("Boss/1/tile001.png"),(122*2,110*2)).convert_alpha())
+BossIdleImages1.append(pygame.transform.scale(pygame.image.load("Boss/1/tile002.png"),(122*2,110*2)).convert_alpha())
+BossIdleImages1.append(pygame.transform.scale(pygame.image.load("Boss/1/tile003.png"),(122*2,110*2)).convert_alpha())
+BossIdleImages1.append(pygame.transform.scale(pygame.image.load("Boss/1/tile004.png"),(122*2,110*2)).convert_alpha())
+BossIdleImages1.append(pygame.transform.scale(pygame.image.load("Boss/1/tile005.png"),(122*2,110*2)).convert_alpha())
+BossIdleImages1.append(pygame.transform.scale(pygame.image.load("Boss/1/tile006.png"),(122*2,110*2)).convert_alpha())
+BossIdleImages1.append(pygame.transform.scale(pygame.image.load("Boss/1/tile007.png"),(122*2,110*2)).convert_alpha())
+BossIdleImages1Left=[]
+for image in BossIdleImages1:
+    BossIdleImages1Left.append(pygame.transform.flip(image,True,False))
+BossIdleImages2=[]
+BossIdleImages2.append(pygame.transform.scale(pygame.image.load("Boss/2/tile000.png"),(87*2,110*2)).convert_alpha())
+BossIdleImages2.append(pygame.transform.scale(pygame.image.load("Boss/2/tile002.png"),(87*2,110*2)).convert_alpha())
+BossIdleImages2.append(pygame.transform.scale(pygame.image.load("Boss/2/tile002.png"),(87*2,110*2)).convert_alpha())
+BossIdleImages2.append(pygame.transform.scale(pygame.image.load("Boss/2/tile003.png"),(87*2,110*2)).convert_alpha())
+BossIdleImages2.append(pygame.transform.scale(pygame.image.load("Boss/2/tile004.png"),(87*2,110*2)).convert_alpha())
+BossIdleImages2.append(pygame.transform.scale(pygame.image.load("Boss/2/tile005.png"),(87*2,110*2)).convert_alpha())
+BossIdleImages2.append(pygame.transform.scale(pygame.image.load("Boss/2/tile006.png"),(87*2,110*2)).convert_alpha())
+BossIdleImages2.append(pygame.transform.scale(pygame.image.load("Boss/2/tile007.png"),(87*2,110*2)).convert_alpha())
+BossIdleImages2Left=[]
+for image in BossIdleImages2:
+    BossIdleImages2Left.append(pygame.transform.flip(image,True,False))
