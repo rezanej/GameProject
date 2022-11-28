@@ -555,3 +555,11 @@ BossIdleImages2.append(pygame.transform.scale(pygame.image.load("Boss/2/tile007.
 BossIdleImages2Left=[]
 for image in BossIdleImages2:
     BossIdleImages2Left.append(pygame.transform.flip(image,True,False))
+FireBallImagesLeft=[]
+FireBallImagesRight=[]
+FireBallImagesLeft.append(pygame.transform.rotate(pygame.transform.scale(pygame.image.load("FireBall/tile000.png"),(32,32)).convert_alpha(),-90))
+FireBallImagesLeft.append(pygame.transform.rotate(pygame.transform.scale(pygame.image.load("FireBall/tile001.png"),(32,32)).convert_alpha(),-90))
+FireBallImagesLeft.append(pygame.transform.rotate(pygame.transform.scale(pygame.image.load("FireBall/tile002.png"),(32,32)).convert_alpha(),-90))
+FireBallImagesLeft.append(pygame.transform.rotate(pygame.transform.scale(pygame.image.load("FireBall/tile003.png"),(32,32)).convert_alpha(),-90))
+for image in FireBallImagesLeft:
+    FireBallImagesRight.append(pygame.transform.flip(image,True,False))

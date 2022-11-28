@@ -3,11 +3,12 @@ import pygame
 from Kunai import Kunai
 import random
 from Setting import  *
+from FireBall import FireBall
 class Boss(pygame.sprite.Sprite):
     def __init__(self,x,y,speed,tileGroup,playerGroup,fightBorderGroup,idle0,idle0Left,idle1,idle1left,idle2,idle2left,kunaiGroup):
         super().__init__()
         self.throw = False
-        self.throwTimer=70
+        self.throwTimer=150
         self.health=200
         self.kunaiGroup=kunaiGroup
         self.idleAnim0 = idle0
@@ -119,12 +120,12 @@ class Boss(pygame.sprite.Sprite):
                 return 0
 
     def throwCheck(self):
-        if self.throwTimer<70:
+        if self.throwTimer<150:
             self.throwTimer+=1
-        if self.throwTimer==70 and self.throw:
+        if self.throwTimer==150 and self.throw:
             self.throwF()
     def throwF(self):
-        self.kunaiGroup.add(Kunai(self.rect.centerx, self.rect.centery, self, self.playerGroup,KunaiSpeed//2))
+        self.kunaiGroup.add(FireBall(self.rect.centerx, self.rect.centery+60, self, self.playerGroup,KunaiSpeed//3))
         self.throwTimer = 0
     def verticalCollision(self):
         for sprite in self.tileGroup.sprites():
@@ -159,8 +160,8 @@ class Boss(pygame.sprite.Sprite):
         if not self.dead:
             self.helthBar = pygame.surface.Surface((self.health / 2, 8))
             self.helthBar.fill((0, 156, 56))
-            self.helthBarRect = self.helthBar.get_rect(topleft=(self.rect.centerx - 69, self.rect.centery - 93))
-            self.helthBarBackground = pygame.rect.Rect(self.rect.left + 15, self.rect.top - 2, 250, 8)
+            self.helthBarRect = self.helthBar.get_rect(topleft=(self.rect.centerx - 119, self.rect.centery - 93))
+            self.helthBarBackground = pygame.rect.Rect(self.rect.left - 35, self.rect.top - 2, 250, 8)
             display.blit(self.helthBar, self.helthBarRect)
             pygame.draw.rect(display, (255, 0, 0), self.helthBarBackground, 2)
 
