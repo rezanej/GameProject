@@ -9,7 +9,6 @@ class Boss(pygame.sprite.Sprite):
         super().__init__()
         self.throw = False
         self.throwTimer=150
-        self.health=200
         self.kunaiGroup=kunaiGroup
         self.idleAnim0 = idle0
         self.idleAnim0left = idle0Left
@@ -31,7 +30,7 @@ class Boss(pygame.sprite.Sprite):
         self.movementLength = 2 * 40
         self.direction.x = 1
         self.animationSpeed = 0.4
-        self.health = 500
+        self.health = 300
         self.dead = False
         self.seenPlayer = True
         self.playerGroup = playerGroup
@@ -158,10 +157,10 @@ class Boss(pygame.sprite.Sprite):
 
     def showHealth(self, display):
         if not self.dead:
-            self.helthBar = pygame.surface.Surface((self.health / 2, 8))
+            self.helthBar = pygame.surface.Surface((self.health, 8))
             self.helthBar.fill((0, 156, 56))
-            self.helthBarRect = self.helthBar.get_rect(topleft=(self.rect.centerx - 119, self.rect.centery - 93))
-            self.helthBarBackground = pygame.rect.Rect(self.rect.left - 35, self.rect.top - 2, 250, 8)
+            self.helthBarRect = self.helthBar.get_rect(topleft=(self.rect.centerx - 139, self.rect.centery - 93))
+            self.helthBarBackground = pygame.rect.Rect(self.rect.left - 55, self.rect.top - 2, 300, 8)
             display.blit(self.helthBar, self.helthBarRect)
             pygame.draw.rect(display, (255, 0, 0), self.helthBarBackground, 2)
 

@@ -27,6 +27,7 @@ class Game():
     def update(self):
         while self.running:
             self.events=pygame.event.get()
+            self.eventsForQuit = self.events.copy()
             for event in self.events:
                 if event.type==pygame.QUIT:
                     self.running=False
@@ -58,6 +59,7 @@ class Game():
                 self.levelTrue[2]=0
                 self.levelTrue[5]=0
             if self.levelTrue[3]==1:
+                self.levelTrue[5]=0
                 self.freeRun.showAUpdate()
             if self.levelTrue[4]==1:
                 self.freeRun=FreeRun.FreeRun(self.display,self.levelTrue)
@@ -77,7 +79,10 @@ class Game():
             if self.levelTrue[7]==1:
                 self.optionMenu.menuLoop(self.events,1)
                 self.events = []
-
+            # game was not able to quit while in menu so i added this
+            for event in self.eventsForQuit:
+                if event.type == pygame.QUIT:
+                    self.running = False
             pygame.display.flip()
             self.clock.tick(Fps)
 

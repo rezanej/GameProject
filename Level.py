@@ -344,16 +344,21 @@ class Level():
         self.font=HudFont
         self.healthText=self.font.render("Health:",True,(255,0,0))
         self.healthTextRect=self.healthText.get_rect(topleft=(20,23))
+        self.staminaText=self.font.render("Stamina:",True,(255,0,0))
+        self.staminaTextRect=self.staminaText.get_rect(topleft=(20,63))
         self.kunaiImage=pygame.transform.scale(pygame.image.load("PlayerImages/Kunai.png"),(16/1.3,80/1.3))
-        self.kunaiImageRect=KunaiImgae.get_rect(topleft=(20,70))
-        self.kunaiText=self.font.render(f": {self.playerGroup.sprite.kunaiNumber}",True,(40,54,67))
-        self.kunaiTextRect=self.kunaiText.get_rect(topleft=(50,85))
-        self.scoreText=self.font.render(f"Score: {self.playerGroup.sprite.score}",True,((40,54,67)))
+        self.kunaiImageRect=KunaiImgae.get_rect(topleft=(20,100))
+        self.kunaiText=self.font.render(f": {self.playerGroup.sprite.kunaiNumber}",True,(76, 139, 50))
+        self.kunaiTextRect=self.kunaiText.get_rect(topleft=(50,125))
+        self.scoreText=self.font.render(f"Score: {self.playerGroup.sprite.score}",True,(76, 139, 50))
         self.scoreTextRect=self.scoreText.get_rect(topleft=(350,23))
     def HelthBar(self):
         self.helthBar=pygame.surface.Surface((200,16))
         self.helthBarRect=self.helthBar.get_rect(topleft=(120,34))
         self.helthBarBackground=pygame.rect.Rect(120,34,200,16)
+        self.staminaBar = pygame.surface.Surface((200, 16))
+        self.staminaBarRect = self.staminaBar.get_rect(topleft=(120, 74))
+        self.staminaBarBackground = pygame.rect.Rect(120, 74, 200, 16)
     def HudBlit(self):
         self.display.blit(self.healthText, self.healthTextRect)
         self.display.blit(self.helthBar,self.helthBarRect)
@@ -361,6 +366,9 @@ class Level():
         self.display.blit(self.kunaiImage,self.kunaiImageRect)
         self.display.blit(self.kunaiText,self.kunaiTextRect)
         self.display.blit(self.scoreText,self.scoreTextRect)
+        self.display.blit(self.staminaText,self.staminaTextRect)
+        self.display.blit(self.staminaBar,self.staminaBarRect)
+        pygame.draw.rect(self.display, (255, 140, 9), self.staminaBarBackground, 3)
         # self.display.blit(self.vintageImage,self.vintageImageRect)
 
     def HudUpdate(self):
@@ -368,8 +376,10 @@ class Level():
             self.playerGroup.sprite.health=0
         self.helthBar=pygame.surface.Surface((self.playerGroup.sprite.health*2,16))
         self.helthBar.fill((152,142,24))
-        self.scoreText = self.font.render(f"Score: {self.playerGroup.sprite.score}", True, ((40, 54, 67)))
-        self.kunaiText = self.font.render(f": {self.playerGroup.sprite.kunaiNumber}", True, (40, 54, 67))
+        self.staminaBar = pygame.surface.Surface((self.playerGroup.sprite.attackStamina*2, 16))
+        self.staminaBar.fill((17, 89, 155))
+        self.scoreText = self.font.render(f"Score: {self.playerGroup.sprite.score}", True, (76, 139, 50))
+        self.kunaiText = self.font.render(f": {self.playerGroup.sprite.kunaiNumber}", True, (76, 139, 50))
     def enemyShowHealth(self):
         for enemy in self.enemyGroup.sprites():
             enemy.showHealth(self.display)

@@ -36,7 +36,7 @@ class FreeRun:
         for tileNum in FreeRunStart:
 
             if tileNum == "1":
-                g=GrassTile(c * 64, r * 64,1)
+                g=GrassTile(c * 64, r * 64,0)
                 self.tiles.add(g)
                 self.t.append(g)
                 self.lastTileY = r*64
@@ -91,7 +91,7 @@ class FreeRun:
                     a = random.choice([0, 1, 2, 3])
                     g =Heart((c+i)*64,(r-1-a)*64,self.playerGroup,20)
                     self.heartGroup.add(g)
-                g=GrassTile((c+i)*64,r*64)
+                g=GrassTile((c+i)*64,r*64,0)
                 self.tiles.add(g)
                 self.t.append(g)
                 count+=1

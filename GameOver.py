@@ -47,6 +47,8 @@ class GameoverMenu():
                     if self.selectedButton==1:
                         self.levelTrue[2]=1
                         self.levelTrue[5]=0
+                        if self.levelTrue[3]==1:
+                            self.levelTrue[4]=1
                     if self.selectedButton==2:
                         self.levelTrue[1]=0
                         self.levelTrue[0]=0

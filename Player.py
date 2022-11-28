@@ -39,6 +39,8 @@ class Player(pygame.sprite.Sprite):
         self.fightBorderWork=False
         self.scrollState=True
         self.rect.height -= 3
+        self.attackStamina=100
+        self.addStaminaTimer=300
     def setDirection(self):
         keys=pygame.key.get_pressed()
         if keys[pygame.K_f] and self.kunaiNumber>0 and self.kunaiTimer==KunaiTimer:
@@ -72,12 +74,19 @@ class Player(pygame.sprite.Sprite):
             if keys[pygame.K_SPACE] and self.onGround:
                 self.jump()
                 self.state="jump"
-            if keys[pygame.K_g]:
+            if keys[pygame.K_g] and self.attackStamina>0:
+                self.attackStamina-=1
                 self.state="attack"
                 self.speed=0
-
+                self.direction.x=0
+    def addStamina(self):
+        self.addStaminaTimer-=1
+        if self.addStaminaTimer==0:
+            self.attackStamina=100
+            self.addStaminaTimer=300
     def update(self,tiles):
         self.tileGroup=tiles
+        self.addStamina()
         if not self.dead:
             self.setDirection()
         self.onGround=False
@@ -190,10 +199,10 @@ class Player(pygame.sprite.Sprite):
             if sprite.dead==False and self.dead==False:
                 if sprite.rect.colliderect(self.rect):
                     if self.reduceEnemyHelathCollistion==0:
-                        if sprite.health>20:
-                            sprite.health-=20
+                        if sprite.health>10:
+                            sprite.health-=10
                             self.die()
-                            self.reduceEnemyHelathCollistion=20
+                            self.reduceEnemyHelathCollistion=200
                         else:
                             pass
                             sprite.dead=True
