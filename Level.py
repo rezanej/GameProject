@@ -38,6 +38,7 @@ class Level():
         self.display=display
         self.x=0
         self.addTiles()
+        self.addKunai()
         self.lastCheckPoint=[0,0]
         self.loadSave()
         self.loadCheckpoint()
@@ -92,6 +93,9 @@ class Level():
         for heart in self.heartGroup:
              if heart.rect.x<self.lastCheckPoint[0]:
                  heart.kill(0)
+        for kunai in self.kunaiGroup:
+             if kunai.rect.x<self.lastCheckPoint[0]:
+                 kunai.kill()
 
     def addTiles(self):
         r,c=0,0
@@ -154,8 +158,15 @@ class Level():
                 self.heartGroup.add(Heart(c*64,r*64,self.playerGroup,20))
             elif tileNum=="o":
                 self.portalGroup.add(Portal.Portal(PortalImages,c*64,r*64,self.playerGroup,self))
-            elif tileNum=="k":
-                self.kunaiGroup.add(Kunai(c*64+20,r*64+50,self.playerGroup.sprite,self.enemyGroup,0,True))
+            c+=1
+    def addKunai(self):
+        r, c = 0, 0
+        for tileNum in LevelMaps[self.currentLevel]:
+            if tileNum=="n":
+                r += 1
+                c = -1
+            elif tileNum == "k":
+                self.kunaiGroup.add(Kunai(c * 64 + 20, r * 64 + 50, self.playerGroup.sprite, self.enemyGroup, 0, True))
             c+=1
     def showAUpdate(self):
         if not self.pause[1] and not self.pause[7]:

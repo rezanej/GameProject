@@ -80,10 +80,10 @@ class Enemy(pygame.sprite.Sprite):
 
     def seenPlayerF(self):
 
-        if abs(self.rect.x - self.playerGroup.sprite.rect.x) < 100 and abs(self.rect.x - self.playerGroup.sprite.rect.x) > 20 and self.rect.x - self.playerGroup.sprite.rect.x <0:
+        if abs(self.rect.x - self.playerGroup.sprite.rect.x) < 200 and abs(self.rect.x - self.playerGroup.sprite.rect.x) > 50 and self.rect.x - self.playerGroup.sprite.rect.x <0:
             self.seenPlayer=True
             return 1
-        elif abs(self.rect.x - self.playerGroup.sprite.rect.x) < 100 and abs(self.rect.x - self.playerGroup.sprite.rect.x) > 20 and self.rect.x -self.playerGroup.sprite.rect.x > 0:
+        elif abs(self.rect.x - self.playerGroup.sprite.rect.x) < 200 and abs(self.rect.x - self.playerGroup.sprite.rect.x) > 50 and self.rect.x -self.playerGroup.sprite.rect.x > 0:
             self.seenPlayer=True
             return -1
         else :

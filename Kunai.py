@@ -42,6 +42,7 @@ class Kunai(pygame.sprite.Sprite):
                 self.kill()
 
     def collectCollition(self):
-        if self.rect.colliderect(self.player):
+
+        if self.rect.colliderect(self.player.rect):
             self.player.kunaiNumber+=1
             self.kill()
