@@ -149,10 +149,10 @@ class Player(pygame.sprite.Sprite):
                         elif self.reduceHelathCollistion > 0:
                             self.reduceHelathCollistion -= 1
 
-                        if self.direction.x > 0:
-                            self.rect.right = sprite.rect.left
-                        if self.direction.x < 0:
-                            self.rect.left = sprite.rect.right
+                        # if self.direction.x > 0:
+                        #     self.rect.right = sprite.rect.left
+                        # if self.direction.x < 0:
+                        #     self.rect.left = sprite.rect.right
                     else:
                         if self.reduceEnemyHelathCollistion == 0:
                             if sprite.health >20:
@@ -210,13 +210,13 @@ class Player(pygame.sprite.Sprite):
                     elif self.reduceEnemyHelathCollistion>0:
                         self.reduceEnemyHelathCollistion-=1
 
-                    if self.direction.y > 0:
-                        self.rect.bottom = sprite.rect.top
-                        self.direction.y = 0
-                        self.onGround=True
-                    elif self.direction.y < 0:
-                        self.rect.top = sprite.rect.bottom
-                        self.direction.y = 0
+                    # if self.direction.y > 0:
+                    #     self.rect.bottom = sprite.rect.top
+                    #     self.direction.y = 0
+                    #     self.onGround=True
+                    # elif self.direction.y < 0:
+                    #     self.rect.top = sprite.rect.bottom
+                    #     self.direction.y = 0
 
     def coinCollision(self):
         if not self.dead:

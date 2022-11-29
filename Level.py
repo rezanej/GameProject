@@ -219,7 +219,7 @@ class Level():
         self.backGroundRect = self.backGround.get_rect()
 
     def scroll(self):
-        if self.playerGroup.sprite.rect.x <WindowWidth/4 and self.playerGroup.sprite.direction.x<0:
+        if self.playerGroup.sprite.rect.x <WindowWidth/3 and self.playerGroup.sprite.direction.x<0:
             self.x+=PlayerSpeed
             self.playerGroup.sprite.speed=0
             for tiles in self.tiles:
@@ -246,7 +246,7 @@ class Level():
                 tiles.rect.x+=PlayerSpeed
             for tiles in self.kunaiGroup:
                 tiles.rect.x+=PlayerSpeed
-        elif self.playerGroup.sprite.rect.x >WindowWidth*(3/4) and self.playerGroup.sprite.direction.x>0:
+        elif self.playerGroup.sprite.rect.x >WindowWidth*(2/3) and self.playerGroup.sprite.direction.x>0:
             self.x-=PlayerSpeed
             self.playerGroup.sprite.speed = 0
             for tiles in self.tiles:
