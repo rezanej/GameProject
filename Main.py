@@ -6,6 +6,7 @@ import Menu
 import FreeRun
 import GameOver
 import OptionMenu
+from End import End
 class Game():
     def __init__(self):
         pygame.init()
@@ -17,13 +18,15 @@ class Game():
         self.events=[]
         # first one for main menu and second one for pause third one for new level forth for free run
         # fifth for new free run sixth one for gameover menu seventh for optionMenu Main 8th for optionMenu from pause
-        self.levelTrue=[0,0,0,0,0,0,0,0]
+        # 9th for The end
+        self.levelTrue=[0,0,0,0,0,0,0,0,0]
         self.freeRun=FreeRun.FreeRun(self.display,self.levelTrue)
         self.level=Level.Level(self.display,self.levelTrue)
         self.menu=Menu.Menu(self.display,self.levelTrue)
         self.pauseMenu=PauseMenu(self.display,self.levelTrue)
         self.gameoverMenu=GameOver.GameoverMenu(self.display,self.levelTrue)
         self.optionMenu=OptionMenu.OptionMenu(self.display,self.levelTrue,self.level)
+        self.end=End(self.display,self.levelTrue)
         pygame.event.set_allowed([pygame.QUIT,pygame.KEYDOWN])
     def update(self):
         while self.running:
@@ -79,6 +82,9 @@ class Game():
                 self.events = []
             if self.levelTrue[7]==1:
                 self.optionMenu.menuLoop(self.events,1)
+                self.events = []
+            if self.levelTrue[8]==1:
+                self.running=self.end.menuLoop(self.events)
                 self.events = []
             # game was not able to quit while in menu so i added this
             for event in self.eventsForQuit:

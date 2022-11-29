@@ -200,7 +200,7 @@ class Player(pygame.sprite.Sprite):
                 if sprite.rect.colliderect(self.rect):
                     if self.reduceEnemyHelathCollistion==0:
                         if sprite.health>10:
-                            sprite.health-=10
+                            sprite.health-=0
                             self.die()
                             self.reduceEnemyHelathCollistion=40
                         else:

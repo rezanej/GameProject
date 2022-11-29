@@ -16,6 +16,7 @@ from os import remove
 from OptionMenu import OptionMenu
 import Portal
 from Zombie import Zombie
+from Dog import Dog
 from Boss import  Boss
 class Level():
     def __init__(self,display,pause):
@@ -127,6 +128,8 @@ class Level():
                 self.treeAndObjectGroup.add(Tile(c*64,r*64,ObjectImages[5]))
             elif tileNum=="5":
                 self.treeAndObjectGroup.add(Tree(TreeImages[5],c*64,r*64+74))
+            elif tileNum=="g":
+                self.treeAndObjectGroup.add(Dog(c*64,r*64,self.playerGroup,self.pause))
             elif tileNum=="d":
                 self.tiles.add(Tile(c*64,r*64,DirtImages[self.currentLevel]))
             elif tileNum=="b":
@@ -180,10 +183,11 @@ class Level():
                 self.kunaiGroup.add(Kunai(c * 64 + 20, r * 64 + 50, self.playerGroup.sprite, self.enemyGroup, 0, True))
             c+=1
     def showAUpdate(self):
-        if not self.pause[1] and not self.pause[7]:
+        if not self.pause[1] and not self.pause[7] :
             self.scroll()
             self.tiles.update()
             self.display.blit(self.backGround,self.backGroundRect)
+            self.treeAndObjectGroup.update()
             self.treeAndObjectGroup.draw(self.display)
             self.tiles.draw(self.display)
             self.subTiles.draw(self.display)
