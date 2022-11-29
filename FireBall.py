@@ -35,7 +35,7 @@ class FireBall(pygame.sprite.Sprite):
     def collition(self):
         for sprite in self.enemies:
             if self.rect.colliderect(sprite):
-                sprite.health-=20
+                sprite.health-=10
                 if sprite.health<=0:
                     sprite.dead=True
                 self.kill()

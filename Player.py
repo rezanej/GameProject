@@ -140,10 +140,10 @@ class Player(pygame.sprite.Sprite):
                     if self.state!="attack":
 
                         if self.reduceHelathCollistion == 0:
-                            if self.health >=10:
-                                self.health -= 20
+                            if self.health >=5:
+                                self.health -= 5
                                 self.die()
-                                self.reduceHelathCollistion = 20
+                                self.reduceHelathCollistion = 120
                             else:
                                 self.die()
                         elif self.reduceHelathCollistion > 0:
@@ -202,7 +202,7 @@ class Player(pygame.sprite.Sprite):
                         if sprite.health>10:
                             sprite.health-=10
                             self.die()
-                            self.reduceEnemyHelathCollistion=200
+                            self.reduceEnemyHelathCollistion=40
                         else:
                             pass
                             sprite.dead=True

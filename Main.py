@@ -24,6 +24,7 @@ class Game():
         self.pauseMenu=PauseMenu(self.display,self.levelTrue)
         self.gameoverMenu=GameOver.GameoverMenu(self.display,self.levelTrue)
         self.optionMenu=OptionMenu.OptionMenu(self.display,self.levelTrue,self.level)
+        pygame.event.set_allowed([pygame.QUIT,pygame.KEYDOWN])
     def update(self):
         while self.running:
             self.events=pygame.event.get()
