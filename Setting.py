@@ -281,7 +281,7 @@ ObjectImages.append(pygame.transform.scale(pygame.image.load("Level1Assets/Objec
 ObjectImages.append(pygame.transform.scale(pygame.image.load("Level2/Objects/DeadBush.png"),(132,74)).convert_alpha())
 ObjectImages.append(pygame.transform.scale(pygame.image.load("Level2/Objects/TombStone (1).png"),(54,55)).convert_alpha())
 ObjectImages.append(pygame.transform.scale(pygame.image.load("Level2/Objects/TombStone (2).png"),(53,76)).convert_alpha())
-
+MusicPath="Music/ANGELS OVER TOKYO.mp3"
 
 Level1TileMap="000000000000000000000000000000000000000000000000000000000ccckCc0000ddddddddddddddd00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000n" \
               "b000000000000000000000000000000000000000000000000000001111111110000ddddddddddddddd0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000BB000khC000000000h000000BB00000000000000000000000n" \

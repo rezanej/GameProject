@@ -68,7 +68,7 @@ class OptionMenu():
                             OptionMenu.PlayMusic = False
                             self.musicText = MenuButtonFont.render("Music : Off", True, MenuButtonTextColor)
                         elif OptionMenu.PlayMusic==False:
-                            pygame.mixer.music.load("Music/NinjaManFightVer(remixAgain1).mp3")
+                            pygame.mixer.music.load(MusicPath)
                             pygame.mixer.music.play()
                             with open("save.txt", "r") as save:
                                 lines = save.readlines()

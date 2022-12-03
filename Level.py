@@ -403,5 +403,5 @@ class Level():
         self.__init__(self.display,self.pause)
     def playMusic(self):
         if OptionMenu.PlayMusic==True:
-            pygame.mixer.music.load("Music/NinjaManFightVer(remixAgain1).mp3")
+            pygame.mixer.music.load(MusicPath)
             pygame.mixer.music.play()
