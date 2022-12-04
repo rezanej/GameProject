@@ -209,10 +209,6 @@ class Level():
             self.fallingFromScreen(self.playerGroup.sprite)
             self.setCheckPoint()
             self.checkGameOver()
-            if self.currentLevel==2:
-                self.night()
-                self.blitNight()
-                self.lightGroup.draw(self.display)
     def initBackGround(self):
 
         self.backGround = BackgroundImages[self.currentLevel]
@@ -387,18 +383,6 @@ class Level():
     def enemyShowHealth(self):
         for enemy in self.enemyGroup.sprites():
             enemy.showHealth(self.display)
-    def vintage(self):
-        self.vintageImage=pygame.transform.scale(pygame.image.load("vintage2.jpg").convert_alpha(),(WindowWidth,WindowHeight))
-        self.vintageImageRect=self.vintageImage.get_rect()
-        alpha = 60
-        self.vintageImage.fill((255, 255, 255, alpha), None, pygame.BLEND_RGBA_MULT)
-    def night(self):
-        self.fog=pygame.surface.Surface((WindowWidth,WindowHeight))
-        self.fog.fill((30,30,30))
-        self.fogRect=self.fog.get_rect(topleft=(0,0))
-
-    def blitNight(self):
-        self.display.blit(self.fog,self.fogRect,special_flags=pygame.BLEND_MULT)
     def reset(self):
         self.__init__(self.display,self.pause)
     def playMusic(self):
