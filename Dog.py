@@ -37,4 +37,6 @@ class Dog(pygame.sprite.Sprite):
     def collition(self):
         if self.rect.colliderect(self.playerGroup.sprite):
             self.levelTrue[8]=True
-            self.playerGroup.sprite.speed=0
+            self.playerGroup.sprite.fightBorderWork=True
+            self.speed=0
+            self.animationSpeed=0

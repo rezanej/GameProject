@@ -129,7 +129,7 @@ class Level():
             elif tileNum=="5":
                 self.treeAndObjectGroup.add(Tree(TreeImages[5],c*64,r*64+74))
             elif tileNum=="g":
-                self.treeAndObjectGroup.add(Dog(c*64,r*64,self.playerGroup,self.pause))
+                self.treeAndObjectGroup.add(Dog(c*64,r*64+5,self.playerGroup,self.pause))
             elif tileNum=="d":
                 self.tiles.add(Tile(c*64,r*64,DirtImages[self.currentLevel]))
             elif tileNum=="b":
