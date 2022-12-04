@@ -8,7 +8,6 @@ from GrassTile import *
 from Tree import *
 from Tile import *
 from Enemy import *
-from Light import Light
 from Coin import Coin
 from Heart import Heart
 from NinjaGirl import NinjaGirl
@@ -159,8 +158,6 @@ class Level():
             elif tileNum=="z":
                 self.enemyGroup.add(Zombie(c * 64, r * 64, DogSpeed, self.tiles, self.playerGroup, self.fightBorder,zombieFemaleIdleImages \
                                            , zombieFemaleWalkImages, zombieFemaleDeadImages, zombieFemaleIdleImagesLeft,zombieFemaleWalkImagesLeft, zombieFemaleDeadImagesLeft))
-            elif tileNum=="L":
-                self.lightGroup.add(Light(c*64,r*64,1))
             elif tileNum=="P":
                 self.treeAndObjectGroup.add(Tree(TreeImages[2], c * 64, r * 64 + 74))
                 self.checkpoints.add(Tile(c*64,r*64,DirtImages[0]))

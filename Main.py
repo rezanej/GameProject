@@ -11,8 +11,9 @@ class Game():
     def __init__(self):
         pygame.init()
         self.display=Display
-        pygame.display.set_caption("Swordman")
+        pygame.display.set_caption("Revenge Of The NinjaMan")
         # icon will be added here
+        pygame.display.set_icon(PlayerIdleImages[0])
         self.clock=pygame.time.Clock()
         self.running=True
         self.events=[]
