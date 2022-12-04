@@ -343,7 +343,7 @@ class Level():
         self.healthTextRect=self.healthText.get_rect(topleft=(20,23))
         self.staminaText=self.font.render("Stamina:",True,(255,0,0))
         self.staminaTextRect=self.staminaText.get_rect(topleft=(20,63))
-        self.kunaiImage=pygame.transform.scale(pygame.image.load("PlayerImages/Kunai.png"),(16/1.3,80/1.3))
+        self.kunaiImage=pygame.transform.scale(pygame.image.load("Data/PlayerImages/Kunai.png"), (16 / 1.3, 80 / 1.3))
         self.kunaiImageRect=KunaiImgae.get_rect(topleft=(20,100))
         self.kunaiText=self.font.render(f": {self.playerGroup.sprite.kunaiNumber}",True,(76, 139, 50))
         self.kunaiTextRect=self.kunaiText.get_rect(topleft=(50,125))
