@@ -142,10 +142,6 @@ class FreeRun:
             self.HudUpdate()
             self.checkGameOver()
             self.addScore()
-
-            # self.night()
-            # self.blitNight()
-            # self.lightGroup.draw(self.display)
     def initBackGround(self):
 
         self.backGround = BackgroundImages[CurrentLevel]
@@ -186,7 +182,6 @@ class FreeRun:
         self.display.blit(self.helthBar,self.helthBarRect)
         pygame.draw.rect(self.display,(255,140,9),self.helthBarBackground,3)
         self.display.blit(self.scoreText, self.scoreTextRect)
-        # self.display.blit(self.vintageImage,self.vintageImageRect)
 
     def HudUpdate(self):
         if self.playerGroup.sprite.health<=0:
@@ -194,18 +189,7 @@ class FreeRun:
         self.helthBar=pygame.surface.Surface((self.playerGroup.sprite.health*2,16))
         self.scoreText = self.font.render(f"Score: {int(self.playerGroup.sprite.score)}", True, ((40, 54, 67)))
 
-    def vintage(self):
-        self.vintageImage=pygame.transform.scale(pygame.image.load("vintage2.jpg").convert_alpha(),(WindowWidth,WindowHeight))
-        self.vintageImageRect=self.vintageImage.get_rect()
-        alpha = 60
-        self.vintageImage.fill((255, 255, 255, alpha), None, pygame.BLEND_RGBA_MULT)
-    def night(self):
-        self.fog=pygame.surface.Surface((WindowWidth,WindowHeight))
-        self.fog.fill((30,30,30))
-        self.fogRect=self.fog.get_rect(topleft=(0,0))
 
-    def blitNight(self):
-        self.display.blit(self.fog,self.fogRect,special_flags=pygame.BLEND_MULT)
     def reset(self):
         self.__init__(self.display,self.pause)
     def checkGameOver(self):

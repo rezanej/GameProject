@@ -37,7 +37,6 @@ class Player(pygame.sprite.Sprite):
         self.reduceHelathCollistion=0
         self.reduceEnemyHelathCollistion=0
         self.fightBorderWork=False
-        self.scrollState=True
         self.rect.height -= 3
         self.attackStamina=100
         self.addStaminaTimer=300
@@ -233,9 +232,6 @@ class Player(pygame.sprite.Sprite):
     def checkJump(self):
         if self.direction.y <0:
             self.state="jump"
-    # def verticalMovement(self):
-    #     self.direction.y+=4
-    #     self.rect.y+=self.direction.y
     def animate(self):
         if self.state=="idle":
             if not self.left:
@@ -321,6 +317,7 @@ class Player(pygame.sprite.Sprite):
             self.rect.left += 40
     def checkFreeRun(self):
         if len(self.borderGroup.sprites())==0:
+            self.gravity-=0.3
             return True
         return False
 
