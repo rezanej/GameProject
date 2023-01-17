@@ -10,6 +10,15 @@ class Enemy(pygame.sprite.Sprite):
         self.idleAnimL=idleAnimL
         self.runAnimL=runAnimL
         self.deadAnimL=deadAnimL
+
+        # T 's are for changing after freeze
+        self.idleAnimT=idleAnim.copy()
+        self.runAnimT=runAnim.copy()
+        self.deadAnimT=deadAnim.copy()
+        self.idleAnimLT=idleAnimL.copy()
+        self.runAnimLT=runAnimL.copy()
+        self.deadAnimLT=deadAnimL.copy()
+
         self.image = self.idleAnim[0]
         self.rect = self.image.get_rect(topleft=(x, y))
         self.direction = pygame.math.Vector2()
@@ -33,6 +42,10 @@ class Enemy(pygame.sprite.Sprite):
         self.once=False
         self.once1=True
         self.rect.height -= 5
+
+        self.freeze=False
+        self.freezeOnce=False
+        self.freezeImage=0
     def chekcIdle(self):
         if self.once1:
             if self.idleTimer>0:
@@ -112,27 +125,38 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.centery += self.direction.y
 
     def animate(self):
-        if self.state=="idle":
-            if self.currentimageNum>=len(self.idleAnim)-2:
-                self.currentimageNum=0
-            if not self.left:
-                self.image=self.idleAnim[int(self.currentimageNum)]
-            elif self.left:
-                self.image =self.idleAnimL[int(self.currentimageNum)]
-            self.currentimageNum += self.animationSpeed
-        if self.state=="run":
-            if self.currentimageNum>=len(self.runAnim)-2:
-                self.currentimageNum=0
-            if self.direction.x > 0:
-                self.left=False
-                self.image=self.runAnim[int(self.currentimageNum)]
-            if self.direction.x < 0:
-                self.left = True
-                self.image=self.runAnimL[int(self.currentimageNum)]
-            self.currentimageNum += self.animationSpeed
+        if not self.freeze:
+            if self.state=="idle":
+                if self.currentimageNum>=len(self.idleAnim)-2:
+                    self.currentimageNum=0
+                if not self.left:
+                    self.image=self.idleAnim[int(self.currentimageNum)]
+                elif self.left:
+                    self.image =self.idleAnimL[int(self.currentimageNum)]
+                self.currentimageNum += self.animationSpeed
+            if self.state=="run":
+                if self.currentimageNum>=len(self.runAnim)-2:
+                    self.currentimageNum=0
+                if self.direction.x > 0:
+                    self.left=False
+                    self.image=self.runAnim[int(self.currentimageNum)]
+                if self.direction.x < 0:
+                    self.left = True
+                    self.image=self.runAnimL[int(self.currentimageNum)]
+                self.currentimageNum += self.animationSpeed
+        elif not self.freezeOnce:
+            self.tempImage=self.image.copy()
+            colorImage = pygame.Surface(self.image.get_size()).convert_alpha()
+            color = pygame.Color(0)
+            color.hsla = (200, 100, 60, 100)
+            colorImage.fill(color)
+            self.tempImage.blit(colorImage, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
+            self.image=self.tempImage
+            self.freezeOnce=True
 
     def horizontalMovement(self):
-        self.rect.x += self.direction.x * self.speed
+        if not self.freeze:
+            self.rect.x += self.direction.x * self.speed
 
     def showHealth(self,display):
         if not self.dead:

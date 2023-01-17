@@ -37,6 +37,7 @@ class Level():
         self.checkpoints=pygame.sprite.Group()
         self.heartGroup=pygame.sprite.Group()
         self.portalGroup=pygame.sprite.Group()
+        self.iceGroup=pygame.sprite.Group()
         self.display=display
         self.x=0
         self.addTiles()
@@ -61,6 +62,7 @@ class Level():
                 self.playerGroup.sprite.score = int(SaveFile.readline())
                 self.playerGroup.sprite.kunaiNumber = int(SaveFile.readline())
                 self.playerGroup.sprite.health = int(SaveFile.readline())
+                self.playerGroup.sprite.iceSpellNumber = int(SaveFile.readline())
                 if int(SaveFile.readline())==0:
                     OptionMenu.PlayMusic=False
                 else :OptionMenu.PlayMusic=True
@@ -107,7 +109,7 @@ class Level():
                 self.tiles.add(GrassTile(c*64,r*64,self.currentLevel))
             elif tileNum=="p":
                 self.playerGroup.add(Player(c*64,r*64,self.tiles,self.kunaiGroup,self.borderGroup,self.enemyGroup,\
-                                            self.coinGroup,self.fightBorder,self.checkpoints,self.heartGroup))
+                                            self.coinGroup,self.fightBorder,self.checkpoints,self.heartGroup,self.iceGroup))
             elif tileNum=="n":
                 r+=1
                 c=-1
@@ -169,6 +171,7 @@ class Level():
                 self.heartGroup.add(Heart(c*64,r*64,self.playerGroup,20))
             elif tileNum=="o":
                 self.portalGroup.add(Portal.Portal(PortalImages,c*64,r*64,self.playerGroup,self))
+
             c+=1
     def addKunai(self):
         r, c = 0, 0
@@ -178,6 +181,8 @@ class Level():
                 c = -1
             elif tileNum == "k":
                 self.kunaiGroup.add(Kunai(c * 64 + 20, r * 64 + 50, self.playerGroup.sprite, self.enemyGroup, 0, True))
+            elif tileNum=="s":
+                self.kunaiGroup.add(IceSpell(c*64+20,r*64+40,self.playerGroup.sprite,self.enemyGroup,0,True))
             c+=1
     def showAUpdate(self):
         if not self.pause[1] and not self.pause[7] :
@@ -196,6 +201,8 @@ class Level():
             self.coinGroup.draw(self.display)
             self.enemyGroup.update()
             self.enemyGroup.draw(self.display)
+            self.iceGroup.update()
+            self.iceGroup.draw(self.display)
             self.heartGroup.update()
             self.heartGroup.draw(self.display)
             self.portalGroup.update(self)
@@ -239,6 +246,8 @@ class Level():
                 tiles.rect.x+=PlayerSpeed
             for tiles in self.kunaiGroup:
                 tiles.rect.x+=PlayerSpeed
+            for tiles in self.iceGroup:
+                tiles.rect.x += PlayerSpeed
         elif self.playerGroup.sprite.rect.x >WindowWidth*(2/3) and self.playerGroup.sprite.direction.x>0:
             self.x-=PlayerSpeed
             self.playerGroup.sprite.speed = 0
@@ -266,6 +275,8 @@ class Level():
                 tiles.rect.x-=PlayerSpeed
             for tiles in self.kunaiGroup:
                 tiles.rect.x-=PlayerSpeed
+            for tiles in self.iceGroup:
+                tiles.rect.x -= PlayerSpeed
         else:
             self.playerGroup.sprite.speed=PlayerSpeed
     def setCheckPoint(self):
@@ -292,10 +303,12 @@ class Level():
             SaveFile.write(f"{self.playerGroup.sprite.kunaiNumber}")
             SaveFile.write("\n")
             SaveFile.write(f"{self.playerGroup.sprite.health}\n")
+            SaveFile.write(f"{self.playerGroup.sprite.iceSpellNumber}\n")
             if OptionMenu.PlayMusic:
                 SaveFile.write("1")
             else:
                 SaveFile.write("0")
+
 
     def fallingFromScreen(self,player):
         if player.rect.top > WindowHeight:
@@ -337,6 +350,8 @@ class Level():
             tiles.rect.x += x
         for tiles in self.kunaiGroup:
             tiles.rect.x += x
+        for tiles in self.iceGroup:
+            tiles.rect.x+=x
     def HudInit(self):
         self.font=HudFont
         self.healthText=self.font.render("Health:",True,(255,0,0))
@@ -345,8 +360,12 @@ class Level():
         self.staminaTextRect=self.staminaText.get_rect(topleft=(20,63))
         self.kunaiImage=pygame.transform.scale(pygame.image.load("Data/PlayerImages/Kunai.png"), (16 / 1.3, 80 / 1.3))
         self.kunaiImageRect=KunaiImgae.get_rect(topleft=(20,100))
-        self.kunaiText=self.font.render(f": {self.playerGroup.sprite.kunaiNumber}",True,(76, 139, 50))
-        self.kunaiTextRect=self.kunaiText.get_rect(topleft=(50,125))
+        self.kunaiText = self.font.render(f": {self.playerGroup.sprite.kunaiNumber}", True, (76, 139, 50))
+        self.kunaiTextRect = self.kunaiText.get_rect(topleft=(50, 125))
+        self.iceSpellImage = pygame.transform.scale(pygame.image.load("Data/spells/tile059.png"), (64/2,64/2))
+        self.iceSpellImageRect = self.iceSpellImage.get_rect(topleft=(15, 200))
+        self.iceSpellText = self.font.render(f": {self.playerGroup.sprite.iceSpellNumber}", True, (76, 139, 50))
+        self.iceSpellTextRect = self.iceSpellText.get_rect(topleft=(50, 200))
         self.scoreText=self.font.render(f"Score: {self.playerGroup.sprite.score}",True,(76, 139, 50))
         self.scoreTextRect=self.scoreText.get_rect(topleft=(350,23))
     def HelthBar(self):
@@ -361,6 +380,8 @@ class Level():
         self.display.blit(self.helthBar,self.helthBarRect)
         pygame.draw.rect(self.display,(255,140,9),self.helthBarBackground,3)
         self.display.blit(self.kunaiImage,self.kunaiImageRect)
+        self.display.blit(self.iceSpellImage,self.iceSpellImageRect)
+        self.display.blit(self.iceSpellText,self.iceSpellTextRect)
         self.display.blit(self.kunaiText,self.kunaiTextRect)
         self.display.blit(self.scoreText,self.scoreTextRect)
         self.display.blit(self.staminaText,self.staminaTextRect)
@@ -377,6 +398,7 @@ class Level():
         self.staminaBar.fill((17, 89, 155))
         self.scoreText = self.font.render(f"Score: {self.playerGroup.sprite.score}", True, (76, 139, 50))
         self.kunaiText = self.font.render(f": {self.playerGroup.sprite.kunaiNumber}", True, (76, 139, 50))
+        self.iceSpellText = self.font.render(f": {self.playerGroup.sprite.iceSpellNumber}", True, (76, 139, 50))
     def enemyShowHealth(self):
         for enemy in self.enemyGroup.sprites():
             enemy.showHealth(self.display)

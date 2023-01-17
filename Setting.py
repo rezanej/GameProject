@@ -6,7 +6,7 @@ pygame.init()
 WindowWidth=64*20 #temporary
 WindowHeight=64*10 #temporary
 #Display is her cause convert alpha needs it
-Display=pygame.display.set_mode((WindowWidth,WindowHeight),flags=pygame.SCALED|pygame.FULLSCREEN,vsync=1)
+Display=pygame.display.set_mode((WindowWidth,WindowHeight),flags=pygame.SCALED,vsync=1)
 Fps=60
 CurrentLevel=0
 PlayerSpeed=5
@@ -16,6 +16,7 @@ PlayerJumpSpeed=30
 Gravity=2
 KunaiSpeed=30
 StartKunai=40
+StartIceSpell=10
 KunaiLifetime=4
 KunaiTimer=20
 BackgroundImages=[]
@@ -290,7 +291,7 @@ Level1TileMap="000000000000000000000000000000000000000000000000000000000ccckCc00
               "b000000000000000BB00000000000BB00000000000000000000001ddddddddd1000ddddddddddddddd00BB00000000000kh00000000000000BB000000000000000000000000000000000kC00000000000000000000000000000000000000BB0001111000000111100000BB00000000000000000000000n" \
               "b000000000000000BB00000000000BB0000000000000000000001dddddddddd0000ddddddddddddddd00BB0000000000C1110000000000000BB00000000000000000000000000000BB00111000h00000000000000BB00000000000000000BB000000000000000000cc00BB0000000000000000b000000n" \
               "b000000000000000BB00000000000BB000000000000000000001ddddddddddd0000ddddddd00dddddd00BB000000000010000000000000000BB00000000000000000000Ch00C0000BB00000001110000000000000BB00000000000000000BB00CCh00N0TCC0tcc000000BB0000000000000000b000000n" \
-              "b00pPT0Tkr000000BB000jTD0ccT0BB00000000TePrT00k0001dddddddddddd0001dddddd000ckc00d00BB000000000000000000000000000BB00000000000000000CC0000000000BB00000000000000000000000BB00000000000000000111111111111111111111111111000000000000000b000000n" \
+              "b00pPTsTkr000000BB000jTD0ccT0BB00000000TePrT00k0001dddddddddddd0001dddddd000ckc00d00BB000000000000000000000000000BB00000000000000000CC0000000000BB00000000000000000000000BB00000000000000000111111111111111111111111111000000000000000b000000n" \
               "11111111110000Ck11111111111111100t0000111111111111ddddddddddddd0000dddddd00dddddd000BBr0t0T0acT0T0ca00Tt0Tc00T000BB0000000000CC00011111001110000BBcc0T0D0a00T00CCe00tT0C0BB00000000000000011ddddddddddddddddddddddddddd11100Pccjccko00b000000n" \
               "dddddddddd0c0c1100000000000000011111C000c00c0cc0ddddddddddddddd00000000CCCCCCCC000P11111111111111111111111111111111rPchccc00111100ddddd00000C1111111111111111111111111111100P0jcchh0k01111dddddddddddddddddddddddddddddddd1111111111111111110n" \
               "dddddddddd1111wwwwwwwwwwwwwwwwwwwwww111111111111ddddddddddddddd0001111111111111111111wwwwwwwwwwwwwwwwwwwwwwwwwwww11111110011100000dddd000dddddd000000000000000000000000000111111111111dddddddddddddddddddddddddddddddddddddddddddddddddddddddn" \
@@ -575,3 +576,12 @@ DogImagesRight.append(pygame.transform.scale(pygame.image.load("Data/PlayerDog/d
 DogImagesRight.append(pygame.transform.scale(pygame.image.load("Data/PlayerDog/dog.png_5.png"), (153 / 2, 138 / 2)).convert_alpha())
 for image in DogImagesRight:
     DogImagesLeft.append(pygame.transform.flip(image,True,False))
+
+
+FreezeIceImages=[]
+FreezeIceImages.append(pygame.transform.scale(pygame.image.load("Data/FreezeIceAnimation/tile008.png"),(64,64)).convert_alpha())
+FreezeIceImages.append(pygame.transform.scale(pygame.image.load("Data/FreezeIceAnimation/tile009.png"),(64,64)).convert_alpha())
+FreezeIceImages.append(pygame.transform.scale(pygame.image.load("Data/FreezeIceAnimation/tile010.png"),(64,64)).convert_alpha())
+FreezeIceImages.append(pygame.transform.scale(pygame.image.load("Data/FreezeIceAnimation/tile011.png"),(64,64)).convert_alpha())
+
+IceSpellImage=pygame.transform.scale(pygame.image.load("Data/spells/tile059.png"),(32,32)).convert_alpha()

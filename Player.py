@@ -1,11 +1,11 @@
 import pygame
 from Setting import *
 from Kunai import *
-
+from IceSpell import IceSpell
 class Player(pygame.sprite.Sprite):
     def __init__(self,x,y,tileGroup,kunaiGroup=pygame.sprite.Group(),bordergroup=pygame.sprite.Group(),\
                  enemyGroup=pygame.sprite.Group(),coinGroup=pygame.sprite.Group(),fightBorder=pygame.sprite.Group(),\
-                 checkpoints=pygame.sprite.Group(),heartGroup=pygame.sprite.Group):
+                 checkpoints=pygame.sprite.Group(),heartGroup=pygame.sprite.Group,iceGroup=pygame.sprite.Group):
         super().__init__()
         self.image=PlayerImage
         self.rect=self.image.get_rect(topleft=(x,y))
@@ -18,6 +18,7 @@ class Player(pygame.sprite.Sprite):
         self.fightBorder=fightBorder
         self.checkpoints=checkpoints
         self.heartGroup=heartGroup
+        self.iceGroup=iceGroup
         self.jumpSpeed=PlayerJumpSpeed
         self.speed=PlayerSpeed
         self.gravity=Gravity
@@ -25,6 +26,7 @@ class Player(pygame.sprite.Sprite):
         self.throw=False
         self.currentimageNum=0
         self.kunaiNumber=StartKunai
+        self.iceSpellNumber=StartIceSpell
         self.kunaiTimer=KunaiTimer
         self.left=False
         self.onGround=False
@@ -45,6 +47,15 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_f] and self.kunaiNumber>0 and self.kunaiTimer==KunaiTimer:
             self.kunaiGroup.add(Kunai(self.rect.centerx,self.rect.centery,self,self.enemyGroup,KunaiSpeed))
             self.kunaiNumber-=1
+            self.kunaiTimer=0
+            self.state="throw"
+            self.throw=True
+            self.speed=0
+            self.direction.x=0
+            self.currentimageNum=0
+        if keys[pygame.K_e] and self.kunaiNumber>0 and self.kunaiTimer==KunaiTimer:
+            self.kunaiGroup.add(IceSpell(self.rect.centerx,self.rect.centery,self,self.enemyGroup,KunaiSpeed,iceGroup=self.iceGroup))
+            self.iceSpellNumber-=1
             self.kunaiTimer=0
             self.state="throw"
             self.throw=True
