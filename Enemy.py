@@ -168,12 +168,13 @@ class Enemy(pygame.sprite.Sprite):
             pygame.draw.rect(display,(255,0,0),self.helthBarBackground,2)
     def update(self):
         if not self.dead:
-            self.chekcIdle()
-            self.setDirection()
-            self.horizontalMovement()
-            self.horizontalCollision()
-            self.gravityFun()
-            self.verticalCollision()
+            if not self.freeze:  # for enemies like ninjagirl to not throw while frozen
+                self.chekcIdle()
+                self.setDirection()
+                self.horizontalMovement()
+                self.horizontalCollision()
+                self.gravityFun()
+                self.verticalCollision()
             self.animate()
         else:
             self.die()
