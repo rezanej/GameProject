@@ -4,6 +4,7 @@ import random
 class Enemy(pygame.sprite.Sprite):
     def __init__(self,x,y,speed,tileGroup,playerGroup,fightBorderGroup,idleAnim,runAnim,deadAnim,idleAnimL,runAnimL,deadAnimL):
         super().__init__()
+        self.type= "simple"
         self.idleAnim=idleAnim
         self.runAnim=runAnim
         self.deadAnim=deadAnim

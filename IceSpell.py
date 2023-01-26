@@ -41,9 +41,10 @@ class IceSpell(pygame.sprite.Sprite):
         for sprite in self.enemies:
             if self.rect.colliderect(sprite):
                 sprite.health-=20
-                sprite.freeze=True
                 self.colidedSprite=sprite
-                self.iceGroup.add(Ice.Ice(sprite.rect.x,sprite.rect.y,FreezeIceImages,sprite))
+                if sprite.type!="boss":
+                    sprite.freeze=True
+                    self.iceGroup.add(Ice.Ice(sprite.rect.x,sprite.rect.y,FreezeIceImages,sprite))
                 if sprite.health<=0:
                     sprite.dead=True
                 self.kill()

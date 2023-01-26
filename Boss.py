@@ -7,6 +7,7 @@ from FireBall import FireBall
 class Boss(pygame.sprite.Sprite):
     def __init__(self,x,y,speed,tileGroup,playerGroup,fightBorderGroup,idle0,idle0Left,idle1,idle1left,idle2,idle2left,kunaiGroup):
         super().__init__()
+        self.type="boss"
         self.throw = False
         self.throwTimer=150
         self.kunaiGroup=kunaiGroup
@@ -124,7 +125,7 @@ class Boss(pygame.sprite.Sprite):
         if self.throwTimer==150 and self.throw:
             self.throwF()
     def throwF(self):
-        self.kunaiGroup.add(FireBall(self.rect.centerx, self.rect.centery+60, self, self.playerGroup,KunaiSpeed//3))
+        self.kunaiGroup.add(FireBall(self.rect.centerx, self.rect.centery+60, self, self.playerGroup,KunaiSpeed//3,FireBallImagesLeft,FireBallImagesRight))
         self.throwTimer = 0
     def verticalCollision(self):
         for sprite in self.tileGroup.sprites():

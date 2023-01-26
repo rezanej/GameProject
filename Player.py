@@ -1,4 +1,6 @@
 import pygame
+
+import FireBall
 from Setting import *
 from Kunai import *
 from IceSpell import IceSpell
@@ -42,10 +44,26 @@ class Player(pygame.sprite.Sprite):
         self.rect.height -= 3
         self.attackStamina=100
         self.addStaminaTimer=300
+        self.combatMode=2
+
     def setDirection(self):
         keys=pygame.key.get_pressed()
+        if keys[pygame.K_1]:
+            self.combatMode=1
+        elif keys[pygame.K_2]:
+            self.combatMode = 2
+        elif keys[pygame.K_3]:
+            self.combatMode = 3
+
         if keys[pygame.K_f] and self.kunaiNumber>0 and self.kunaiTimer==KunaiTimer:
-            self.kunaiGroup.add(Kunai(self.rect.centerx,self.rect.centery,self,self.enemyGroup,KunaiSpeed))
+            if self.combatMode==1:
+                self.kunaiGroup.add(Kunai(self.rect.centerx,self.rect.centery,self,self.enemyGroup,KunaiSpeed))
+            elif self.combatMode==2:
+                self.kunaiGroup.add(FireBall.FireBall(self.rect.centerx,self.rect.centery,self,self.enemyGroup,KunaiSpeed,BlueFireImagesLeft,BlueFireImages,1))
+                self.kunaiNumber-=2 # decreasing 3 , 2 here 1 in a few lines belower
+            elif self.combatMode==3:
+                self.kunaiGroup.add(FireBall.FireBall(self.rect.centerx,self.rect.centery,self,self.enemyGroup,KunaiSpeed,BlueFireImagesLeft,BlueFireImages))
+                self.kunaiNumber-=1 # decreacing 2 ,....
             self.kunaiNumber-=1
             self.kunaiTimer=0
             self.state="throw"
@@ -53,7 +71,7 @@ class Player(pygame.sprite.Sprite):
             self.speed=0
             self.direction.x=0
             self.currentimageNum=0
-        elif keys[pygame.K_e] and self.iceSpellNumber>0 and self.kunaiTimer==KunaiTimer:
+        elif keys[pygame.K_e] and self.iceSpellNumber>0 and self.kunaiTimer==KunaiTimer and self.combatMode==3:
             self.kunaiGroup.add(IceSpell(self.rect.centerx,self.rect.centery,self,self.enemyGroup,KunaiSpeed,iceGroup=self.iceGroup))
             self.iceSpellNumber-=1
             self.kunaiTimer=0
@@ -305,6 +323,21 @@ class Player(pygame.sprite.Sprite):
                 else:
                     self.image=PlayerDeadImages[int(self.currentimageNum)]
                     self.currentimageNum+=self.animationSpeed
+
+        if self.combatMode==1:
+            pass
+        elif self.combatMode==2:
+            self.changeColor(0)
+        elif self.combatMode==3:
+            self.changeColor(220)
+    def changeColor(self,hue):
+        self.tempImage = self.image.copy()
+        colorImage = pygame.Surface(self.image.get_size()).convert_alpha()
+        color = pygame.Color(0)
+        color.hsla = (hue, 100, 60, 100)
+        colorImage.fill(color)
+        self.tempImage.blit(colorImage, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
+        self.image = self.tempImage
 
     def kunaiTiming(self):
         if self.kunaiTimer<KunaiTimer:

@@ -123,6 +123,18 @@ KunaiImgae=pygame.transform.rotate(pygame.transform.scale(pygame.image.load("Dat
 KunaiImgae=pygame.transform.flip(KunaiImgae,True,False)
 KunaiImgaeLeft=pygame.transform.rotate(pygame.transform.scale(pygame.image.load("Data/PlayerImages/Kunai.png"), (32 / 4, 160 / 4)), 90).convert_alpha()
 
+BlueFireImages=[]
+BlueFireImages.append(pygame.transform.rotate(pygame.transform.scale(pygame.image.load("Data/Fire/BlueFire0.png"), (192/4,292/4)),90).convert_alpha())
+BlueFireImages.append(pygame.transform.rotate(pygame.transform.scale(pygame.image.load("Data/Fire/BlueFire1.png"), (192/4,292/4)),90).convert_alpha())
+BlueFireImages.append(pygame.transform.rotate(pygame.transform.scale(pygame.image.load("Data/Fire/BlueFire2.png"), (192/4,292/4)),90).convert_alpha())
+BlueFireImages.append(pygame.transform.rotate(pygame.transform.scale(pygame.image.load("Data/Fire/BlueFire3.png"), (192/4,292/4)),90).convert_alpha())
+BlueFireImages.append(pygame.transform.rotate(pygame.transform.scale(pygame.image.load("Data/Fire/BlueFire4.png"), (192/4,292/4)),90).convert_alpha())
+BlueFireImages.append(pygame.transform.rotate(pygame.transform.scale(pygame.image.load("Data/Fire/BlueFire5.png"), (192/4,292/4)),90).convert_alpha())
+BlueFireImages.append(pygame.transform.rotate(pygame.transform.scale(pygame.image.load("Data/Fire/BlueFire6.png"), (192/4,292/4)),90).convert_alpha())
+BlueFireImages.append(pygame.transform.rotate(pygame.transform.scale(pygame.image.load("Data/Fire/BlueFire7.png"), (192/4,292/4)),90).convert_alpha())
+BlueFireImagesLeft=[]
+for image in BlueFireImages:
+    BlueFireImagesLeft.append(pygame.transform.flip(image,True,False))
 DogIdleImages=[]
 
 DogIdleImages.append(pygame.transform.scale(pygame.image.load("Data/dog/Idle (1).png"), (547 / 7, 481 / 7)).convert_alpha())
