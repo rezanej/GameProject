@@ -44,7 +44,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.height -= 3
         self.attackStamina=100
         self.addStaminaTimer=300
-        self.combatMode=2
+        self.combatMode=1
         self.doubleJumpTimer=0
         self.canDoubleJump=False
     def setDirection(self):

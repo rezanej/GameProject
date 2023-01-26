@@ -17,6 +17,7 @@ import Portal
 from Zombie import Zombie
 from Dog import Dog
 from Boss import  Boss
+from Flame import Flame
 class Level():
     def __init__(self,display,pause):
         self.currentLevel=0
@@ -48,6 +49,7 @@ class Level():
         self.HudInit()
         self.HelthBar()
         self.playMusic()
+        self.flame=Flame(500,500)
     def setLevel(self):
         if exists("save.txt"):
             with  open("save.txt", "r") as SaveFile:
@@ -195,6 +197,13 @@ class Level():
             self.subTiles.draw(self.display)
             self.kunaiGroup.update()
             self.kunaiGroup.draw(self.display)
+            if self.playerGroup.sprite.combatMode==2:
+                self.FlameUpdate()
+                self.flame.draw(self.display,2)
+            elif self.playerGroup.sprite.combatMode==3:
+                self.FlameUpdate()
+                self.flame.draw(self.display,3)
+
             self.playerGroup.update(self.tiles) # self.tiles are for falling problem in freeRun
             self.playerGroup.draw(self.display)
             self.coinGroup.update()
@@ -207,6 +216,8 @@ class Level():
             self.heartGroup.draw(self.display)
             self.portalGroup.update(self)
             self.portalGroup.draw(self.display)
+
+
             self.HudUpdate()
             self.HudBlit()
             self.enemyShowHealth()
@@ -352,6 +363,10 @@ class Level():
             tiles.rect.x += x
         for tiles in self.iceGroup:
             tiles.rect.x+=x
+
+    def FlameUpdate(self):
+        self.flame.x=self.playerGroup.sprite.rect.centerx+5
+        self.flame.y=self.playerGroup.sprite.rect.centery
     def HudInit(self):
         self.font=HudFont
         self.healthText=self.font.render("Health:",True,(255,0,0))
