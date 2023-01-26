@@ -45,7 +45,8 @@ class Player(pygame.sprite.Sprite):
         self.attackStamina=100
         self.addStaminaTimer=300
         self.combatMode=2
-
+        self.doubleJumpTimer=0
+        self.canDoubleJump=False
     def setDirection(self):
         keys=pygame.key.get_pressed()
         if keys[pygame.K_1]:
@@ -99,14 +100,21 @@ class Player(pygame.sprite.Sprite):
                 self.direction.x = 0
                 self.state = "idle"
 
-            if keys[pygame.K_SPACE] and self.onGround:
+            if keys[pygame.K_SPACE] and (self.onGround or (self.doubleJumpTimer>15 and self.doubleJumpTimer<20 and self.canDoubleJump) ) :
                 self.jump()
                 self.state="jump"
+                self.doubleJumpTimer=0
+                if self.onGround==False:
+                    self.canDoubleJump=False
             if keys[pygame.K_g] and self.attackStamina>0:
                 self.attackStamina-=1
                 self.state="attack"
                 self.speed=0
                 self.direction.x=0
+    def checkDoubleJump(self):
+        if self.doubleJumpTimer<20 and not self.onGround:
+            self.doubleJumpTimer+=1
+
     def addStamina(self):
         self.addStaminaTimer-=1
         if self.addStaminaTimer==0:
@@ -115,6 +123,7 @@ class Player(pygame.sprite.Sprite):
     def update(self,tiles):
         self.tileGroup=tiles
         self.addStamina()
+        self.checkDoubleJump()
         if not self.dead:
             self.setDirection()
         self.onGround=False
@@ -201,6 +210,7 @@ class Player(pygame.sprite.Sprite):
                     self.rect.bottom = sprite.rect.top
                     self.direction.y = 0
                     self.onGround=True
+                    self.canDoubleJump=True
                 elif self.direction.y < 0:
                     self.rect.top = sprite.rect.bottom
                     self.direction.y = 0
@@ -220,9 +230,11 @@ class Player(pygame.sprite.Sprite):
                         self.rect.bottom = sprite.rect.top
                         self.direction.y = 0
                         self.onGround=True
+                        self.canDoubleJump=True
                     elif self.direction.y < 0:
                         self.rect.top = sprite.rect.bottom
                         self.direction.y = 0
+                        self.canDoubleJump = False
         for sprite in self.enemyGroup.sprites():
             if sprite.dead==False and self.dead==False:
                 if sprite.rect.colliderect(self.rect):
