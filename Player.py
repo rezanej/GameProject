@@ -53,7 +53,7 @@ class Player(pygame.sprite.Sprite):
             self.speed=0
             self.direction.x=0
             self.currentimageNum=0
-        if keys[pygame.K_e] and self.kunaiNumber>0 and self.kunaiTimer==KunaiTimer:
+        elif keys[pygame.K_e] and self.iceSpellNumber>0 and self.kunaiTimer==KunaiTimer:
             self.kunaiGroup.add(IceSpell(self.rect.centerx,self.rect.centery,self,self.enemyGroup,KunaiSpeed,iceGroup=self.iceGroup))
             self.iceSpellNumber-=1
             self.kunaiTimer=0
