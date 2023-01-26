@@ -49,20 +49,20 @@ class Player(pygame.sprite.Sprite):
         self.canDoubleJump=False
     def setDirection(self):
         keys=pygame.key.get_pressed()
-        if keys[pygame.K_1]:
+        if keys[pygame.K_1] and not self.freeRun:
             self.combatMode=1
-        elif keys[pygame.K_2]:
+        elif keys[pygame.K_2] and not self.freeRun:
             self.combatMode = 2
-        elif keys[pygame.K_3]:
+        elif keys[pygame.K_3] and not self.freeRun:
             self.combatMode = 3
 
         if keys[pygame.K_f] and self.kunaiNumber>0 and self.kunaiTimer==KunaiTimer:
             if self.combatMode==1:
                 self.kunaiGroup.add(Kunai(self.rect.centerx,self.rect.centery,self,self.enemyGroup,KunaiSpeed))
-            elif self.combatMode==2:
+            elif self.combatMode==2 and self.kunaiNumber>=3:
                 self.kunaiGroup.add(FireBall.FireBall(self.rect.centerx,self.rect.centery,self,self.enemyGroup,KunaiSpeed,BlueFireImagesLeft,BlueFireImages,1))
                 self.kunaiNumber-=2 # decreasing 3 , 2 here 1 in a few lines belower
-            elif self.combatMode==3:
+            elif self.combatMode==3 and self.kunaiNumber>=2:
                 self.kunaiGroup.add(FireBall.FireBall(self.rect.centerx,self.rect.centery,self,self.enemyGroup,KunaiSpeed,BlueFireImagesLeft,BlueFireImages))
                 self.kunaiNumber-=1 # decreacing 2 ,....
             self.kunaiNumber-=1
