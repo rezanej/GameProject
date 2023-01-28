@@ -58,8 +58,7 @@ class Flame():
 
         for i in range(2*25):
             self.particleGroup.append(Particle(self.x+random.randint(-2,2),self.y+random.randint(-2,2)))
-    def update(self):
-        pass
+
     def draw(self,display,mode):
             Particle.color=mode
             self.speed += 1

@@ -5,7 +5,7 @@ from os.path import exists
 pygame.init()
 WindowWidth=64*20 #temporary
 WindowHeight=64*10 #temporary
-#Display is her cause convert alpha needs it
+#Display is here cause convert alpha needs it
 Display=pygame.display.set_mode((WindowWidth,WindowHeight),flags=pygame.SCALED|pygame.FULLSCREEN,vsync=1)
 Fps=60
 CurrentLevel=0
